@@ -69,6 +69,9 @@ project(":ios") {
         compile "org.robovm:robovm-cocoatouch:$roboVMVersion"
         compile "com.badlogicgames.gdx:gdx-backend-robovm:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"
+        compile ('com.googlecode.json-simple:json-simple:1.1.1') {
+            exclude module: 'junit'
+        }
     }
 }
 
