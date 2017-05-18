@@ -5,18 +5,33 @@ package com.projectcastle.game.util;
  */
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.projectcastle.game.Map;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
-import java.io.File;
-
+/**
+ * This class loads the Tiled map
+ */
 public class MapLoader {
 
     public static final String TAG = MapLoader.class.toString();
+
+    public static TiledMap load(String path){
+
+        TiledMap map = new TiledMap();
+
+        try {
+            map = new TmxMapLoader().load(path);
+        } catch (Exception ex){
+            Gdx.app.log(TAG, ex.getMessage());
+            Gdx.app.log(TAG, Constants.MAP_ERROR_MESSAGE);
+        }
+
+        return map;
+
+    }
+
+
+
 
 }
