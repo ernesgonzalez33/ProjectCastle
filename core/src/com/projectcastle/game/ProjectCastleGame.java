@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,6 +24,7 @@ public class ProjectCastleGame extends Game {
 
 	public static final String TAG = ProjectCastleGame.class.getName();
 
+	FPSLogger fpsLogger;
 	SpriteBatch batch;
 	TiledMap map;
 	OrthographicCamera camera;
@@ -33,6 +35,8 @@ public class ProjectCastleGame extends Game {
 
 	@Override
 	public void create () {
+
+		fpsLogger = new FPSLogger();
 		batch = new SpriteBatch();
 		map = MapLoader.load(Constants.TEST_MAP);
 		camera = new OrthographicCamera();
@@ -59,6 +63,7 @@ public class ProjectCastleGame extends Game {
 		camera.update();
 		renderer.setView(camera);
 		renderer.render();
+		fpsLogger.log();
 
 //		batch.draw(img, 0, 0);
 		batch.end();

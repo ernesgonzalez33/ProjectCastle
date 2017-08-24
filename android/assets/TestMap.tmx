@@ -6,7 +6,7 @@
  <tileset firstgid="121" name="BasicCharacters" tilewidth="16" tileheight="16" tilecount="96" columns="12">
   <image source="characters_1.png" width="192" height="128"/>
  </tileset>
- <layer name="Capa de Patrones 1" width="20" height="20" visible="0">
+ <layer name="Capa de Patrones 1" width="20" height="20">
   <data encoding="csv">
 65,65,65,2,18,18,18,18,18,18,18,2,65,65,65,66,66,66,66,66,
 65,65,65,2,18,18,18,18,18,18,18,2,65,65,65,66,66,66,66,66,
@@ -30,7 +30,7 @@
 65,65,65,65,65,65,65,65,65,65,65,65,65,11,65,65,65,65,65,65
 </data>
  </layer>
- <layer name="Capa de patrones 2" width="20" height="20" visible="0">
+ <layer name="Capa de patrones 2" width="20" height="20">
   <data encoding="csv">
 0,0,0,0,56,0,0,37,0,0,56,0,0,0,39,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,39,0,0,0,0,0,
