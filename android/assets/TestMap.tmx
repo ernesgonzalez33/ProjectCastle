@@ -6,7 +6,7 @@
  <tileset firstgid="121" name="BasicCharacters" tilewidth="16" tileheight="16" tilecount="96" columns="12">
   <image source="characters_1.png" width="192" height="128"/>
  </tileset>
- <layer name="Capa de Patrones 1" width="20" height="20">
+ <layer name="Capa de Patrones 1" width="20" height="20" visible="0">
   <data encoding="csv">
 65,65,65,2,18,18,18,18,18,18,18,2,65,65,65,66,66,66,66,66,
 65,65,65,2,18,18,18,18,18,18,18,2,65,65,65,66,66,66,66,66,
@@ -30,7 +30,7 @@
 65,65,65,65,65,65,65,65,65,65,65,65,65,11,65,65,65,65,65,65
 </data>
  </layer>
- <layer name="Capa de patrones 2" width="20" height="20">
+ <layer name="Capa de patrones 2" width="20" height="20" visible="0">
   <data encoding="csv">
 0,0,0,0,56,0,0,37,0,0,56,0,0,0,39,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,39,0,0,0,0,0,
@@ -54,16 +54,16 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Capa de Objetos 1">
-  <object id="5" gid="127" x="128.791" y="303.431" width="16" height="16"/>
-  <object id="6" gid="124" x="159.189" y="305.331" width="16" height="16"/>
-  <object id="7" gid="121" x="144.94" y="273.033" width="16" height="16"/>
-  <object id="8" gid="130" x="127.841" y="142.891" width="16" height="16"/>
-  <object id="9" gid="130" x="95.5433" y="144.791" width="16" height="16"/>
-  <object id="10" gid="130" x="80.3443" y="144.791" width="16" height="16"/>
-  <object id="11" gid="130" x="144.94" y="144.791" width="16" height="16"/>
-  <object id="13" gid="169" x="193.387" y="16.5494" width="16" height="16"/>
-  <object id="14" gid="169" x="31.8974" y="17.4994" width="16" height="16"/>
-  <object id="15" gid="175" x="112.642" y="48.8473" width="16" height="16"/>
+ <objectgroup name="objects">
+  <object id="5" name="hero2" gid="127" x="128.791" y="303.431" width="16" height="16"/>
+  <object id="6" name="hero3" gid="124" x="159.189" y="305.331" width="16" height="16"/>
+  <object id="7" name="hero1" gid="121" x="144.94" y="273.033" width="16" height="16"/>
+  <object id="8" name="ske3" gid="130" x="127.841" y="142.891" width="16" height="16"/>
+  <object id="9" name="ske2" gid="130" x="95.5433" y="144.791" width="16" height="16"/>
+  <object id="10" name="ske1" gid="130" x="80.3443" y="144.791" width="16" height="16"/>
+  <object id="11" name="ske4" gid="130" x="144.94" y="144.791" width="16" height="16"/>
+  <object id="13" name="slim2" gid="169" x="193.387" y="16.5494" width="16" height="16"/>
+  <object id="14" name="slim1" gid="169" x="31.8974" y="17.4994" width="16" height="16"/>
+  <object id="15" name="ghost" gid="175" x="112.642" y="48.8473" width="16" height="16"/>
  </objectgroup>
 </map>
