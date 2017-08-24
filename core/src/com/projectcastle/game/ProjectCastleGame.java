@@ -28,6 +28,7 @@ public class ProjectCastleGame extends Game {
 		map = MapLoader.load(Constants.TEST_MAP);
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 20, 20);
+		camera.update();
 		renderer = new OrthogonalTiledMapRenderer(map, Constants.UNIT_SCALE);
 	}
 
@@ -37,6 +38,7 @@ public class ProjectCastleGame extends Game {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 
+		camera.update();
 		renderer.setView(camera);
 		renderer.render();
 
