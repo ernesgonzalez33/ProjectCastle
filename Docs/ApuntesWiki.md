@@ -41,3 +41,33 @@ Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //Limpia la pantalla
 ```
 
 * Importante llamar el método `dispose` de todas las cosas
+
+## Extending the simple game
+
+* [Enlace](https://github.com/libgdx/libgdx/wiki/Extending-the-simple-game)
+
+* La clase `Screen` tiene los métodos de `ApplicationListener` y además tiene `show` y `hide`
+
+* La clase `Game` también implementa los métodos de `ApplicationListener` además de otros métodos para seleccionar la pantalla que quieras utilizar
+
+* En `Game` dentro del método `create()`, tenemos que llamar a `this.setScreen(new NombreScreen(this))`
+
+* **SUMAMENTE IMPORTANTE** utilizar `super.render();` dentro del método `render` en la clase `Game`
+
+* Las diferentes `Screen` tienen que tener un atributo del tipo `Game` (y todo lo demás de un `ApplicationListener`) y crear un constructor con el mismo de argumento
+
+```java
+public MainMenuScreen(final Drop game) {
+		this.game = game;
+
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, 800, 480);
+
+	}
+```
+
+* La razón por la que se usa el atributo del tipo `Game` es para poder usar el `SpriteBatch` y el `BitmapFont` de la clase principal, en lugar de usar uno por pantalla
+
+* Todo el juego se programa en las diferentes pantallas y no en `Game`
+
+* El método `dispose()` de las clases `Screen` no es llamado automáticamente. La forma más correcta de hacerlo es desde la clase `Game`
