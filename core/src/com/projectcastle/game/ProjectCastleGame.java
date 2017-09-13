@@ -50,8 +50,9 @@ public class ProjectCastleGame extends Game {
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClearColor(1, 0, 0, 1); //RGB alpha
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //Limpia la pantalla
+		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 
 		camera.update();
