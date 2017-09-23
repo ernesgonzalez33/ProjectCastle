@@ -7,7 +7,6 @@ package com.projectcastle.game.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.projectcastle.game.Map;
 
 /**
  * This class loads the Tiled map
