@@ -28,11 +28,13 @@ public class ProjectCastleGame extends Game {
 
 		batch = new SpriteBatch();
 		this.setScreen(new TestMapScreen(this));
+		fpsLogger = new FPSLogger();
 
 	}
 
 	public void render(){
 		super.render(); //Si no se hace, no renderiza la pantalla
+		fpsLogger.log();
 	}
 
 	public void dispose(){

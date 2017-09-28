@@ -8,6 +8,8 @@ public class Constants {
 
     public static final String MAP_ERROR_MESSAGE = "Could not load map";
     public static final String TEST_MAP = "TestMap2.tmx";
-    public static final float UNIT_SCALE = 1 / 32f;
+    public static final float UNIT_SCALE = 1;
+    public static final int WIDTH = 640;
+    public static final int HEIGHT = 640;
 
 }
