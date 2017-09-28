@@ -13,7 +13,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
  */
 public class MapLoader {
 
-    public static final String TAG = MapLoader.class.toString();
+    public static final String TAG = MapLoader.class.getName();
 
     public static TiledMap load(String path){
 

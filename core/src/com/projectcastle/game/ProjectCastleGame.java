@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.projectcastle.game.screens.TestMapScreen;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.MapLoader;
 
@@ -18,11 +19,23 @@ public class ProjectCastleGame extends Game {
 
 	public static final String TAG = ProjectCastleGame.class.getName();
 
-	FPSLogger fpsLogger;
-	SpriteBatch batch;
+	public FPSLogger fpsLogger;
+	public SpriteBatch batch;
+	public OrthogonalTiledMapRenderer tiledMapRenderer;
 
 	@Override
 	public void create() {
 
+		batch = new SpriteBatch();
+		this.setScreen(new TestMapScreen(this));
+
+	}
+
+	public void render(){
+		super.render(); //Si no se hace, no renderiza la pantalla
+	}
+
+	public void dispose(){
+		batch.dispose();
 	}
 }
