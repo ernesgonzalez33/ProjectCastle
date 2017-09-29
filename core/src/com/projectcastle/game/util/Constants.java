@@ -11,5 +11,10 @@ public class Constants {
     public static final float UNIT_SCALE = 1;
     public static final int WIDTH = 640;
     public static final int HEIGHT = 640;
+    public static final String PRINCESS_NAME = "Erika";
+    public static final String PRINCE_NAME = "Christian";
+    public static final String COMMANDER_NAME = "Airmanagild";
+    public static final String GUARD_NAME = "Rebecca";
+    public static final String CLERIC_NAME = "Peter";
 
 }
