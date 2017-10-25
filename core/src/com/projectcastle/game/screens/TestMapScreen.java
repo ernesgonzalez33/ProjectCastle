@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.projectcastle.game.ProjectCastleGame;
+import com.projectcastle.game.util.Assets;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.MapLoader;
 
@@ -27,8 +28,11 @@ public class TestMapScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
-        map = MapLoader.load(Constants.TEST_MAP);
+//        map = MapLoader.load(Constants.TEST_MAP);
+        map = Assets.instance.testMap;
         game.tiledMapRenderer = new OrthogonalTiledMapRenderer(map, Constants.UNIT_SCALE);
+
+        //TODO: Hacer que esto del mapa funcione
 
     }
 
