@@ -8,6 +8,7 @@ buildscript {
         classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
         classpath 'com.android.tools.build:gradle:2.3.3'
         classpath 'org.robovm:robovm-gradle-plugin:1.8.0'
+        classpath "org.akhikhl.gretty:gretty:2.0.0"
     }
 }
 
@@ -18,7 +19,7 @@ allprojects {
     version = '1.0'
     ext {
         appName = "ProjectCastle"
-        gdxVersion = '1.9.6'
+        gdxVersion = '1.9.7'
         roboVMVersion = '1.8.0'
         box2DLightsVersion = '1.4'
         ashleyVersion = '1.6.0'
