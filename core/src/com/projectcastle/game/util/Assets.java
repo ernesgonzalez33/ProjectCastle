@@ -23,12 +23,11 @@ public class Assets implements Disposable, AssetErrorListener {
 
     private AssetManager assetManager;
 
-    private Assets(){
-
-    }
+    private Assets(){}
 
     public void init(AssetManager assetManager) {
-        this.assetManager = assetManager;
+
+        this.assetManager = new AssetManager();
         assetManager.setErrorListener(this);
 
         //Cargo el Mapa de pruebas
@@ -38,8 +37,10 @@ public class Assets implements Disposable, AssetErrorListener {
         //Espero a que se termine de cargar
         assetManager.finishLoading();
 
+        //TODO: Usar el AssetManager de forma dinámica
+        //TODO: Meter texturas de los personajes con el AssetManager dinámico
+        //TODO: Empezar a programar las mecánicas de una vez
         testMap = assetManager.get(Constants.TEST_MAP);
-
 
     }
 

@@ -32,7 +32,6 @@ public class TestMapScreen implements Screen {
         map = Assets.instance.testMap;
         game.tiledMapRenderer = new OrthogonalTiledMapRenderer(map, Constants.UNIT_SCALE);
 
-        //TODO: Hacer que esto del mapa funcione
 
     }
 
@@ -52,7 +51,6 @@ public class TestMapScreen implements Screen {
 
         game.batch.begin();
 
-        camera.update();
         game.tiledMapRenderer.setView(camera);
         game.tiledMapRenderer.render();
 
