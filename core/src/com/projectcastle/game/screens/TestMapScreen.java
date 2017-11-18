@@ -28,8 +28,7 @@ public class TestMapScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
-//        map = MapLoader.load(Constants.TEST_MAP);
-        map = Assets.instance.testMap;
+        map = MapLoader.load(Constants.TEST_MAP);
         game.tiledMapRenderer = new OrthogonalTiledMapRenderer(map, Constants.UNIT_SCALE);
 
 
