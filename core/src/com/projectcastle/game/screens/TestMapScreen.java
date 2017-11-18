@@ -2,7 +2,6 @@ package com.projectcastle.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.loaders.resolvers.ExternalFileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -10,9 +9,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.projectcastle.game.ProjectCastleGame;
-import com.projectcastle.game.util.Assets;
 import com.projectcastle.game.util.Constants;
-import com.projectcastle.game.util.MapLoader;
 
 /**
  * Created by ernestogonzalezchacon on 23/9/17.
@@ -31,7 +28,7 @@ public class TestMapScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
-        //map = MapLoader.load(Constants.TEST_MAP);
+
         // only needed once
         game.manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         game.manager.load(Constants.TEST_MAP, TiledMap.class);
