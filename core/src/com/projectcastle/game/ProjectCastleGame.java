@@ -2,6 +2,7 @@ package com.projectcastle.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -22,10 +23,12 @@ public class ProjectCastleGame extends Game {
 	public FPSLogger fpsLogger;
 	public SpriteBatch batch;
 	public OrthogonalTiledMapRenderer tiledMapRenderer;
+	public AssetManager manager;
 
 	@Override
 	public void create() {
 
+		manager = new AssetManager();
 		batch = new SpriteBatch();
 		this.setScreen(new TestMapScreen(this));
 		fpsLogger = new FPSLogger();
