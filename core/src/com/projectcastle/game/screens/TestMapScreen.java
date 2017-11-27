@@ -2,9 +2,11 @@ package com.projectcastle.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.loaders.TextureAtlasLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -26,6 +28,10 @@ public class TestMapScreen implements Screen {
     TiledMap map;
     Viewport viewport;
 
+
+    //Test image
+    Texture testTexture;
+
     public TestMapScreen(final ProjectCastleGame game){
         this.game = game;
 
@@ -41,6 +47,9 @@ public class TestMapScreen implements Screen {
         // once the asset manager is done loading
         TiledMap map = game.manager.get(Constants.TEST_MAP);
         game.tiledMapRenderer = new OrthogonalTiledMapRenderer(map, Constants.UNIT_SCALE);
+
+        //Test image
+        testTexture = new Texture(Gdx.files.internal("TestImage.png"));
 
     }
 
@@ -58,10 +67,12 @@ public class TestMapScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
-        game.batch.begin();
-
         game.tiledMapRenderer.setView(camera);
         game.tiledMapRenderer.render();
+
+        game.batch.begin();
+
+        game.batch.draw(testTexture, 0, 0);
 
         game.batch.end();
 
