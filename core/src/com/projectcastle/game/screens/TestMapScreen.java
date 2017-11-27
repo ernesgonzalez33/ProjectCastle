@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.util.Constants;
 
@@ -22,11 +24,13 @@ public class TestMapScreen implements Screen {
     final ProjectCastleGame game;
     OrthographicCamera camera;
     TiledMap map;
+    Viewport viewport;
 
     public TestMapScreen(final ProjectCastleGame game){
         this.game = game;
 
         camera = new OrthographicCamera();
+        viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
         camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
 
         // only needed once
@@ -65,7 +69,7 @@ public class TestMapScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        viewport.update(width, height);
     }
 
     @Override
