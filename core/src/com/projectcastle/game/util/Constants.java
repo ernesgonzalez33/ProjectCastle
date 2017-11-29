@@ -16,5 +16,6 @@ public class Constants {
     public static final String COMMANDER_NAME = "Airmanagild";
     public static final String GUARD_NAME = "Rebecca";
     public static final String CLERIC_NAME = "Peter";
+    public static final String CHARACTERS_ASSET = "characters_1.png";
 
 }
