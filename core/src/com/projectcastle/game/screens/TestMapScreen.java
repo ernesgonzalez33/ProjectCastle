@@ -79,8 +79,7 @@ public class TestMapScreen implements Screen {
 
         game.batch.begin();
 
-        //TODO: Arreglar esto, está cargando la textura entera;
-        game.batch.draw(charactersRegions[0][0].getTexture(), 0, 0);
+        game.batch.draw(charactersRegions[0][0], 0, 0);
 
         game.batch.end();
 
