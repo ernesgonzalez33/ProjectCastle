@@ -8,10 +8,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+//TODO: Utilizar esta clase para dividir y escalar texturas
+
 /**
  * Clase para dividir las imágenes
  */
-public class TextureDivider {
+public class TextureTools {
 
     public Texture units;
     public TextureRegion[][] unitsRegions = new TextureRegion[8][12];

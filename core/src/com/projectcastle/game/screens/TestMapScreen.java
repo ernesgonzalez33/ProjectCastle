@@ -57,6 +57,7 @@ public class TestMapScreen implements Screen {
         charactersRegions = new TextureRegion[8][12];
         charactersRegions = TextureRegion.split(characters, 16, 16);
 
+//TODO: Utilizar TextureTools para cargar los objetos directamente
 
     }
 

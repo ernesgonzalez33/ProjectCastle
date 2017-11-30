@@ -1,5 +1,7 @@
 package com.projectcastle.game.entities;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -13,10 +15,28 @@ public class Unit {
     protected int attack;
     protected int defense;
     protected String name;
+    protected int health;
+    protected TextureRegion region;
 
-    public String getName() {
-        return name;
+    public Unit(Vector2 position, int attack, int defense, String name, int health, TextureRegion region){
+
+        this.position = position;
+        this.attack = attack;
+        this.defense = defense;
+        this.name = name;
+        this.health = health;
+        this.region = region;
+
     }
+
+    public void render(SpriteBatch batch){
+
+        //TODO: Dibujar aqui el sprite
+//        batch.draw();
+
+    }
+
+    public String getName() { return name; }
 
     public void setName(String name) {
         this.name = name;
@@ -45,8 +65,6 @@ public class Unit {
     public void setHealth(int health) {
         this.health = health;
     }
-
-    protected int health;
 
     public Vector2 getPosition() {
         return position;
