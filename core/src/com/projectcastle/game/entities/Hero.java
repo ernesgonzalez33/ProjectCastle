@@ -1,5 +1,6 @@
 package com.projectcastle.game.entities;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -10,15 +11,8 @@ public class Hero extends Unit {
 
     public final static String TAG = Unit.class.getName();
 
-    public Hero (Vector2 initialPosition, String name, int attack, int defense, int health){
 
-        this.position = initialPosition;
-        this.name = name;
-        this.attack = attack;
-        this.defense = defense;
-        this.health = health;
-
+    public Hero(Vector2 position, int attack, int defense, String name, int health, TextureRegion region) {
+        super(position, attack, defense, name, health, region);
     }
-
-
 }
