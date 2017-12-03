@@ -3,6 +3,7 @@ package com.projectcastle.game.entities;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.projectcastle.game.util.Constants;
 
 /**
  * Created by ernestogonzalezchacon on 12/5/17.
@@ -32,7 +33,7 @@ public class Unit {
     public void render(SpriteBatch batch){
 
         //TODO: Dibujar aqui el sprite
-//        batch.draw();
+        batch.draw(this.region, this.getPosition().x, this.position.y, Constants.TILE_SIZE, Constants.TILE_SIZE);
 
     }
 

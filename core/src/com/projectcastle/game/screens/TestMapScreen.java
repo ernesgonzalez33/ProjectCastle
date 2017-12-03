@@ -13,9 +13,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
+import com.projectcastle.game.entities.Unit;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.TextureTools;
 
@@ -34,6 +36,7 @@ public class TestMapScreen implements Screen {
     Texture characters;
     public TextureRegion [][] charactersRegions;
     TextureTools textureTools;
+    Unit testUnit;
 
     public TestMapScreen(final ProjectCastleGame game){
         this.game = game;
@@ -55,9 +58,14 @@ public class TestMapScreen implements Screen {
         TiledMap map = game.manager.get(Constants.TEST_MAP);
         game.tiledMapRenderer = new OrthogonalTiledMapRenderer(map, Constants.UNIT_SCALE);
 
+        // Treating the textures
         characters = game.manager.get(Constants.CHARACTERS_ASSET);
         textureTools = new TextureTools();
         charactersRegions = textureTools.divide(characters, Constants.CHARACTER_SIZE, Constants.CHARACTER_SIZE);
+
+        // Creating the first unit
+        Vector2 positionTestUnit = new Vector2(3 * Constants.TILE_SIZE, 3 * Constants.TILE_SIZE);
+        testUnit = new Unit(positionTestUnit, 10, 10, "Test", 10, charactersRegions[0][0]);
 
     }
 
@@ -80,7 +88,7 @@ public class TestMapScreen implements Screen {
 
         game.batch.begin();
 
-        game.batch.draw(charactersRegions[0][0], 0, 0, Constants.TILE_SIZE, Constants.TILE_SIZE);
+        testUnit.render(game.batch);
 
         game.batch.end();
 
