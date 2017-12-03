@@ -17,5 +17,7 @@ public class Constants {
     public static final String GUARD_NAME = "Rebecca";
     public static final String CLERIC_NAME = "Peter";
     public static final String CHARACTERS_ASSET = "characters_1.png";
+    public static final int TILE_SIZE = 32;
+    public static final int CHARACTER_SIZE = 16;
 
 }

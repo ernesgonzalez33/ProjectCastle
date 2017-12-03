@@ -9,10 +9,8 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-//TODO: Utilizar esta clase para dividir y escalar texturas
-
 /**
- * Clase para dividir las imágenes
+ * Clase para tratar las texturas
  */
 public class TextureTools {
 

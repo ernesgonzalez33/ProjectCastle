@@ -57,9 +57,7 @@ public class TestMapScreen implements Screen {
 
         characters = game.manager.get(Constants.CHARACTERS_ASSET);
         textureTools = new TextureTools();
-        charactersRegions = textureTools.divide(characters, 16, 16);
-
-//TODO: Utilizar TextureTools para cargar los objetos directamente
+        charactersRegions = textureTools.divide(characters, Constants.CHARACTER_SIZE, Constants.CHARACTER_SIZE);
 
     }
 
@@ -82,7 +80,7 @@ public class TestMapScreen implements Screen {
 
         game.batch.begin();
 
-        game.batch.draw(charactersRegions[0][0], 0, 0);
+        game.batch.draw(charactersRegions[0][0], 0, 0, Constants.TILE_SIZE, Constants.TILE_SIZE);
 
         game.batch.end();
 
