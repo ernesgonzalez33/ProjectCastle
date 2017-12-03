@@ -5,6 +5,7 @@ package com.projectcastle.game.util;
  */
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -15,13 +16,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class TextureTools {
 
-    public Texture units;
-    public TextureRegion[][] unitsRegions = new TextureRegion[8][12];
+    public TextureTools(){}
 
-    public void divide(){
+    public TextureRegion[][] divide(Texture texture, int tileWidth, int tileHeight){
 
-        units = new Texture(Gdx.files.internal("characters_1.png"));
-        unitsRegions = TextureRegion.split(units, 16, 16);
+        TextureRegion[][] regions = new TextureRegion[8][12];
+        regions = TextureRegion.split(texture, tileWidth, tileHeight);
+
+        return regions;
 
     }
 

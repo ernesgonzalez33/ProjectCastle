@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.util.Constants;
+import com.projectcastle.game.util.TextureTools;
 
 /**
  * Created by ernestogonzalezchacon on 23/9/17.
@@ -31,7 +32,8 @@ public class TestMapScreen implements Screen {
     TiledMap map;
     Viewport viewport;
     Texture characters;
-    TextureRegion [][] charactersRegions;
+    public TextureRegion [][] charactersRegions;
+    TextureTools textureTools;
 
     public TestMapScreen(final ProjectCastleGame game){
         this.game = game;
@@ -40,7 +42,7 @@ public class TestMapScreen implements Screen {
         viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
         camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
 
-        // only needed once
+        // loading map
         game.manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         game.manager.load(Constants.TEST_MAP, TiledMap.class);
 
@@ -54,8 +56,8 @@ public class TestMapScreen implements Screen {
         game.tiledMapRenderer = new OrthogonalTiledMapRenderer(map, Constants.UNIT_SCALE);
 
         characters = game.manager.get(Constants.CHARACTERS_ASSET);
-        charactersRegions = new TextureRegion[8][12];
-        charactersRegions = TextureRegion.split(characters, 16, 16);
+        textureTools = new TextureTools();
+        charactersRegions = textureTools.divide(characters, 16, 16);
 
 //TODO: Utilizar TextureTools para cargar los objetos directamente
 
