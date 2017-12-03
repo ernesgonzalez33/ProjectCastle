@@ -17,6 +17,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
+import com.projectcastle.game.entities.Enemy;
+import com.projectcastle.game.entities.Hero;
 import com.projectcastle.game.entities.Unit;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.TextureTools;
@@ -36,7 +38,9 @@ public class TestMapScreen implements Screen {
     Texture characters;
     public TextureRegion [][] charactersRegions;
     TextureTools textureTools;
-    Unit testUnit;
+    Hero number1;
+    Hero number2;
+    Enemy theOne;
 
     public TestMapScreen(final ProjectCastleGame game){
         this.game = game;
@@ -63,9 +67,13 @@ public class TestMapScreen implements Screen {
         textureTools = new TextureTools();
         charactersRegions = textureTools.divide(characters, Constants.CHARACTER_SIZE, Constants.CHARACTER_SIZE);
 
-        // Creating the first unit
-        Vector2 positionTestUnit = new Vector2(3 * Constants.TILE_SIZE, 3 * Constants.TILE_SIZE);
-        testUnit = new Unit(positionTestUnit, 10, 10, "Test", 10, charactersRegions[0][0]);
+        // Creating the characters
+        Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
+        Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
+        Vector2 positionTheOne = textureTools.positionConverter(10, 8);
+        number1 = new Hero(positionNumber1, 10, 10, "Number1", 10, charactersRegions[0][0]);
+        number2 = new Hero(positionNumber2, 10, 10, "Number2", 10, charactersRegions[0][3]);
+        theOne = new Enemy(positionTheOne, 10, 10, "TheOne", 10, charactersRegions[0][9]);
 
     }
 
@@ -88,7 +96,9 @@ public class TestMapScreen implements Screen {
 
         game.batch.begin();
 
-        testUnit.render(game.batch);
+        number1.render(game.batch);
+        number2.render(game.batch);
+        theOne.render(game.batch);
 
         game.batch.end();
 
