@@ -65,7 +65,7 @@ public class TestMapScreen implements Screen {
         // Treating the textures
         characters = game.manager.get(Constants.CHARACTERS_ASSET);
         textureTools = new TextureTools();
-        charactersRegions = textureTools.divide(characters, Constants.CHARACTER_SIZE, Constants.CHARACTER_SIZE);
+        charactersRegions = textureTools.divide(characters, 8, 12, Constants.CHARACTER_SIZE, Constants.CHARACTER_SIZE);
 
         // Creating the characters
         Vector2 positionNumber1 = textureTools.positionConverter(9, 3);

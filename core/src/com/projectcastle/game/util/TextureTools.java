@@ -17,9 +17,9 @@ public class TextureTools {
 
     public TextureTools(){}
 
-    public TextureRegion[][] divide(Texture texture, int tileWidth, int tileHeight){
+    public TextureRegion[][] divide(Texture texture, int i, int j, int tileWidth, int tileHeight){
 
-        TextureRegion[][] regions = new TextureRegion[8][12];
+        TextureRegion[][] regions = new TextureRegion[i][j];
         regions = TextureRegion.split(texture, tileWidth, tileHeight);
 
         return regions;
