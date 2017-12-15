@@ -71,3 +71,30 @@ public MainMenuScreen(final Drop game) {
 * Todo el juego se programa en las diferentes pantallas y no en `Game`
 
 * El método `dispose()` de las clases `Screen` no es llamado automáticamente. La forma más correcta de hacerlo es desde la clase `Game`
+
+## Scene2D
+
+* La clase `MoveToAction` permite mover actores y cambiar la duración del movimiento así como la nueva posición
+
+* Los personajes tendrían que extender la clase `Actor` de `Scene2D`
+
+* Ejemplo de codigo:
+
+```java
+@Override
+public void create() {        
+    stage = new Stage();
+    Gdx.input.setInputProcessor(stage);
+    
+    MyActor myActor = new MyActor();
+    
+    MoveToAction moveAction = new MoveToAction();
+    moveAction.setPosition(300f, 0f);
+    moveAction.setDuration(10f);
+    myActor.addAction(moveAction);
+    
+    stage.addActor(myActor);
+}
+```
+
+* 
