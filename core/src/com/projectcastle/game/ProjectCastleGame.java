@@ -23,7 +23,7 @@ public class ProjectCastleGame extends Game {
 
 		manager = new AssetManager();
 		batch = new SpriteBatch();
-		actionMenu = new ActionMenu();
+//		actionMenu = new ActionMenu();
 		this.setScreen(new TestMapScreen(this));
 		fpsLogger = new FPSLogger();
 

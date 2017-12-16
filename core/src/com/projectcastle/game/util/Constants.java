@@ -19,5 +19,6 @@ public class Constants {
     public static final String CHARACTERS_ASSET = "characters_1.png";
     public static final int TILE_SIZE = 32;
     public static final int CHARACTER_SIZE = 16;
+    public static final int CHARACTER_SCALE = 2;
 
 }

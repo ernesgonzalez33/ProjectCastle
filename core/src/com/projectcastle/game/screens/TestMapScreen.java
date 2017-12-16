@@ -14,6 +14,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
@@ -36,6 +38,7 @@ public class TestMapScreen implements Screen {
     TiledMap map;
     Viewport viewport;
     Texture characters;
+    Stage stage;
     public TextureRegion [][] charactersRegions;
     TextureTools textureTools;
     Hero number1;
@@ -69,6 +72,9 @@ public class TestMapScreen implements Screen {
 
         //TODO: Esto habrá que cambiarlo con Scene2D
 
+        //Setting the stage
+        stage = new Stage();
+
         // Creating the characters
         Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
         Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
@@ -76,6 +82,9 @@ public class TestMapScreen implements Screen {
         number1 = new Hero(positionNumber1, 10, 10, "Number1", 10, charactersRegions[0][0]);
         number2 = new Hero(positionNumber2, 10, 10, "Number2", 10, charactersRegions[0][3]);
         theOne = new Enemy(positionTheOne, 10, 10, "TheOne", 10, charactersRegions[0][9]);
+        stage.addActor(number1);
+        stage.addActor(number2);
+        stage.addActor(theOne);
 
     }
 
@@ -98,9 +107,10 @@ public class TestMapScreen implements Screen {
 
         game.batch.begin();
 
-        number1.render(game.batch);
-        number2.render(game.batch);
-        theOne.render(game.batch);
+        stage.draw();
+//        number1.render(game.batch);
+//        number2.render(game.batch);
+//        theOne.render(game.batch);
 
         game.batch.end();
 

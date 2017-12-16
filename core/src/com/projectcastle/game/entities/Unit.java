@@ -1,8 +1,11 @@
 package com.projectcastle.game.entities;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.projectcastle.game.util.Constants;
 
 /**
@@ -11,7 +14,7 @@ import com.projectcastle.game.util.Constants;
 
 // TODO: Esto tiene que extender de Actor
 
-public class Unit {
+public class Unit extends Actor {
 
     public final static String TAG = Unit.class.getName();
     protected Vector2 position;
@@ -23,19 +26,32 @@ public class Unit {
 
     public Unit(Vector2 position, int attack, int defense, String name, int health, TextureRegion region){
 
-        this.position = position;
+        this.setPosition(position.x, position.y);
+        this.setBounds(position.x, position.y, region.getRegionWidth(), region.getRegionHeight());
         this.attack = attack;
         this.defense = defense;
         this.name = name;
         this.health = health;
         this.region = region;
+        this.setScale(Constants.CHARACTER_SCALE, Constants.CHARACTER_SCALE);
+        this.setRotation(0);
 
     }
 
-    public void render(SpriteBatch batch){
+//    public void render(SpriteBatch batch){
+//
+////        batch.draw(this.region, this.getX(), this.getY(), Constants.TILE_SIZE, Constants.TILE_SIZE);
+//        this.draw(batch, 1);
+//
+//    }
 
-        batch.draw(this.region, this.getPosition().x, this.position.y, Constants.TILE_SIZE, Constants.TILE_SIZE);
 
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        Color color = getColor();
+        batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
+        batch.draw(this.region, getX(), getY(), getOriginX(), getOriginY(),
+                getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
     }
 
     public String getName() { return name; }
@@ -68,11 +84,4 @@ public class Unit {
         this.health = health;
     }
 
-    public Vector2 getPosition() {
-        return position;
-    }
-
-    public void setPosition(Vector2 position) {
-        this.position = position;
-    }
 }
