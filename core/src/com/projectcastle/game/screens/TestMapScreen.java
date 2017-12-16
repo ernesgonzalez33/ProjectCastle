@@ -67,6 +67,8 @@ public class TestMapScreen implements Screen {
         textureTools = new TextureTools();
         charactersRegions = textureTools.divide(characters, 8, 12, Constants.CHARACTER_SIZE, Constants.CHARACTER_SIZE);
 
+        //TODO: Esto habrá que cambiarlo con Scene2D
+
         // Creating the characters
         Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
         Vector2 positionNumber2 = textureTools.positionConverter(11, 3);

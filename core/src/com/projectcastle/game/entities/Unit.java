@@ -9,6 +9,8 @@ import com.projectcastle.game.util.Constants;
  * Created by ernestogonzalezchacon on 12/5/17.
  */
 
+// TODO: Esto tiene que extender de Actor
+
 public class Unit {
 
     public final static String TAG = Unit.class.getName();
@@ -32,7 +34,6 @@ public class Unit {
 
     public void render(SpriteBatch batch){
 
-        //TODO: Dibujar aqui el sprite
         batch.draw(this.region, this.getPosition().x, this.position.y, Constants.TILE_SIZE, Constants.TILE_SIZE);
 
     }

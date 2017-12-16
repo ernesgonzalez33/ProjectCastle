@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
  * Created by ernestogonzalezchacon on 3/12/17.
  */
 
+//TODO: Crear efectivamente esto
+
 public class ActionMenu extends Table {
 
 //    Label move = new Label("Move", );
