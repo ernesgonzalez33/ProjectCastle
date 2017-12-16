@@ -2,26 +2,22 @@ package com.projectcastle.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.loaders.TextureAtlasLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.entities.Enemy;
 import com.projectcastle.game.entities.Hero;
-import com.projectcastle.game.entities.Unit;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.TextureTools;
 
@@ -70,8 +66,6 @@ public class TestMapScreen implements Screen {
         textureTools = new TextureTools();
         charactersRegions = textureTools.divide(characters, 8, 12, Constants.CHARACTER_SIZE, Constants.CHARACTER_SIZE);
 
-        //TODO: Esto habrá que cambiarlo con Scene2D
-
         //Setting the stage
         stage = new Stage();
 
@@ -108,9 +102,6 @@ public class TestMapScreen implements Screen {
         game.batch.begin();
 
         stage.draw();
-//        number1.render(game.batch);
-//        number2.render(game.batch);
-//        theOne.render(game.batch);
 
         game.batch.end();
 

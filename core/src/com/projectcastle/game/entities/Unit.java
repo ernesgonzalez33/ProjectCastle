@@ -2,7 +2,6 @@ package com.projectcastle.game.entities;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -11,8 +10,6 @@ import com.projectcastle.game.util.Constants;
 /**
  * Created by ernestogonzalezchacon on 12/5/17.
  */
-
-// TODO: Esto tiene que extender de Actor
 
 public class Unit extends Actor {
 
@@ -37,14 +34,6 @@ public class Unit extends Actor {
         this.setRotation(0);
 
     }
-
-//    public void render(SpriteBatch batch){
-//
-////        batch.draw(this.region, this.getX(), this.getY(), Constants.TILE_SIZE, Constants.TILE_SIZE);
-//        this.draw(batch, 1);
-//
-//    }
-
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
