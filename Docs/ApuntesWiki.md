@@ -78,7 +78,7 @@ public MainMenuScreen(final Drop game) {
 
 * Los personajes tendrían que extender la clase `Actor` de `Scene2D`
 
-* Ejemplo de codigo:
+* Ejemplo de código:
 
 ```java
 @Override
@@ -97,4 +97,25 @@ public void create() {
 }
 ```
 
-* 
+* `SequenceAction` sirve para crear una secuencia de acciones
+
+* Usar el `setBounds` es importante para limitar el `Actor`. Si no se hace, no renderiza bien
+
+### Skins
+
+* Tengo que meter el JSON a la `Skin`
+
+```java
+skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+```
+
+* Ejemplo de gestionar un click a un botón:
+
+```java
+button.addListener(new ClickListener(){
+            @Override 
+            public void clicked(InputEvent event, float x, float y){
+                button.setText("You clicked the button");
+            }
+        });
+``` 
