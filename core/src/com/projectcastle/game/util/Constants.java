@@ -20,5 +20,6 @@ public class Constants {
     public static final int TILE_SIZE = 32;
     public static final int CHARACTER_SIZE = 16;
     public static final int CHARACTER_SCALE = 2;
+    public static final String FLAT_SKIN = "skin.json";
 
 }
