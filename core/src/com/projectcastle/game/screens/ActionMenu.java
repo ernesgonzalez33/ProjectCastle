@@ -8,22 +8,34 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
  * Created by ernestogonzalezchacon on 3/12/17.
  */
 
-//TODO: Meter los label y las cosas en el menú
+//TODO: Darle color al menú
 
 public class ActionMenu extends Table {
 
     Skin skin;
+    Label move;
+    Label attack;
 
     public ActionMenu (Skin skin) {
 
+        //Setting the attributes
         super();
         this.skin = skin;
         this.setPosition(0 ,0);
         this.setVisible(false);
 
-    }
+        //Initializing the labels
+        move = new Label("Move", skin);
+        attack = new Label("Attack", skin);
 
-//    Label move = new Label("Move", skin);
-//    Label attack;
+        //Setting the rows
+        this.add(move);
+        this.row();
+        this.add(attack);
+
+        //Setting the background
+//        this.setBackground("default");
+
+    }
 
 }

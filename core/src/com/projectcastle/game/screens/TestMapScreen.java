@@ -81,6 +81,11 @@ public class TestMapScreen implements Screen {
         stage.addActor(number2);
         stage.addActor(theOne);
 
+        //Working with the ActionMenu
+        stage.addActor(this.game.actionMenu);
+        this.game.actionMenu.setPosition(30, 30);
+        this.game.actionMenu.setVisible(true);
+
     }
 
     @Override
