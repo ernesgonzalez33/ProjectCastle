@@ -85,7 +85,6 @@ public class TestMapScreen implements Screen {
         stage.addActor(this.game.actionMenu);
         this.game.actionMenu.setPosition(50, 50);
         this.game.actionMenu.setVisible(true);
-        this.game.actionMenu.setDebug(true);
 
     }
 
