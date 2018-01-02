@@ -13,7 +13,6 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
@@ -83,8 +82,6 @@ public class TestMapScreen implements Screen {
 
         //Working with the ActionMenu
         stage.addActor(this.game.actionMenu);
-        this.game.actionMenu.setPosition(50, 50);
-        this.game.actionMenu.setVisible(true);
 
     }
 

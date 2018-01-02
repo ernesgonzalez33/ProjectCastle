@@ -2,9 +2,7 @@ package com.projectcastle.game.screens;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.projectcastle.game.util.Constants;
 
 /**
  * Created by ernestogonzalezchacon on 3/12/17.
@@ -14,7 +12,6 @@ import com.projectcastle.game.util.Constants;
 
 public class ActionMenu extends Window {
 
-//    Skin skin;
     Label move;
     Label attack;
 
@@ -22,11 +19,8 @@ public class ActionMenu extends Window {
 
         //Setting the attributes
         super("ActionMenu", skin);
-//        this.skin = skin;
         this.setPosition(0 ,0);
         this.setVisible(false);
-//        this.setWidth(Constants.TABLE_WIDTH);
-//        this.setHeight(Constants.TABLE_HEIGHT);
 
         //Initializing the labels
         move = new Label("Move", skin);
@@ -37,8 +31,6 @@ public class ActionMenu extends Window {
         this.row();
         this.add(attack);
 
-        //Setting the background
-//        this.setBackground("default");
 
     }
 
