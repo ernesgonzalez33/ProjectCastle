@@ -1,10 +1,15 @@
 package com.projectcastle.game.entities;
 
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.projectcastle.game.util.Constants;
 
 /**
@@ -21,10 +26,11 @@ public class Unit extends Actor {
     protected int health;
     protected TextureRegion region;
 
-    public Unit(Vector2 position, int attack, int defense, String name, int health, TextureRegion region){
+    public Unit(Vector2 position, int attack, int defense, String name, int health, TextureRegion region) {
 
         this.setPosition(position.x, position.y);
         this.setBounds(position.x, position.y, region.getRegionWidth(), region.getRegionHeight());
+        this.setTouchable(Touchable.enabled);
         this.attack = attack;
         this.defense = defense;
         this.name = name;
@@ -33,6 +39,12 @@ public class Unit extends Actor {
         this.setScale(Constants.CHARACTER_SCALE, Constants.CHARACTER_SCALE);
         this.setRotation(0);
 
+        addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.log(TAG, "Touched!");
+                return true;
+            }
+        });
     }
 
     @Override

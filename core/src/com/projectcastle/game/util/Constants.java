@@ -21,7 +21,7 @@ public class Constants {
     public static final int CHARACTER_SIZE = 16;
     public static final int CHARACTER_SCALE = 2;
     public static final String FLAT_SKIN = "skin.json";
-    public static final float TABLE_WIDTH = 70;
-    public static final float TABLE_HEIGHT = 70;
+    public static final float ACTION_MENU_WIDTH = 70;
+    public static final float ACTION_MENU_HEIGHT = 70;
 
 }

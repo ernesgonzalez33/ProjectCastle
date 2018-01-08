@@ -25,6 +25,8 @@ import com.projectcastle.game.util.TextureTools;
  * Created by ernestogonzalezchacon on 23/9/17.
  */
 
+//TODO: Clickar sobre los personajes y que aparezca el menú
+
 public class TestMapScreen implements Screen {
 
     public static final String TAG = TestMapScreen.class.getName();
@@ -82,6 +84,7 @@ public class TestMapScreen implements Screen {
 
         //Working with the ActionMenu
         stage.addActor(this.game.actionMenu);
+        Gdx.input.setInputProcessor(stage);
 
     }
 
@@ -101,12 +104,16 @@ public class TestMapScreen implements Screen {
 
         game.tiledMapRenderer.setView(camera);
         game.tiledMapRenderer.render();
+        stage.act(delta); //In the case something need to move
 
         game.batch.begin();
 
         stage.draw();
 
         game.batch.end();
+
+        //Testing the inputs
+
 
     }
 
@@ -134,6 +141,7 @@ public class TestMapScreen implements Screen {
     public void dispose() {
 
         map.dispose();
+        stage.dispose();
 
     }
 }
