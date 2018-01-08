@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.util.Constants;
 
 /**
@@ -26,7 +27,7 @@ public class Unit extends Actor {
     protected int health;
     protected TextureRegion region;
 
-    public Unit(Vector2 position, int attack, int defense, String name, int health, TextureRegion region) {
+    public Unit(Vector2 position, int attack, int defense, String name, int health, TextureRegion region, final ActionMenu actionMenu) {
 
         this.setPosition(position.x, position.y);
         this.setBounds(position.x, position.y, region.getRegionWidth(), region.getRegionHeight());
@@ -41,7 +42,8 @@ public class Unit extends Actor {
 
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log(TAG, "Touched!");
+//                Gdx.app.log(TAG, "Touched!");
+                actionMenu.setVisible(true);
                 return true;
             }
         });
