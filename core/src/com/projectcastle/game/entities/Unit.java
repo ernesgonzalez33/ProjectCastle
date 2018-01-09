@@ -26,6 +26,7 @@ public class Unit extends Actor {
     protected String name;
     protected int health;
     protected TextureRegion region;
+    protected boolean isEnemy;
 
     public Unit(Vector2 position, int attack, int defense, String name, int health, TextureRegion region, final ActionMenu actionMenu) {
 
@@ -42,8 +43,14 @@ public class Unit extends Actor {
 
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-//                Gdx.app.log(TAG, "Touched!");
-                actionMenu.setVisible(true);
+
+                if (isEnemy){
+                    Gdx.app.log(TAG, "Don't touch me!");
+                } else {
+                    //TODO: Hacer que aparezca el ActionMenu en el sitio correcto
+                    actionMenu.setPosition(getPositionX(), getPositionY());
+                    actionMenu.setVisible(true);
+                }
                 return true;
             }
         });
@@ -86,5 +93,9 @@ public class Unit extends Actor {
     public void setHealth(int health) {
         this.health = health;
     }
+
+    public float getPositionX() {return position.x; }
+
+    public float getPositionY() {return position.y; }
 
 }

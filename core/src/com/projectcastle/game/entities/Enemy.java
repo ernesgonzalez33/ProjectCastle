@@ -15,5 +15,8 @@ public class Enemy extends Unit {
 
     public Enemy(Vector2 position, int attack, int defense, String name, int health, TextureRegion region, ActionMenu actionMenu) {
         super(position, attack, defense, name, health, region, actionMenu);
+
+        this.isEnemy = true;
+
     }
 }

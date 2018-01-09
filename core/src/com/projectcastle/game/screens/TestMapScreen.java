@@ -25,8 +25,6 @@ import com.projectcastle.game.util.TextureTools;
  * Created by ernestogonzalezchacon on 23/9/17.
  */
 
-//TODO: Clickar sobre los personajes y que aparezca el menú
-
 public class TestMapScreen implements Screen {
 
     public static final String TAG = TestMapScreen.class.getName();
