@@ -1,6 +1,5 @@
 package com.projectcastle.game.entities;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -47,8 +46,9 @@ public class Unit extends Actor {
                 if (isEnemy){
                     Gdx.app.log(TAG, "Don't touch me!");
                 } else {
-                    //TODO: Hacer que aparezca el ActionMenu en el sitio correcto
-                    actionMenu.setPosition(getPositionX(), getPositionY());
+                    //TODO: Así funciona, sin embargo no está claro cómo coge las posiciones
+//                    Gdx.app.log(TAG, "x " + x + " y " + y);
+                    actionMenu.setPosition(x, y);
                     actionMenu.setVisible(true);
                 }
                 return true;
