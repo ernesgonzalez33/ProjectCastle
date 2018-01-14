@@ -9,7 +9,7 @@ import com.projectcastle.game.util.Constants;
  * Created by ernestogonzalezchacon on 3/12/17.
  */
 
-
+//TODO: Hacer que los botones del ActionMenu funcionen
 public class ActionMenu extends Window {
 
     Label move;

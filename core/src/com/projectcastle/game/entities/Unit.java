@@ -27,7 +27,7 @@ public class Unit extends Actor {
     protected TextureRegion region;
     protected boolean isEnemy;
 
-    public Unit(Vector2 position, int attack, int defense, String name, int health, TextureRegion region, final ActionMenu actionMenu) {
+    public Unit(final Vector2 position, int attack, int defense, String name, final int health, TextureRegion region, final ActionMenu actionMenu) {
 
         this.setPosition(position.x, position.y);
         this.setBounds(position.x, position.y, region.getRegionWidth(), region.getRegionHeight());
@@ -46,9 +46,8 @@ public class Unit extends Actor {
                 if (isEnemy){
                     Gdx.app.log(TAG, "Don't touch me!");
                 } else {
-                    //TODO: Así funciona, sin embargo no está claro cómo coge las posiciones
-//                    Gdx.app.log(TAG, "x " + x + " y " + y);
-                    actionMenu.setPosition(x, y);
+//                    Gdx.app.log(TAG, "x " + position.x + " y " + position.y);
+                    actionMenu.setPosition(position.x, position.y);
                     actionMenu.setVisible(true);
                 }
                 return true;
