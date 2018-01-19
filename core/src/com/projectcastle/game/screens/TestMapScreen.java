@@ -25,6 +25,7 @@ import com.projectcastle.game.util.TextureTools;
  * Created by ernestogonzalezchacon on 23/9/17.
  */
 
+//TODO: Hacer desaparecer el menú de acciones cuando se clique fuera
 public class TestMapScreen implements Screen {
 
     public static final String TAG = TestMapScreen.class.getName();

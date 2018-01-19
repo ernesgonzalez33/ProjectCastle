@@ -46,6 +46,7 @@ public class Unit extends Actor {
                 if (isEnemy){
                     Gdx.app.log(TAG, "Don't touch me!");
                 } else {
+                    //TODO (opcional): hacer que el ActionMenu aparezca justo donde se tocó. https://github.com/libgdx/libgdx/wiki/Mouse%2C-Touch-%26amp%3B-Keyboard
 //                    Gdx.app.log(TAG, "x " + position.x + " y " + position.y);
                     actionMenu.setPosition(position.x, position.y);
                     actionMenu.setVisible(true);
