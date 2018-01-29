@@ -2,6 +2,7 @@ package com.projectcastle.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
@@ -85,9 +86,14 @@ public class TestMapScreen implements Screen, InputProcessor {
         stage.addActor(number2);
         stage.addActor(theOne);
 
+        InputMultiplexer inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(stage);
+        inputMultiplexer.addProcessor(this);
+        Gdx.input.setInputProcessor(inputMultiplexer);
+
         //Working with the ActionMenu
         stage.addActor(this.game.actionMenu);
-        Gdx.input.setInputProcessor(stage);
+//        Gdx.input.setInputProcessor(stage);
 
     }
 
@@ -165,7 +171,23 @@ public class TestMapScreen implements Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+        if (game.actionMenu.isVisible()){
+
+            if (screenX > game.actionMenu.getOriginX() && screenX < viewport.getScreenWidth() - (viewport.getScreenWidth() - game.actionMenu.getWidth() - game.actionMenu.getOriginX())){
+                if (screenY > game.actionMenu.getOriginY() && screenY < viewport.getScreenHeight() - (viewport.getScreenHeight() - game.actionMenu.getHeight() - game.actionMenu.getOriginY())){
+                    return false;
+                } else {
+                    game.actionMenu.setVisible(false);
+                }
+            } else {
+                game.actionMenu.setVisible(false);
+            }
+
+        }
+
         return false;
+
     }
 
     @Override
