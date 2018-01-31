@@ -44,7 +44,7 @@ public class Unit extends Actor {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
                 if (isEnemy){
-                    Gdx.app.log(TAG, "Don't touch me!");
+                    Gdx.app.log(TAG, "Can't touch this!");
                 } else {
                     //TODO (opcional): hacer que el ActionMenu aparezca justo donde se tocó. https://github.com/libgdx/libgdx/wiki/Mouse%2C-Touch-%26amp%3B-Keyboard
 //                    Gdx.app.log(TAG, "x " + position.x + " y " + position.y);

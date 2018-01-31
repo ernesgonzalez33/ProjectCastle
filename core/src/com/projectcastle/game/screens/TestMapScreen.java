@@ -30,7 +30,6 @@ import com.projectcastle.game.util.TextureTools;
  * Kind of class: ${PACKAGE_NAME}
  */
 
-//TODO: Hacer desaparecer el menú de acciones cuando se clique fuera
 public class TestMapScreen implements Screen, InputProcessor {
 
     public static final String TAG = TestMapScreen.class.getName();
@@ -85,15 +84,14 @@ public class TestMapScreen implements Screen, InputProcessor {
         stage.addActor(number1);
         stage.addActor(number2);
         stage.addActor(theOne);
+        stage.addActor(this.game.actionMenu);
 
+        //Input processors
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(stage);
         inputMultiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(inputMultiplexer);
 
-        //Working with the ActionMenu
-        stage.addActor(this.game.actionMenu);
-//        Gdx.input.setInputProcessor(stage);
 
     }
 
