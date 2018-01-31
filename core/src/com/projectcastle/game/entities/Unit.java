@@ -25,7 +25,6 @@ public class Unit extends Actor {
     protected String name;
     protected int health;
     protected TextureRegion region;
-    protected boolean isEnemy;
 
     public Unit(final Vector2 position, int attack, int defense, String name, final int health, TextureRegion region, final ActionMenu actionMenu) {
 

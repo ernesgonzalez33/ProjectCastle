@@ -19,6 +19,8 @@ public class ActionMenu extends Window {
     public final static String TAG = ActionMenu.class.getName();
     TextButton move;
     TextButton attack;
+    String calledBy; //Variable to know who is calling
+
 
     public ActionMenu (Skin skin) {
 
@@ -41,7 +43,7 @@ public class ActionMenu extends Window {
         move.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.app.log(TAG, "Move touched!");
+                Gdx.app.log(TAG, "Move touched by " + calledBy); //TODO: Aquí aparece null
                 setVisible(false);
             }
         });
@@ -54,6 +56,14 @@ public class ActionMenu extends Window {
             }
         });
 
+    }
+
+    public String getCalledBy() {
+        return calledBy;
+    }
+
+    public void setCalledBy(String calledBy) {
+        this.calledBy = calledBy;
     }
 
 }

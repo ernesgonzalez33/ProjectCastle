@@ -16,22 +16,16 @@ public class Hero extends Unit {
     public final static String TAG = Hero.class.getName();
 
 
-    public Hero(final Vector2 position, int attack, int defense, String name, int health, TextureRegion region, final ActionMenu actionMenu) {
+    public Hero(final Vector2 position, int attack, int defense, final String name, int health, TextureRegion region, final ActionMenu actionMenu) {
         super(position, attack, defense, name, health, region, actionMenu);
-
-        this.isEnemy = false;
 
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
-                if (isEnemy){
-                    Gdx.app.log(TAG, "Can't touch this!");
-                } else {
-                    //TODO (opcional): hacer que el ActionMenu aparezca justo donde se tocó. https://github.com/libgdx/libgdx/wiki/Mouse%2C-Touch-%26amp%3B-Keyboard
-//                    Gdx.app.log(TAG, "x " + position.x + " y " + position.y);
-                    actionMenu.setPosition(position.x, position.y);
-                    actionMenu.setVisible(true);
-                }
+                actionMenu.setPosition(position.x, position.y);
+                actionMenu.setVisible(true);
+                actionMenu.setCalledBy(name);
+
                 return true;
             }
         });
