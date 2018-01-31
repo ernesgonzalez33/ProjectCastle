@@ -40,20 +40,6 @@ public class Unit extends Actor {
         this.setScale(Constants.CHARACTER_SCALE, Constants.CHARACTER_SCALE);
         this.setRotation(0);
 
-        addListener(new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-
-                if (isEnemy){
-                    Gdx.app.log(TAG, "Can't touch this!");
-                } else {
-                    //TODO (opcional): hacer que el ActionMenu aparezca justo donde se tocó. https://github.com/libgdx/libgdx/wiki/Mouse%2C-Touch-%26amp%3B-Keyboard
-//                    Gdx.app.log(TAG, "x " + position.x + " y " + position.y);
-                    actionMenu.setPosition(position.x, position.y);
-                    actionMenu.setVisible(true);
-                }
-                return true;
-            }
-        });
     }
 
     @Override
