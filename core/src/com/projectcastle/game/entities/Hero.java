@@ -1,6 +1,5 @@
 package com.projectcastle.game.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -8,7 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.projectcastle.game.screens.ActionMenu;
 
 /**
- * Created by ernestogonzalezchacon on 12/5/17.
+ * Created by Ernesto Gonzalez on 12/5/17.
+ * Kind of class: ${PACKAGE_NAME}
  */
 
 public class Hero extends Unit {
@@ -24,7 +24,7 @@ public class Hero extends Unit {
 
                 actionMenu.setPosition(position.x, position.y);
                 actionMenu.setVisible(true);
-                actionMenu.setCalledBy(name);
+                actionMenu.setCalledBy(Hero.this);
 
                 return true;
             }
