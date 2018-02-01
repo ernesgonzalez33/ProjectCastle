@@ -21,6 +21,7 @@ import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.entities.Enemy;
 import com.projectcastle.game.entities.Hero;
 import com.projectcastle.game.util.Constants;
+import com.projectcastle.game.util.Enums;
 import com.projectcastle.game.util.TextureTools;
 
 /**
@@ -30,7 +31,7 @@ import com.projectcastle.game.util.TextureTools;
 
 public class TestMapScreen implements Screen, InputProcessor {
 
-    public static final String TAG = TestMapScreen.class.getName();
+    private static final String TAG = TestMapScreen.class.getName();
 
     private final ProjectCastleGame game;
     private OrthographicCamera camera;
@@ -174,9 +175,17 @@ public class TestMapScreen implements Screen, InputProcessor {
                     return false;
                 } else {
                     game.actionMenu.setVisible(false);
+                    if (game.actionMenu.getCalledBy().getState() != Enums.UnitState.IDLE){
+                        game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
+                        Gdx.app.log(TAG, "Unit " + game.actionMenu.getCalledBy().getName() + " state is now " + game.actionMenu.getCalledBy().getState());
+                    }
                 }
             } else {
                 game.actionMenu.setVisible(false);
+                if (game.actionMenu.getCalledBy().getState() != Enums.UnitState.IDLE){
+                    game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
+                    Gdx.app.log(TAG, "Unit " + game.actionMenu.getCalledBy().getName() + " state is now " + game.actionMenu.getCalledBy().getState());
+                }
             }
 
         }

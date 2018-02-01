@@ -15,6 +15,8 @@ import com.projectcastle.game.util.Enums;
  * Kind of class: ${PACKAGE_NAME}
  */
 
+//TODO: Si llamo al ActionMenu desde otra unidad, la anterior tiene que pasar a Idle
+
 public class ActionMenu extends Window {
 
     private final static String TAG = ActionMenu.class.getName();
@@ -63,7 +65,7 @@ public class ActionMenu extends Window {
 
     }
 
-    public Unit getCalledBy() {
+    Unit getCalledBy() {
         return calledBy;
     }
 
