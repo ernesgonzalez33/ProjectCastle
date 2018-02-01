@@ -1,32 +1,32 @@
 package com.projectcastle.game.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.util.Constants;
+import com.projectcastle.game.util.Enums;
 
 /**
- * Created by ernestogonzalezchacon on 12/5/17.
+ * Created by Ernesto Gonzalez on 12/5/17.
+ * Kind of class: ${PACKAGE_NAME}
  */
 
 public class Unit extends Actor {
 
     public final static String TAG = Unit.class.getName();
-    protected Vector2 position;
-    protected int attack;
-    protected int defense;
-    protected String name;
-    protected int health;
-    protected TextureRegion region;
+    private Vector2 position;
+    private int attack;
+    private int defense;
+    private String name;
+    private int health;
+    private TextureRegion region;
+    private Enums.UnitState state;
 
-    public Unit(final Vector2 position, int attack, int defense, String name, final int health, TextureRegion region, final ActionMenu actionMenu) {
+    Unit(final Vector2 position, int attack, int defense, String name, final int health, TextureRegion region, final ActionMenu actionMenu) {
 
         this.setPosition(position.x, position.y);
         this.setBounds(position.x, position.y, region.getRegionWidth(), region.getRegionHeight());
@@ -38,6 +38,7 @@ public class Unit extends Actor {
         this.region = region;
         this.setScale(Constants.CHARACTER_SCALE, Constants.CHARACTER_SCALE);
         this.setRotation(0);
+        this.setState(Enums.UnitState.IDLE);
 
     }
 
@@ -82,5 +83,13 @@ public class Unit extends Actor {
     public float getPositionX() {return position.x; }
 
     public float getPositionY() {return position.y; }
+
+    public Enums.UnitState getState() {
+        return state;
+    }
+
+    public void setState(Enums.UnitState state) {
+        this.state = state;
+    }
 
 }

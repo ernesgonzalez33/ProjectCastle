@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.projectcastle.game.entities.Unit;
 import com.projectcastle.game.util.Constants;
+import com.projectcastle.game.util.Enums;
 
 /**
  * Created by Ernesto Gonzalez on 3/12/17.
@@ -44,6 +45,8 @@ public class ActionMenu extends Window {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.log(TAG, "Move touched by " + calledBy.getName());
+                calledBy.setState(Enums.UnitState.MOVING);
+                Gdx.app.log(TAG, "State is now " + calledBy.getState());
                 setVisible(false);
             }
         });
@@ -52,6 +55,8 @@ public class ActionMenu extends Window {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.log(TAG, "Attack touched by " + calledBy.getName());
+                calledBy.setState(Enums.UnitState.ATTACKING);
+                Gdx.app.log(TAG, "State is now " + calledBy.getState());
                 setVisible(false);
             }
         });

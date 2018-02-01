@@ -7,7 +7,7 @@ package com.projectcastle.game.util;
 
 public class Enums {
 
-    public enum HeroState {
+    public enum UnitState {
         MOVING, ATTACKING, IDLE
     }
 

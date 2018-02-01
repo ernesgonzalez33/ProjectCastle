@@ -16,6 +16,7 @@ public class Hero extends Unit {
     public final static String TAG = Hero.class.getName();
 
 
+
     public Hero(final Vector2 position, int attack, int defense, final String name, int health, TextureRegion region, final ActionMenu actionMenu) {
         super(position, attack, defense, name, health, region, actionMenu);
 
