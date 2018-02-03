@@ -15,6 +15,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
@@ -188,6 +189,11 @@ public class TestMapScreen implements Screen, InputProcessor {
                 }
             }
 
+        } else {
+            if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
+                game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, screenY, 10)); //TODO: Averiguar cómo transformar screenY en las coordenadas reales
+                game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
+            }
         }
 
         return false;
