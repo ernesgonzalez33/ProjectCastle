@@ -191,7 +191,7 @@ public class TestMapScreen implements Screen, InputProcessor {
 
         } else {
             if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
-                game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, screenY, 10)); //TODO: Averiguar cómo transformar screenY en las coordenadas reales
+                game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, viewport.getScreenHeight() - screenY, 2)); //TODO: Averiguar cómo transformar screenY en las coordenadas reales
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
             }
         }
