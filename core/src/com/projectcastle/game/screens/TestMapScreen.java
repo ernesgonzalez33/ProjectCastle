@@ -64,6 +64,7 @@ public class TestMapScreen implements Screen, InputProcessor {
         game.manager.finishLoading();
         // once the asset manager is done loading
         TiledMap map = game.manager.get(Constants.TEST_MAP);
+//        map.getLayers().get("Roof").setOpacity(0.9f); //TODO: (opcional) transparentar ciertas capas para que se vean los personajes
         game.tiledMapRenderer = new OrthogonalTiledMapRenderer(map, Constants.UNIT_SCALE);
 
         // Treating the textures
@@ -191,7 +192,7 @@ public class TestMapScreen implements Screen, InputProcessor {
 
         } else {
             if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
-                game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, viewport.getScreenHeight() - screenY, 2)); //TODO: Averiguar cómo transformar screenY en las coordenadas reales
+                game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, viewport.getScreenHeight() - screenY, 2)); //TODO: (opcional) arreglar para que se fije en los tiles
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
             }
         }
