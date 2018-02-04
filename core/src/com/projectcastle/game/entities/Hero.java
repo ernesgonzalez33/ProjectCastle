@@ -23,7 +23,7 @@ public class Hero extends Unit {
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
-                actionMenu.setPosition(position.x, position.y);
+                actionMenu.setPosition(getX(), getY()); //TODO: (opcional) Hacer que el ActionMenu aparezca más centrado en la unidad
                 actionMenu.setVisible(true);
                 actionMenu.setCalledBy(Hero.this);
 

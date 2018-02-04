@@ -80,9 +80,9 @@ public class Unit extends Actor {
         this.health = health;
     }
 
-    public float getPositionX() {return position.x; }
-
-    public float getPositionY() {return position.y; }
+//    public float getPositionX() {return position.x; }
+//
+//    public float getPositionY() {return position.y; }
 
     public Enums.UnitState getState() {
         return state;

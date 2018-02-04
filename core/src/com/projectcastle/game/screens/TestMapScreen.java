@@ -193,7 +193,10 @@ public class TestMapScreen implements Screen, InputProcessor {
         } else {
             if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
                 game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, viewport.getScreenHeight() - screenY, 2)); //TODO: (opcional) arreglar para que se fije en los tiles
+//                game.actionMenu.getCalledBy().setPosition(screenX, viewport.getScreenHeight() - screenY);
+                Gdx.app.log(TAG, "Unit " + game.actionMenu.getCalledBy().getName() + " is now in position (" + game.actionMenu.getCalledBy().getX() + "," + game.actionMenu.getCalledBy().getY() + ")");
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
+                Gdx.app.log(TAG, "Unit " + game.actionMenu.getCalledBy().getName() + " state is now " + game.actionMenu.getCalledBy().getState());
             }
         }
 
