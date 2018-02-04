@@ -6,14 +6,16 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.projectcastle.game.screens.ActionMenu;
+import com.projectcastle.game.util.Enums;
 
 /**
- * Created by ernestogonzalezchacon on 12/5/17.
+ * Created by Ernesto Gonzalez on 12/5/17.
+ * Kind of class: ${PACKAGE_NAME}
  */
 
 public class Enemy extends Unit {
 
-    public final static String TAG = Enemy.class.getName();
+    private final static String TAG = Enemy.class.getName();
 
 
     public Enemy(final Vector2 position, int attack, int defense, final String name, int health, TextureRegion region, final ActionMenu actionMenu) {
@@ -22,7 +24,11 @@ public class Enemy extends Unit {
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
-                Gdx.app.log(TAG, "Can't touch this!");
+                if (actionMenu.getCalledBy().getState() == Enums.UnitState.ATTACKING){
+                    Gdx.app.log(TAG, "Are you attacking me?"); //TODO: Hacer que el ataque funcione
+                } else {
+                    Gdx.app.log(TAG, "Can't touch this!");
+                }
 
                 return true;
             }
