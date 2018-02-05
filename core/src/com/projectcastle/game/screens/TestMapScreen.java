@@ -79,9 +79,9 @@ public class TestMapScreen implements Screen, InputProcessor {
         Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
         Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
         Vector2 positionTheOne = textureTools.positionConverter(10, 8);
-        number1 = new Hero(positionNumber1, 10, 10, "Number1", 10, charactersRegions[0][0], this.game.actionMenu);
-        number2 = new Hero(positionNumber2, 10, 10, "Number2", 10, charactersRegions[0][3], this.game.actionMenu);
-        theOne = new Enemy(positionTheOne, 10, 10, "TheOne", 10, charactersRegions[0][9], this.game.actionMenu);
+        number1 = new Hero(positionNumber1.x, positionNumber1.y, 10, 10, "Number1", 10, charactersRegions[0][0], this.game.actionMenu, 3);
+        number2 = new Hero(positionNumber2.x, positionNumber2.y, 10, 10, "Number2", 10, charactersRegions[0][3], this.game.actionMenu, 3);
+        theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 10, "TheOne", 10, charactersRegions[0][9], this.game.actionMenu, 3);
         stage.addActor(number1);
         stage.addActor(number2);
         stage.addActor(theOne);
