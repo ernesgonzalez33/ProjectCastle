@@ -17,14 +17,23 @@ public class Enemy extends Unit {
     private final static String TAG = Enemy.class.getName();
 
 
-    public Enemy(float positionX, float positionY, int attack, int defense, final String name, int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit) {
+    public Enemy(float positionX, float positionY, int attack, int defense, final String name, final int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit) {
         super(positionX, positionY, attack, defense, name, health, region, actionMenu, moveLimit);
 
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
+                //TODO: Hacer que el ataque funcione
                 if (actionMenu.getCalledBy().getState() == Enums.UnitState.ATTACKING){
-                    Gdx.app.log(TAG, "Are you attacking me?"); //TODO: Hacer que el ataque funcione
+                    Gdx.app.log(TAG, "Attacking " + getName() + " by " + actionMenu.getCalledBy().getName());
+                    Gdx.app.log(TAG, "Old health: " + getHealth());
+                    setHealth(getHealth() - (actionMenu.getCalledBy().getAttack() - getDefense()));
+                    Gdx.app.log(TAG, "New health : " + getHealth());
+                    if (getHealth() < 1){
+                        Gdx.app.log(TAG, getName() + " died!");
+                        setVisible(false);
+                    }
+                    actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
                 } else {
                     Gdx.app.log(TAG, "Can't touch this!");
                 }
