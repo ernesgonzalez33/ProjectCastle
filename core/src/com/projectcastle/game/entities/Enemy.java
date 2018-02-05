@@ -31,8 +31,8 @@ public class Enemy extends Unit {
                     Gdx.app.log(TAG, "New health : " + getHealth());
                     if (getHealth() < 1){
                         Gdx.app.log(TAG, getName() + " died!");
-                        setVisible(false);
-                    }
+                        remove();
+                    } //TODO: Programar la parte de la subida de stats
                     actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
                 } else {
                     Gdx.app.log(TAG, "Can't touch this!");
