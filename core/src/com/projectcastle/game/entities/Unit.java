@@ -50,13 +50,20 @@ public class Unit extends Actor {
                 getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
     }
 
+    void setStatsAfterAttack (Unit attackingUnit, Unit defendingUnit){
+
+        //Setting health
+        defendingUnit.setHealth(defendingUnit.getHealth() - (attackingUnit.getAttack() - defendingUnit.getDefense()));
+
+    }
+
     public String getName() { return name; }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getAttack() {
+    private int getAttack() {
         return attack;
     }
 
@@ -64,7 +71,7 @@ public class Unit extends Actor {
         this.attack = attack;
     }
 
-    public int getDefense() {
+    private int getDefense() {
         return defense;
     }
 
@@ -72,11 +79,11 @@ public class Unit extends Actor {
         this.defense = defense;
     }
 
-    public int getHealth() {
+    int getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
+    private void setHealth(int health) {
         this.health = health;
     }
 
@@ -91,5 +98,7 @@ public class Unit extends Actor {
     public int getMoveLimit() { return moveLimit; }
 
     public void setMoveLimit(int moveLimit) { this.moveLimit = moveLimit; }
+
+    public Unit getThis() { return this; }
 
 }

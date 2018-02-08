@@ -27,15 +27,17 @@ public class Enemy extends Unit {
                 if (actionMenu.getCalledBy().getState() == Enums.UnitState.ATTACKING){
                     Gdx.app.log(TAG, "Attacking " + getName() + " by " + actionMenu.getCalledBy().getName());
                     Gdx.app.log(TAG, "Old health: " + getHealth());
-                    setHealth(getHealth() - (actionMenu.getCalledBy().getAttack() - getDefense()));
+                    setStatsAfterAttack(actionMenu.getCalledBy(), getThis());
                     Gdx.app.log(TAG, "New health : " + getHealth());
                     if (getHealth() < 1){
                         Gdx.app.log(TAG, getName() + " died!");
                         remove();
-                    } //TODO: Programar la parte de la subida de stats
+                    }
                     actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
-                } else {
+                } else if (actionMenu.getCalledBy().getState() == Enums.UnitState.IDLE) {
                     Gdx.app.log(TAG, "Can't touch this!");
+                } else {
+                    Gdx.app.log(TAG, "Can't move there");
                 }
 
                 return true;
