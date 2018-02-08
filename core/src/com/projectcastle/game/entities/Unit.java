@@ -55,6 +55,23 @@ public class Unit extends Actor {
         //Setting health
         defendingUnit.setHealth(defendingUnit.getHealth() - (attackingUnit.getAttack() - defendingUnit.getDefense()));
 
+        //Setting defense
+        if (attackingUnit.getDefense() > defendingUnit.getDefense() + 5){
+            defendingUnit.setDefense(defendingUnit.getDefense() + 3);
+        } else if (attackingUnit.getDefense() < defendingUnit.getDefense() + 5) {
+            defendingUnit.setDefense(defendingUnit.getDefense() + 1);
+        } else {
+            defendingUnit.setDefense(defendingUnit.getDefense() + 2);
+        }
+
+        //Setting attack
+        if (attackingUnit.getAttack() > defendingUnit.getAttack() + 5){
+            attackingUnit.setAttack(attackingUnit.getAttack() + 1);
+        } else if (attackingUnit.getAttack() < defendingUnit.getAttack() + 5) {
+            attackingUnit.setAttack(attackingUnit.getAttack() + 3);
+        } else {
+            attackingUnit.setAttack(attackingUnit.getAttack() + 2);
+        }
     }
 
     public String getName() { return name; }
@@ -67,7 +84,7 @@ public class Unit extends Actor {
         return attack;
     }
 
-    public void setAttack(int attack) {
+    private void setAttack(int attack) {
         this.attack = attack;
     }
 
@@ -75,7 +92,7 @@ public class Unit extends Actor {
         return defense;
     }
 
-    public void setDefense(int defense) {
+    private void setDefense(int defense) {
         this.defense = defense;
     }
 

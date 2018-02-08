@@ -32,9 +32,7 @@ public class Enemy extends Unit {
                 //TODO: Hacer que el ataque funcione
                 if (actionMenu.getCalledBy().getState() == Enums.UnitState.ATTACKING){
                     Gdx.app.log(TAG, "Attacking " + getName() + " by " + actionMenu.getCalledBy().getName());
-                    Gdx.app.log(TAG, "Old health: " + getHealth());
                     setStatsAfterAttack(actionMenu.getCalledBy(), getThis());
-                    Gdx.app.log(TAG, "New health : " + getHealth());
                     if (getHealth() < 1){
                         Gdx.app.log(TAG, getName() + " died!");
                         remove();
