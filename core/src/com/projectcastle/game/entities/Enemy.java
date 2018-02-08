@@ -23,6 +23,12 @@ public class Enemy extends Unit {
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
+                //Issue #1 solved
+                if (actionMenu.getCalledBy() == null) {
+                    Gdx.app.log(TAG, "Can't touch this!");
+                    return true;
+                }
+
                 //TODO: Hacer que el ataque funcione
                 if (actionMenu.getCalledBy().getState() == Enums.UnitState.ATTACKING){
                     Gdx.app.log(TAG, "Attacking " + getName() + " by " + actionMenu.getCalledBy().getName());
