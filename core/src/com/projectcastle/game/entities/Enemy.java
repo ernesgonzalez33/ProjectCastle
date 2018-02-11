@@ -29,7 +29,6 @@ public class Enemy extends Unit {
                     return true;
                 }
 
-                //TODO: Hacer que el ataque funcione
                 if (actionMenu.getCalledBy().getState() == Enums.UnitState.ATTACKING){
                     Gdx.app.log(TAG, "Attacking " + getName() + " by " + actionMenu.getCalledBy().getName());
                     setStatsAfterAttack(actionMenu.getCalledBy(), getThis());

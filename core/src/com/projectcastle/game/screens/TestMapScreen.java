@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -37,6 +38,7 @@ public class TestMapScreen implements Screen, InputProcessor {
     private final ProjectCastleGame game;
     private OrthographicCamera camera;
     private TiledMap map;
+    private TiledMapTileLayer tiledMapTileLayer;
     private Viewport viewport;
     private Texture characters;
     private Stage stage;
@@ -92,6 +94,11 @@ public class TestMapScreen implements Screen, InputProcessor {
         inputMultiplexer.addProcessor(stage);
         inputMultiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(inputMultiplexer);
+
+        // Experimenting with the map
+        tiledMapTileLayer = (TiledMapTileLayer) map.getLayers().get(1);
+        TiledMapTileLayer.Cell testCell = tiledMapTileLayer.getCell(2,1);
+        testCell.setFlipHorizontally(false);
 
     }
 
