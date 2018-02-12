@@ -1,7 +1,8 @@
 package com.projectcastle.game.util;
 
 /**
- * Created by ernestogonzalezchacon on 12/5/17.
+ * Created by Ernesto Gonzalez on 12/5/17.
+ * Kind of class: ${PACKAGE_NAME}
  */
 
 public class Constants {
@@ -17,11 +18,12 @@ public class Constants {
     public static final String GUARD_NAME = "Rebecca";
     public static final String CLERIC_NAME = "Peter";
     public static final String CHARACTERS_ASSET = "characters_1.png";
-    public static final int TILE_SIZE = 32;
+    static final int TILE_SIZE = 32;
     public static final int CHARACTER_SIZE = 16;
     public static final int CHARACTER_SCALE = 2;
     public static final String FLAT_SKIN = "skin.json";
     public static final float ACTION_MENU_WIDTH = 70;
     public static final float ACTION_MENU_HEIGHT = 70;
+    public static final float ACTION_MENU_BUTTON_WIDTH = 45;
 
 }
