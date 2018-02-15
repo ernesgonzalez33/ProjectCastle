@@ -43,6 +43,7 @@ public class TestMapScreen implements Screen, InputProcessor {
     private Texture characters;
     private Stage stage;
     private TextureRegion [][] charactersRegions;
+    private Texture selectedSprite;
     private TextureTools textureTools;
     private Hero number1;
     private Hero number2;
@@ -62,6 +63,7 @@ public class TestMapScreen implements Screen, InputProcessor {
         // loading the characters
         game.manager.setLoader(Texture.class, new TextureLoader(new InternalFileHandleResolver()));
         game.manager.load(Constants.CHARACTERS_ASSET, Texture.class);
+        game.manager.load(Constants.SELECTED_SPRITE_ASSET, Texture.class);
 
         game.manager.finishLoading();
         // once the asset manager is done loading
@@ -73,6 +75,7 @@ public class TestMapScreen implements Screen, InputProcessor {
         characters = game.manager.get(Constants.CHARACTERS_ASSET);
         textureTools = new TextureTools();
         charactersRegions = textureTools.divide(characters, 8, 12, Constants.CHARACTER_SIZE, Constants.CHARACTER_SIZE);
+        selectedSprite = game.manager.get(Constants.SELECTED_SPRITE_ASSET);
 
         //Setting the stage
         stage = new Stage();
@@ -198,7 +201,12 @@ public class TestMapScreen implements Screen, InputProcessor {
             }
 
         } else {
-            if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
+
+            if (game.actionMenu.getCalledBy() == null) {
+                Gdx.app.log(TAG, "Touching!");
+                //Prueba del Selected Sprite
+//                tiledMapTileLayer.getCell(screenX, viewport.getScreenHeight() - screenY).getTile().setTextureRegion(selectedSprite);
+            } else if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
                 game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, viewport.getScreenHeight() - screenY, 2)); //TODO: (opcional) arreglar para que se fije en los tiles
 //                game.actionMenu.getCalledBy().setPosition(screenX, viewport.getScreenHeight() - screenY);
                 Gdx.app.log(TAG, "Unit " + game.actionMenu.getCalledBy().getName() + " is now in position (" + game.actionMenu.getCalledBy().getX() + "," + game.actionMenu.getCalledBy().getY() + ")");

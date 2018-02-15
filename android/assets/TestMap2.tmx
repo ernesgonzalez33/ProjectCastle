@@ -15,6 +15,9 @@
  <tileset firstgid="1669" name="characters" tilewidth="16" tileheight="16" tilecount="96" columns="12">
   <image source="characters_1.png" width="192" height="128"/>
  </tileset>
+ <tileset firstgid="1765" name="Unicolor" tilewidth="8" tileheight="8" tilecount="63" columns="7">
+  <image source="TestImage.png" trans="003039" width="63" height="79"/>
+ </tileset>
  <layer name="Grass" width="20" height="20">
   <data encoding="csv">
 434,434,434,434,434,434,434,434,434,434,434,434,434,434,434,434,434,434,434,434,
