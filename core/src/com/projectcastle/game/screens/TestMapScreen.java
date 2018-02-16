@@ -38,12 +38,13 @@ public class TestMapScreen implements Screen, InputProcessor {
     private final ProjectCastleGame game;
     private OrthographicCamera camera;
     private TiledMap map;
-    private TiledMapTileLayer tiledMapTileLayer;
+    private TiledMapTileLayer selectedTileLayer;
     private Viewport viewport;
     private Texture characters;
     private Stage stage;
     private TextureRegion [][] charactersRegions;
     private Texture selectedSprite;
+    private TextureRegion selectedSpriteRegion;
     private TextureTools textureTools;
     private Hero number1;
     private Hero number2;
@@ -76,6 +77,7 @@ public class TestMapScreen implements Screen, InputProcessor {
         textureTools = new TextureTools();
         charactersRegions = textureTools.divide(characters, 8, 12, Constants.CHARACTER_SIZE, Constants.CHARACTER_SIZE);
         selectedSprite = game.manager.get(Constants.SELECTED_SPRITE_ASSET);
+        selectedSpriteRegion = new TextureRegion(selectedSprite);
 
         //Setting the stage
         stage = new Stage();
@@ -99,9 +101,7 @@ public class TestMapScreen implements Screen, InputProcessor {
         Gdx.input.setInputProcessor(inputMultiplexer);
 
         // Experimenting with the map
-        tiledMapTileLayer = (TiledMapTileLayer) map.getLayers().get(1);
-        TiledMapTileLayer.Cell testCell = tiledMapTileLayer.getCell(2,1);
-        testCell.setFlipHorizontally(false);
+        selectedTileLayer = (TiledMapTileLayer) map.getLayers().get("Selected");
 
     }
 
@@ -203,15 +203,11 @@ public class TestMapScreen implements Screen, InputProcessor {
         } else {
 
             if (game.actionMenu.getCalledBy() == null) {
-                Gdx.app.log(TAG, "Touching!");
                 //Prueba del Selected Sprite
-//                tiledMapTileLayer.getCell(screenX, viewport.getScreenHeight() - screenY).getTile().setTextureRegion(selectedSprite);
+                Gdx.app.log(TAG, "Touched!");
             } else if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
                 game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, viewport.getScreenHeight() - screenY, 2)); //TODO: (opcional) arreglar para que se fije en los tiles
-//                game.actionMenu.getCalledBy().setPosition(screenX, viewport.getScreenHeight() - screenY);
-                Gdx.app.log(TAG, "Unit " + game.actionMenu.getCalledBy().getName() + " is now in position (" + game.actionMenu.getCalledBy().getX() + "," + game.actionMenu.getCalledBy().getY() + ")");
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
-                Gdx.app.log(TAG, "Unit " + game.actionMenu.getCalledBy().getName() + " state is now " + game.actionMenu.getCalledBy().getState());
             }
         }
 
