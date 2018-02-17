@@ -12,8 +12,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -39,6 +41,7 @@ public class TestMapScreen implements Screen, InputProcessor {
     private OrthographicCamera camera;
     private TiledMap map;
     private TiledMapTileLayer selectedTileLayer;
+    private TiledMapTileSet selectedTileSet;
     private Viewport viewport;
     private Texture characters;
     private Stage stage;
@@ -102,6 +105,7 @@ public class TestMapScreen implements Screen, InputProcessor {
 
         // Experimenting with the map
         selectedTileLayer = (TiledMapTileLayer) map.getLayers().get("Selected");
+        selectedTileSet = map.getTileSets().getTileSet("SelectedTile");
 
     }
 
@@ -204,7 +208,11 @@ public class TestMapScreen implements Screen, InputProcessor {
 
             if (game.actionMenu.getCalledBy() == null) {
                 //Prueba del Selected Sprite
-                Gdx.app.log(TAG, "Touched!");
+                TiledMapTileLayer.Cell selectedCell = new TiledMapTileLayer.Cell();
+                selectedCell.setTile(selectedTileSet.getTile(0));
+                StaticTiledMapTile selectedTile = new StaticTiledMapTile(selectedSpriteRegion);
+                selectedCell.setTile(selectedTile);
+                selectedTileLayer.setCell((int) Math.floor(screenX / 32), (int) Math.floor((viewport.getScreenHeight() - screenY / 32)), selectedCell);
             } else if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
                 game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, viewport.getScreenHeight() - screenY, 2)); //TODO: (opcional) arreglar para que se fije en los tiles
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
