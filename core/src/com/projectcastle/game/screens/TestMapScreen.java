@@ -28,6 +28,8 @@ import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
 import com.projectcastle.game.util.TextureTools;
 
+import gameplay.InputProcessorHelp;
+
 /**
  * Created by Ernesto Gonzalez on 23/9/17.
  * Kind of class: ${PACKAGE_NAME}
@@ -52,6 +54,7 @@ public class TestMapScreen implements Screen, InputProcessor {
     private Hero number1;
     private Hero number2;
     private Enemy theOne;
+    private InputProcessorHelp inputProcessorHelp;
 
     public TestMapScreen(final ProjectCastleGame game){
         this.game = game;
@@ -102,6 +105,7 @@ public class TestMapScreen implements Screen, InputProcessor {
         inputMultiplexer.addProcessor(stage);
         inputMultiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(inputMultiplexer);
+        inputProcessorHelp = new InputProcessorHelp(this.game);
 
         // Experimenting with the map
         selectedTileLayer = (TiledMapTileLayer) map.getLayers().get("Selected");
@@ -184,42 +188,7 @@ public class TestMapScreen implements Screen, InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        if (game.actionMenu.isVisible()){
-
-            if (screenX > game.actionMenu.getOriginX() && screenX < viewport.getScreenWidth() - (viewport.getScreenWidth() - game.actionMenu.getWidth() - game.actionMenu.getOriginX())){
-                if (screenY > game.actionMenu.getOriginY() && screenY < viewport.getScreenHeight() - (viewport.getScreenHeight() - game.actionMenu.getHeight() - game.actionMenu.getOriginY())){
-                    return false;
-                } else {
-                    game.actionMenu.setVisible(false);
-                    if (game.actionMenu.getCalledBy().getState() != Enums.UnitState.IDLE){
-                        game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
-                        Gdx.app.log(TAG, "Unit " + game.actionMenu.getCalledBy().getName() + " state is now " + game.actionMenu.getCalledBy().getState());
-                    }
-                }
-            } else {
-                game.actionMenu.setVisible(false);
-                if (game.actionMenu.getCalledBy().getState() != Enums.UnitState.IDLE){
-                    game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
-                    Gdx.app.log(TAG, "Unit " + game.actionMenu.getCalledBy().getName() + " state is now " + game.actionMenu.getCalledBy().getState());
-                }
-            }
-
-        } else {
-
-            if (game.actionMenu.getCalledBy() == null) {
-                //Prueba del Selected Sprite
-                TiledMapTileLayer.Cell selectedCell = new TiledMapTileLayer.Cell();
-                selectedCell.setTile(selectedTileSet.getTile(0));
-                StaticTiledMapTile selectedTile = new StaticTiledMapTile(selectedSpriteRegion);
-                selectedCell.setTile(selectedTile);
-                selectedTileLayer.setCell((int) Math.floor(screenX / 32), (int) Math.floor((viewport.getScreenHeight() - screenY / 32)), selectedCell);
-            } else if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
-                game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, viewport.getScreenHeight() - screenY, 2)); //TODO: (opcional) arreglar para que se fije en los tiles
-                game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
-            }
-        }
-
-        return false;
+        return inputProcessorHelp.ScreenTouchDown(screenX, screenY, viewport, selectedSpriteRegion, selectedTileSet, selectedTileLayer);
 
     }
 
