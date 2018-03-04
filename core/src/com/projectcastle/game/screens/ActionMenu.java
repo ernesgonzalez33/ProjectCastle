@@ -36,8 +36,8 @@ public class ActionMenu extends Window {
         attack = new TextButton("Attack", skin);
 
         //Setting the rows
-        this.add(move).width(Constants.ACTION_MENU_BUTTON_WIDTH);
-        this.row(); //TODO: (opcional). Separar un poco los botones
+        this.add(move).width(Constants.ACTION_MENU_BUTTON_WIDTH).pad(Constants.ACTION_MENU_BUTTON_PADDING);
+        this.row();
         this.add(attack).width(Constants.ACTION_MENU_BUTTON_WIDTH);
 
         //Setting the inputs ---> No parece funcionar aquí
