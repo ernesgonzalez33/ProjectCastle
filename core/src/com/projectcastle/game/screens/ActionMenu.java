@@ -40,7 +40,7 @@ public class ActionMenu extends Window {
         this.row();
         this.add(attack).width(Constants.ACTION_MENU_BUTTON_WIDTH);
 
-        //Setting the inputs ---> No parece funcionar aquí
+        //Setting the inputs
         move.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
