@@ -15,20 +15,17 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.entities.Enemy;
 import com.projectcastle.game.entities.Hero;
 import com.projectcastle.game.util.Constants;
-import com.projectcastle.game.util.Enums;
 import com.projectcastle.game.util.TextureTools;
 
-import gameplay.InputProcessorHelp;
+import com.projectcastle.game.gameplay.InputProcessorHelp;
 
 /**
  * Created by Ernesto Gonzalez on 23/9/17.

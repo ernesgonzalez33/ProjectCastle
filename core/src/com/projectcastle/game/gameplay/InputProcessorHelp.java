@@ -1,4 +1,4 @@
-package gameplay;
+package com.projectcastle.game.gameplay;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
