@@ -81,6 +81,8 @@ public class TestMapScreen implements Screen, InputProcessor {
         charactersRegions = textureTools.divide(characters, 8, 12, Constants.CHARACTER_SIZE, Constants.CHARACTER_SIZE);
         selectedSprite = game.manager.get(Constants.SELECTED_SPRITE_ASSET);
         selectedSpriteRegion = new TextureRegion(selectedSprite);
+        selectedSpriteRegion.setRegionWidth(32);
+        selectedSpriteRegion.setRegionHeight(32);
 
         //Setting the stage
         stage = new Stage();
@@ -107,6 +109,7 @@ public class TestMapScreen implements Screen, InputProcessor {
         // Experimenting with the map
         selectedTileLayer = (TiledMapTileLayer) map.getLayers().get("Selected");
         selectedTileSet = map.getTileSets().getTileSet("SelectedTile");
+        selectedTileLayer.setOpacity(0.6f);
 
     }
 
