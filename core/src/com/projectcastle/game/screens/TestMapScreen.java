@@ -71,7 +71,7 @@ public class TestMapScreen implements Screen, InputProcessor {
 
         game.manager.finishLoading();
         // once the asset manager is done loading
-        TiledMap map = game.manager.get(Constants.TEST_MAP);
+        map = game.manager.get(Constants.TEST_MAP);
 //        map.getLayers().get("Roof").setOpacity(0.9f); //TODO: (opcional) transparentar ciertas capas para que se vean los personajes
         game.tiledMapRenderer = new OrthogonalTiledMapRenderer(map, Constants.UNIT_SCALE);
 
