@@ -17,6 +17,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
@@ -32,26 +33,15 @@ import com.projectcastle.game.gameplay.InputProcessorHelp;
  * Kind of class: ${PACKAGE_NAME}
  */
 
-public class TestMapScreen implements Screen, InputProcessor {
+public class TestMapScreen extends TemplateScreen implements InputProcessor {
 
     private static final String TAG = TestMapScreen.class.getName();
 
     private final ProjectCastleGame game;
-    private OrthographicCamera camera;
-    private TiledMap map;
     private TiledMapTileLayer selectedTileLayer;
     private TiledMapTileSet selectedTileSet;
-    private Viewport viewport;
-    private Texture characters;
-    private Stage stage;
-    private TextureRegion [][] charactersRegions;
     private Texture selectedSprite;
     private TextureRegion selectedSpriteRegion;
-    private TextureTools textureTools;
-    private Hero number1;
-    private Hero number2;
-    private Enemy theOne;
-    private InputProcessorHelp inputProcessorHelp;
 
     public TestMapScreen(final ProjectCastleGame game){
         this.game = game;
@@ -84,20 +74,34 @@ public class TestMapScreen implements Screen, InputProcessor {
         selectedSpriteRegion.setRegionWidth(32);
         selectedSpriteRegion.setRegionHeight(32);
 
+        //TODO: (opcional) Meter estas cosas en un método dentro de la clase TemplateScreen o en otra especializada
+
         //Setting the stage
         stage = new Stage();
+        stage.addActor(this.game.actionMenu);
 
         // Creating the characters
         Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
         Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
         Vector2 positionTheOne = textureTools.positionConverter(10, 8);
-        number1 = new Hero(positionNumber1.x, positionNumber1.y, 15, 16, "Number1", 11, charactersRegions[0][0], this.game.actionMenu, 3);
-        number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, "Number2", 11, charactersRegions[0][3], this.game.actionMenu, 3);
-        theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, charactersRegions[0][9], this.game.actionMenu, 3);
-        stage.addActor(number1);
-        stage.addActor(number2);
-        stage.addActor(theOne);
-        stage.addActor(this.game.actionMenu);
+        Hero number1 = new Hero(positionNumber1.x, positionNumber1.y, 15, 16, "Number1", 11, charactersRegions[0][0], this.game.actionMenu, 3);
+        Hero number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, "Number2", 11, charactersRegions[0][3], this.game.actionMenu, 3);
+        Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, charactersRegions[0][9], this.game.actionMenu, 3);
+
+        //Adding heroes and enemies to the SnapshotArray
+        heroes = new SnapshotArray<Hero>();
+        enemies = new SnapshotArray<Enemy>();
+        heroes.add(number1);
+        heroes.add(number2);
+        enemies.add(theOne);
+
+        //Adding the heroes and enemies to the Stage
+        for (Hero hero:heroes) {
+            stage.addActor(hero);
+        }
+        for (Enemy enemy:enemies) {
+            stage.addActor(enemy);
+        }
 
         //Input processors
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
