@@ -38,10 +38,6 @@ public class TestMapScreen extends TemplateScreen implements InputProcessor {
     private static final String TAG = TestMapScreen.class.getName();
 
     private final ProjectCastleGame game;
-    private TiledMapTileLayer selectedTileLayer;
-    private TiledMapTileSet selectedTileSet;
-    private Texture selectedSprite;
-    private TextureRegion selectedSpriteRegion;
 
     public TestMapScreen(final ProjectCastleGame game){
         this.game = game;
@@ -69,10 +65,6 @@ public class TestMapScreen extends TemplateScreen implements InputProcessor {
         characters = game.manager.get(Constants.CHARACTERS_ASSET);
         textureTools = new TextureTools();
         charactersRegions = textureTools.divide(characters, 8, 12, Constants.CHARACTER_SIZE, Constants.CHARACTER_SIZE);
-        selectedSprite = game.manager.get(Constants.SELECTED_SPRITE_ASSET);
-        selectedSpriteRegion = new TextureRegion(selectedSprite);
-        selectedSpriteRegion.setRegionWidth(32);
-        selectedSpriteRegion.setRegionHeight(32);
 
         //TODO: (opcional) Meter estas cosas en un método dentro de la clase TemplateScreen o en otra especializada
 
@@ -110,10 +102,6 @@ public class TestMapScreen extends TemplateScreen implements InputProcessor {
         Gdx.input.setInputProcessor(inputMultiplexer);
         inputProcessorHelp = new InputProcessorHelp(this.game);
 
-        // Experimenting with the map
-        selectedTileLayer = (TiledMapTileLayer) map.getLayers().get("Selected");
-        selectedTileSet = map.getTileSets().getTileSet("SelectedTile");
-        selectedTileLayer.setOpacity(0.6f);
 
     }
 
@@ -192,7 +180,7 @@ public class TestMapScreen extends TemplateScreen implements InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        return inputProcessorHelp.ScreenTouchDown(this, screenX, screenY, pointer, button, selectedSpriteRegion, selectedTileSet, selectedTileLayer);
+        return inputProcessorHelp.ScreenTouchDown(this, screenX, screenY, pointer, button);
 
     }
 

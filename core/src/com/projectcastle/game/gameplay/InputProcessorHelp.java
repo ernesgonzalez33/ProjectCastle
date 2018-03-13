@@ -28,7 +28,7 @@ public class InputProcessorHelp {
 
     }
 
-    public boolean ScreenTouchDown(TemplateScreen screen, int screenX, int screenY, int pointer, int button, TextureRegion selectedSpriteRegion, TiledMapTileSet selectedTileSet, TiledMapTileLayer selectedTileLayer){
+    public boolean ScreenTouchDown(TemplateScreen screen, int screenX, int screenY, int pointer, int button){
 
         if (game.actionMenu.isVisible()){
 
@@ -52,14 +52,7 @@ public class InputProcessorHelp {
 
         } else {
 
-            if (game.actionMenu.getCalledBy() == null) {
-                //Prueba del Selected Sprite
-                TiledMapTileLayer.Cell selectedCell = new TiledMapTileLayer.Cell();
-                selectedCell.setTile(selectedTileSet.getTile(1765));
-                StaticTiledMapTile selectedTile = new StaticTiledMapTile(selectedSpriteRegion);
-                selectedCell.setTile(selectedTile);
-                selectedTileLayer.setCell(screenX / 32, (screen.viewport.getScreenHeight() - screenY) / 32, selectedCell);
-            } else if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
+            if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
                 game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, screen.viewport.getScreenHeight() - screenY, 2)); //TODO: arreglar para que se fije en los tiles
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
             }
