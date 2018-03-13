@@ -192,7 +192,7 @@ public class TestMapScreen extends TemplateScreen implements InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        return inputProcessorHelp.ScreenTouchDown(screenX, screenY, viewport, selectedSpriteRegion, selectedTileSet, selectedTileLayer);
+        return inputProcessorHelp.ScreenTouchDown(this, screenX, screenY, pointer, button, selectedSpriteRegion, selectedTileSet, selectedTileLayer);
 
     }
 

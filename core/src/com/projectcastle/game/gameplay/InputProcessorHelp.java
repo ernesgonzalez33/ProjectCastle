@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
+import com.projectcastle.game.screens.TemplateScreen;
 import com.projectcastle.game.util.Enums;
 
 /**
@@ -27,12 +28,12 @@ public class InputProcessorHelp {
 
     }
 
-    public boolean ScreenTouchDown(int screenX, int screenY, Viewport viewport, TextureRegion selectedSpriteRegion, TiledMapTileSet selectedTileSet, TiledMapTileLayer selectedTileLayer){
+    public boolean ScreenTouchDown(TemplateScreen screen, int screenX, int screenY, int pointer, int button, TextureRegion selectedSpriteRegion, TiledMapTileSet selectedTileSet, TiledMapTileLayer selectedTileLayer){
 
         if (game.actionMenu.isVisible()){
 
-            if (screenX > game.actionMenu.getOriginX() && screenX < viewport.getScreenWidth() - (viewport.getScreenWidth() - game.actionMenu.getWidth() - game.actionMenu.getOriginX())){
-                if (screenY > game.actionMenu.getOriginY() && screenY < viewport.getScreenHeight() - (viewport.getScreenHeight() - game.actionMenu.getHeight() - game.actionMenu.getOriginY())){
+            if (screenX > game.actionMenu.getOriginX() && screenX < screen.viewport.getScreenWidth() - (screen.viewport.getScreenWidth() - game.actionMenu.getWidth() - game.actionMenu.getOriginX())){
+                if (screenY > game.actionMenu.getOriginY() && screenY < screen.viewport.getScreenHeight() - (screen.viewport.getScreenHeight() - game.actionMenu.getHeight() - game.actionMenu.getOriginY())){
                     return false;
                 } else {
                     game.actionMenu.setVisible(false);
@@ -57,9 +58,9 @@ public class InputProcessorHelp {
                 selectedCell.setTile(selectedTileSet.getTile(1765));
                 StaticTiledMapTile selectedTile = new StaticTiledMapTile(selectedSpriteRegion);
                 selectedCell.setTile(selectedTile);
-                selectedTileLayer.setCell(screenX / 32, (viewport.getScreenHeight() - screenY) / 32, selectedCell);
+                selectedTileLayer.setCell(screenX / 32, (screen.viewport.getScreenHeight() - screenY) / 32, selectedCell);
             } else if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
-                game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, viewport.getScreenHeight() - screenY, 2)); //TODO: arreglar para que se fije en los tiles
+                game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, screen.viewport.getScreenHeight() - screenY, 2)); //TODO: arreglar para que se fije en los tiles
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
             }
         }

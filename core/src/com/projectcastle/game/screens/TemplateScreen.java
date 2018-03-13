@@ -13,7 +13,7 @@ import com.projectcastle.game.entities.Hero;
 import com.projectcastle.game.gameplay.InputProcessorHelp;
 import com.projectcastle.game.util.TextureTools;
 
-abstract class TemplateScreen implements Screen {
+public abstract class TemplateScreen implements Screen {
 
     private static final String TAG = TemplateScreen.class.getName();
 
