@@ -28,5 +28,6 @@ public class Constants {
     public static final float ACTION_MENU_BUTTON_WIDTH = 45;
     public static final float ACTION_MENU_BUTTON_PADDING = 5;
     public static final String SELECTED_TILE_SET_NAME = "SelectedTile";
+    public static final String CHARACTERS_TILE_LAYER_NAME = "Characters";
 
 }

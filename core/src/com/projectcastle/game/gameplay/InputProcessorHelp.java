@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.screens.TemplateScreen;
+import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
 
 /**
@@ -53,7 +54,9 @@ public class InputProcessorHelp {
         } else {
 
             if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
-                game.actionMenu.getCalledBy().addAction(Actions.moveTo(screenX, screen.viewport.getScreenHeight() - screenY, 2)); //TODO: arreglar para que se fije en los tiles
+                TiledMapTileLayer charactersLayer = (TiledMapTileLayer) screen.map.getLayers().get(Constants.CHARACTERS_TILE_LAYER_NAME);
+                TiledMapTileLayer.Cell destinyCell = charactersLayer.getCell(screenX, screen.viewport.getScreenHeight() - screenY);
+                game.actionMenu.getCalledBy().addAction(Actions.moveTo(destinyCell.getTile().getOffsetX(), destinyCell.getTile().getOffsetY(), 2)); //TODO: arreglar para que se fije en los tiles
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
             }
         }
