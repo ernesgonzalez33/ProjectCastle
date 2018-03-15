@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
@@ -54,9 +55,8 @@ public class InputProcessorHelp {
         } else {
 
             if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
-                TiledMapTileLayer charactersLayer = (TiledMapTileLayer) screen.map.getLayers().get(Constants.CHARACTERS_TILE_LAYER_NAME);
-                TiledMapTileLayer.Cell destinyCell = charactersLayer.getCell(screenX, screen.viewport.getScreenHeight() - screenY);
-                game.actionMenu.getCalledBy().addAction(Actions.moveTo(destinyCell.getTile().getOffsetX(), destinyCell.getTile().getOffsetY(), 2)); //TODO: arreglar para que se fije en los tiles
+                Vector2 position = screen.textureTools.tileFinder(screenX, screen.viewport.getScreenHeight() - screenY);
+                game.actionMenu.getCalledBy().addAction(Actions.moveTo(position.x, position.y, 2));
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
             }
         }
