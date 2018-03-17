@@ -6,10 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.projectcastle.game.entities.Enemy;
-import com.projectcastle.game.entities.Hero;
 import com.projectcastle.game.gameplay.InputProcessorHelp;
 import com.projectcastle.game.util.TextureTools;
 
@@ -17,16 +14,14 @@ public abstract class TemplateScreen implements Screen {
 
     private static final String TAG = TemplateScreen.class.getName();
 
-    public OrthographicCamera camera;
-    public TiledMap map;
-    public Viewport viewport;
-    public Texture characters;
-    public Stage stage;
-    public TextureRegion[][] charactersRegions;
-    public TextureTools textureTools;
-    public SnapshotArray<Hero> heroes;
-    public SnapshotArray<Enemy> enemies;
-    public InputProcessorHelp inputProcessorHelp;
+    protected OrthographicCamera camera;
+    protected TiledMap map;
+    protected Viewport viewport;
+    protected Texture characters;
+    protected Stage stage;
+    protected TextureRegion[][] charactersRegions;
+    protected TextureTools textureTools;
+    protected InputProcessorHelp inputProcessorHelp;
 
     public OrthographicCamera getCamera() {
         return camera;
@@ -82,22 +77,6 @@ public abstract class TemplateScreen implements Screen {
 
     public void setTextureTools(TextureTools textureTools) {
         this.textureTools = textureTools;
-    }
-
-    public SnapshotArray<Hero> getHeroes() {
-        return heroes;
-    }
-
-    public void setHeroes(SnapshotArray<Hero> heroes) {
-        this.heroes = heroes;
-    }
-
-    public SnapshotArray<Enemy> getEnemies() {
-        return enemies;
-    }
-
-    public void setEnemies(SnapshotArray<Enemy> enemies) {
-        this.enemies = enemies;
     }
 
     public InputProcessorHelp getInputProcessorHelp() {

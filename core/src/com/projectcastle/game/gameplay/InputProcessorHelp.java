@@ -1,17 +1,10 @@
 package com.projectcastle.game.gameplay;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.screens.TemplateScreen;
-import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
 
 /**
@@ -34,8 +27,8 @@ public class InputProcessorHelp {
 
         if (game.actionMenu.isVisible()){
 
-            if (screenX > game.actionMenu.getOriginX() && screenX < screen.viewport.getScreenWidth() - (screen.viewport.getScreenWidth() - game.actionMenu.getWidth() - game.actionMenu.getOriginX())){
-                if (screenY > game.actionMenu.getOriginY() && screenY < screen.viewport.getScreenHeight() - (screen.viewport.getScreenHeight() - game.actionMenu.getHeight() - game.actionMenu.getOriginY())){
+            if (screenX > game.actionMenu.getOriginX() && screenX < screen.getViewport().getScreenWidth() - (screen.getViewport().getScreenWidth() - game.actionMenu.getWidth() - game.actionMenu.getOriginX())){
+                if (screenY > game.actionMenu.getOriginY() && screenY < screen.getViewport().getScreenHeight() - (screen.getViewport().getScreenHeight() - game.actionMenu.getHeight() - game.actionMenu.getOriginY())){
                     return false;
                 } else {
                     game.actionMenu.setVisible(false);
@@ -55,8 +48,8 @@ public class InputProcessorHelp {
         } else {
 
             if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
-                Vector2 position = screen.textureTools.tileFinder(screenX, screen.viewport.getScreenHeight() - screenY);
-                game.actionMenu.getCalledBy().addAction(Actions.moveTo(position.x, position.y, 2));
+                Vector2 position = screen.getTextureTools().tileFinder(screenX, screen.getViewport().getScreenHeight() - screenY);
+                game.actionMenu.getCalledBy().addAction(Actions.moveTo(position.x, position.y, 2)); //TODO: (opcional) Que los personajes no se muevan en diagonal
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
             }
         }
