@@ -1,6 +1,5 @@
 package com.projectcastle.game.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -44,10 +43,8 @@ public class ActionMenu extends Window {
         move.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.app.log(TAG, "Move touched by " + calledBy.getName());
                 calledBy.getScreen().highlightTilesToMove(calledBy);
                 calledBy.setState(Enums.UnitState.MOVING);
-                Gdx.app.log(TAG, "State is now " + calledBy.getState());
                 setVisible(false);
             }
         });
@@ -55,9 +52,7 @@ public class ActionMenu extends Window {
         attack.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.app.log(TAG, "Attack touched by " + calledBy.getName());
                 calledBy.setState(Enums.UnitState.ATTACKING);
-                Gdx.app.log(TAG, "State is now " + calledBy.getState());
                 setVisible(false);
             }
         });

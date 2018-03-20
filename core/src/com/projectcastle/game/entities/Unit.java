@@ -137,4 +137,24 @@ public class Unit extends Actor {
         this.screen = screen;
     }
 
+    public boolean isAdjacent(Unit attackedUnit){
+
+        int attackingX = (int) (this.getX() / Constants.TILE_SIZE);
+        int attackingY = (int) (this.getY() / Constants.TILE_SIZE);
+        int attackedX = (int) (attackedUnit.getX() / Constants.TILE_SIZE);
+        int attackedY = (int) (attackedUnit.getY() / Constants.TILE_SIZE);
+
+        if (attackingX + 1 == attackedX && attackingY == attackedY)
+            return true;
+
+        if (attackingX - 1 == attackedX && attackingY == attackedY)
+            return true;
+
+        if (attackingX == attackedX && attackingY + 1 == attackedY)
+            return true;
+
+        return attackingX == attackedX && attackingY - 1 == attackedY;
+
+    }
+
 }

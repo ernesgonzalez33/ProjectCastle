@@ -144,7 +144,13 @@ public abstract class TemplateScreen implements Screen {
 
     }
 
-    public void clearHighlightedTiles(Unit calledBy){
-        return;
+    public void clearHighlightedTiles(){
+
+        for (int ii = 0; ii < Constants.WIDTH / Constants.TILE_SIZE; ii++){
+            for (int jj = 0; jj < Constants.HEIGHT / Constants.TILE_SIZE; jj++){
+                selectedTileLayer.setCell(ii, jj, null);
+            }
+        }
+
     }
 }

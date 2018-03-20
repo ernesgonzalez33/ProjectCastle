@@ -27,6 +27,7 @@ public class InputProcessorHelp {
 
         if (game.actionMenu.isVisible()){
 
+            //ActionMenu interior
             if (screenX > game.actionMenu.getOriginX() && screenX < screen.getViewport().getScreenWidth() - (screen.getViewport().getScreenWidth() - game.actionMenu.getWidth() - game.actionMenu.getOriginX())){
                 if (screenY > game.actionMenu.getOriginY() && screenY < screen.getViewport().getScreenHeight() - (screen.getViewport().getScreenHeight() - game.actionMenu.getHeight() - game.actionMenu.getOriginY())){
                     return false;
@@ -50,6 +51,7 @@ public class InputProcessorHelp {
             if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
                 Vector2 position = screen.getTextureTools().tileFinder(screenX, screen.getViewport().getScreenHeight() - screenY);
                 game.actionMenu.getCalledBy().addAction(Actions.moveTo(position.x, position.y, 2)); //TODO: (opcional) Que los personajes no se muevan en diagonal
+                screen.clearHighlightedTiles();
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
             }
         }

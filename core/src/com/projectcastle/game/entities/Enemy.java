@@ -34,22 +34,23 @@ public class Enemy extends Unit {
                         showingInfo = true;
                     }
                     else {
-                        screen.clearHighlightedTiles(getThis());
+                        screen.clearHighlightedTiles();
                         showingInfo = false;
                     }
                     return true;
                 }
 
                 if (actionMenu.getCalledBy().getState() == Enums.UnitState.ATTACKING){
-                    Gdx.app.log(TAG, "Attacking " + getName() + " by " + actionMenu.getCalledBy().getName());
-                    setStatsAfterAttack(actionMenu.getCalledBy(), getThis());
-                    if (getHealth() < 1){
-                        Gdx.app.log(TAG, getName() + " died!");
-                        remove();
+                    if (actionMenu.getCalledBy().isAdjacent(getThis())){
+                        Gdx.app.log(TAG, "Attacking " + getName() + " by " + actionMenu.getCalledBy().getName());
+                        setStatsAfterAttack(actionMenu.getCalledBy(), getThis());
+                        if (getHealth() < 1){
+                            remove();
+                        }
+                        actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
+                    } else {
+                        Gdx.app.log(TAG, "Can't attack that one");
                     }
-                    actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
-                } else if (actionMenu.getCalledBy().getState() == Enums.UnitState.IDLE) {
-                    Gdx.app.log(TAG, "Can't touch this!");
                 } else {
                     Gdx.app.log(TAG, "Can't move there");
                 }
