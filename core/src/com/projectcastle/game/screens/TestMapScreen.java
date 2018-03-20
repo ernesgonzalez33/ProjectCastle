@@ -8,7 +8,9 @@ import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -85,6 +87,12 @@ public class TestMapScreen extends TemplateScreen implements InputProcessor {
         Gdx.input.setInputProcessor(inputMultiplexer);
         inputProcessorHelp = new InputProcessorHelp(this.game);
 
+        // Setting the selected layer
+        selectedTileLayer = (TiledMapTileLayer) map.getLayers().get("Selected");
+        selectedTileSet = map.getTileSets().getTileSet("SelectedTile");
+        selectedTileLayer.setOpacity(0.6f);
+        Texture selectedTexture = new Texture(Gdx.files.internal(Constants.SELECTED_SPRITE_ASSET));
+        selectedSpriteRegion = new TextureRegion(selectedTexture, Constants.TILE_SIZE, Constants.TILE_SIZE);
 
     }
 

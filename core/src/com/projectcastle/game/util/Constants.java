@@ -19,7 +19,7 @@ public class Constants {
     public static final String CLERIC_NAME = "Peter";
     public static final String CHARACTERS_ASSET = "characters_1.png";
     public static final String SELECTED_SPRITE_ASSET = "SelectedSprite.png";
-    static final int TILE_SIZE = 32;
+    public static final int TILE_SIZE = 32;
     public static final int CHARACTER_SIZE = 16;
     public static final int CHARACTER_SCALE = 2;
     public static final String FLAT_SKIN = "skin.json";
