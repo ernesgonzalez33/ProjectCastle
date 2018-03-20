@@ -45,6 +45,7 @@ public class ActionMenu extends Window {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.log(TAG, "Move touched by " + calledBy.getName());
+                calledBy.getScreen().highlightTilesToMove(calledBy);
                 calledBy.setState(Enums.UnitState.MOVING);
                 Gdx.app.log(TAG, "State is now " + calledBy.getState());
                 setVisible(false);

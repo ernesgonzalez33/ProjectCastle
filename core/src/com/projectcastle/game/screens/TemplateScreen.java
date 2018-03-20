@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.projectcastle.game.entities.Unit;
 import com.projectcastle.game.gameplay.InputProcessorHelp;
 import com.projectcastle.game.util.TextureTools;
 
@@ -14,14 +15,14 @@ public abstract class TemplateScreen implements Screen {
 
     private static final String TAG = TemplateScreen.class.getName();
 
-    protected OrthographicCamera camera;
-    protected TiledMap map;
-    protected Viewport viewport;
-    protected Texture characters;
-    protected Stage stage;
-    protected TextureRegion[][] charactersRegions;
-    protected TextureTools textureTools;
-    protected InputProcessorHelp inputProcessorHelp;
+    OrthographicCamera camera;
+    TiledMap map;
+    Viewport viewport;
+    Texture characters;
+    Stage stage;
+    TextureRegion[][] charactersRegions;
+    TextureTools textureTools;
+    InputProcessorHelp inputProcessorHelp;
 
     public OrthographicCamera getCamera() {
         return camera;
@@ -85,5 +86,9 @@ public abstract class TemplateScreen implements Screen {
 
     public void setInputProcessorHelp(InputProcessorHelp inputProcessorHelp) {
         this.inputProcessorHelp = inputProcessorHelp;
+    }
+
+    public void highlightTilesToMove(Unit calledBy){
+        int tileLimit = calledBy.getMoveLimit();
     }
 }

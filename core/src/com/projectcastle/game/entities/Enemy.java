@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.projectcastle.game.screens.ActionMenu;
+import com.projectcastle.game.screens.TemplateScreen;
 import com.projectcastle.game.util.Enums;
 
 /**
@@ -17,8 +18,8 @@ public class Enemy extends Unit {
     private final static String TAG = Enemy.class.getName();
 
 
-    public Enemy(float positionX, float positionY, int attack, int defense, final String name, final int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit) {
-        super(positionX, positionY, attack, defense, name, health, region, actionMenu, moveLimit);
+    public Enemy(float positionX, float positionY, int attack, int defense, final String name, final int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, TemplateScreen screen) {
+        super(positionX, positionY, attack, defense, name, health, region, actionMenu, moveLimit, screen);
 
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

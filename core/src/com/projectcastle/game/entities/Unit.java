@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.projectcastle.game.screens.ActionMenu;
+import com.projectcastle.game.screens.TemplateScreen;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
 
@@ -24,8 +25,9 @@ public class Unit extends Actor {
     private TextureRegion region;
     private Enums.UnitState state;
     private int moveLimit;
+    private TemplateScreen screen;
 
-    Unit(float positionX, float positionY, int attack, int defense, String name, final int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit) {
+    Unit(float positionX, float positionY, int attack, int defense, String name, final int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, TemplateScreen screen) {
 
         this.setPosition(positionX, positionY);
         this.setBounds(this.getX(), this.getY(), region.getRegionWidth(), region.getRegionHeight());
@@ -39,6 +41,7 @@ public class Unit extends Actor {
         this.setRotation(0);
         this.setState(Enums.UnitState.IDLE);
         this.moveLimit = moveLimit;
+        this.screen = screen;
 
     }
 
@@ -117,5 +120,21 @@ public class Unit extends Actor {
     public void setMoveLimit(int moveLimit) { this.moveLimit = moveLimit; }
 
     public Unit getThis() { return this; }
+
+    public TextureRegion getRegion() {
+        return region;
+    }
+
+    public void setRegion(TextureRegion region) {
+        this.region = region;
+    }
+
+    public TemplateScreen getScreen() {
+        return screen;
+    }
+
+    public void setScreen(TemplateScreen screen) {
+        this.screen = screen;
+    }
 
 }

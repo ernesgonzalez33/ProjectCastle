@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.projectcastle.game.screens.ActionMenu;
+import com.projectcastle.game.screens.TemplateScreen;
 
 /**
  * Created by Ernesto Gonzalez on 12/5/17.
@@ -16,8 +17,8 @@ public class Hero extends Unit {
 
 
 
-    public Hero(float positionX, float positionY, int attack, int defense, final String name, int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit) {
-        super(positionX, positionY, attack, defense, name, health, region, actionMenu, moveLimit);
+    public Hero(float positionX, float positionY, int attack, int defense, final String name, int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, TemplateScreen screen) {
+        super(positionX, positionY, attack, defense, name, health, region, actionMenu, moveLimit, screen);
 
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
