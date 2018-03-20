@@ -119,10 +119,7 @@ public abstract class TemplateScreen implements Screen {
 
     private void createCellsList(float x, float y, int limit, ArrayList<Vector2> cells){
 
-        if (limit == 0)
-            return;
-
-        for (int ii = 0; ii < limit; ii++){
+        if (limit > 0){
             //x+1 y
             if (!cells.contains(new Vector2(x+1, y))){
                 cells.add(new Vector2(x+1, y));
@@ -143,7 +140,6 @@ public abstract class TemplateScreen implements Screen {
                 cells.add(new Vector2(x, y-1));
                 createCellsList(x, y-1, limit-1, cells);
             }
-
         }
 
     }
