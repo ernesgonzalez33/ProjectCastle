@@ -17,16 +17,26 @@ public class Enemy extends Unit {
 
     private final static String TAG = Enemy.class.getName();
 
+    private boolean showingInfo;
 
-    public Enemy(float positionX, float positionY, int attack, int defense, final String name, final int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, TemplateScreen screen) {
+    public Enemy(float positionX, float positionY, int attack, int defense, final String name, final int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, final TemplateScreen screen) {
         super(positionX, positionY, attack, defense, name, health, region, actionMenu, moveLimit, screen);
+
+        this.showingInfo = false;
 
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
                 //Issue #1 solved
-                if (actionMenu.getCalledBy() == null) {
-                    Gdx.app.log(TAG, "Can't touch this!");
+                if (actionMenu.getCalledBy() == null || actionMenu.getCalledBy().getState() == Enums.UnitState.IDLE) {
+                    if (!showingInfo){
+                        screen.highlightTilesToMove(getThis());
+                        showingInfo = true;
+                    }
+                    else {
+                        screen.clearHighlightedTiles(getThis());
+                        showingInfo = false;
+                    }
                     return true;
                 }
 

@@ -143,4 +143,8 @@ public abstract class TemplateScreen implements Screen {
         }
 
     }
+
+    public void clearHighlightedTiles(Unit calledBy){
+        return;
+    }
 }
