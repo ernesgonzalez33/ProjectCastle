@@ -71,9 +71,9 @@ public class TestMapScreen extends TemplateScreen implements InputProcessor {
         Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
         Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
         Vector2 positionTheOne = textureTools.positionConverter(10, 8);
-        Hero number1 = new Hero(positionNumber1.x, positionNumber1.y, 15, 16, "Number1", 11, charactersRegions[0][0], this.game.actionMenu, 4, this);
-        Hero number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, "Number2", 11, charactersRegions[0][3], this.game.actionMenu, 4, this);
-        Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, charactersRegions[0][9], this.game.actionMenu, 4, this);
+        Hero number1 = new Hero(positionNumber1.x, positionNumber1.y, 15, 16, "Number1", 11, charactersRegions[0][0], this.game.actionMenu, Constants.MOVE_LIMIT, this);
+        Hero number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, "Number2", 11, charactersRegions[0][3], this.game.actionMenu, Constants.MOVE_LIMIT, this);
+        Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, charactersRegions[0][9], this.game.actionMenu, Constants.MOVE_LIMIT, this);
 
         //Adding the heroes and enemies to the Stage
         stage.addActor(number1);

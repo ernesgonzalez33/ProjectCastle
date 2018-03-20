@@ -117,7 +117,7 @@ public abstract class TemplateScreen implements Screen {
 
     }
 
-    private void createCellsList(float x, float y, int limit, ArrayList<Vector2> cells){
+    private void createCellsList(float x, float y, int limit, ArrayList<Vector2> cells){ //TODO: (opcional) Revisar si puedo hacer que funcione para otros valores fuera de 1, 2 y 4
 
         if (limit > 0){
             //x+1 y
