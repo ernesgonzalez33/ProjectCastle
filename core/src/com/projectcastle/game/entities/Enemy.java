@@ -27,34 +27,35 @@ public class Enemy extends Unit {
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
-                //Issue #1 solved
-                if (actionMenu.getCalledBy() == null || actionMenu.getCalledBy().getState() == Enums.UnitState.IDLE) {
-                    if (!showingInfo){
-                        screen.highlightTilesToMove(getThis());
-                        showingInfo = true;
-                    }
-                    else {
-                        screen.clearHighlightedTiles(getThis());
-                        showingInfo = false;
-                    }
-                    return true;
-                }
-
-                if (actionMenu.getCalledBy().getState() == Enums.UnitState.ATTACKING){
-                    if (actionMenu.getCalledBy().isAdjacent(getThis())){
-                        Gdx.app.log(TAG, "Attacking " + getName() + " by " + actionMenu.getCalledBy().getName());
-                        setStatsAfterAttack(actionMenu.getCalledBy(), getThis());
-                        if (getHealth() < 1){
-                            remove();
+                if (screen.game.activeTurn == Enums.Turn.PLAYER){
+                    //Issue #1 solved
+                    if (actionMenu.getCalledBy() == null || actionMenu.getCalledBy().getState() == Enums.UnitState.IDLE) {
+                        if (!showingInfo){
+                            screen.highlightTilesToMove(getThis());
+                            showingInfo = true;
                         }
-                        actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
-                    } else {
-                        Gdx.app.log(TAG, "Can't attack that one");
+                        else {
+                            screen.clearHighlightedTiles(getThis());
+                            showingInfo = false;
+                        }
+                        return true;
                     }
-                } else {
-                    Gdx.app.log(TAG, "Can't move there");
-                }
 
+                    if (actionMenu.getCalledBy().getState() == Enums.UnitState.ATTACKING){
+                        if (actionMenu.getCalledBy().isAdjacent(getThis())){
+                            Gdx.app.log(TAG, "Attacking " + getName() + " by " + actionMenu.getCalledBy().getName());
+                            setStatsAfterAttack(actionMenu.getCalledBy(), getThis());
+                            if (getHealth() < 1){
+                                remove();
+                            }
+                            actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
+                        } else {
+                            Gdx.app.log(TAG, "Can't attack that one");
+                        }
+                    } else {
+                        Gdx.app.log(TAG, "Can't move there");
+                    }
+                }
                 return true;
             }
         });

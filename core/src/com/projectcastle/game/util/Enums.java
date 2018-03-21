@@ -11,4 +11,7 @@ public class Enums {
         MOVING, ATTACKING, IDLE
     }
 
+    public enum Turn {
+        PLAYER, ENEMY
+    }
 }

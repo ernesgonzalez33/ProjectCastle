@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.entities.Unit;
 import com.projectcastle.game.gameplay.InputProcessorHelp;
 import com.projectcastle.game.util.Constants;
@@ -33,6 +34,7 @@ public abstract class TemplateScreen implements Screen {
     TiledMapTileLayer selectedTileLayer;
     TiledMapTileSet selectedTileSet;
     TextureRegion selectedSpriteRegion;
+    public ProjectCastleGame game;
 
     public OrthographicCamera getCamera() {
         return camera;

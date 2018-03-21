@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.screens.TestMapScreen;
 import com.projectcastle.game.util.Constants;
+import com.projectcastle.game.util.Enums;
 
 public class ProjectCastleGame extends Game {
 
@@ -21,6 +22,7 @@ public class ProjectCastleGame extends Game {
 	public AssetManager manager;
 	public ActionMenu actionMenu;
 	public Skin actionMenuSkin;
+	public Enums.Turn activeTurn;
 
 	@Override
 	public void create() {
@@ -31,6 +33,8 @@ public class ProjectCastleGame extends Game {
 		//Creating Action Menu
 		actionMenuSkin = new Skin(Gdx.files.internal(Constants.FLAT_SKIN));
 		actionMenu = new ActionMenu(actionMenuSkin);
+
+		activeTurn = Enums.Turn.PLAYER;
 
 		this.setScreen(new TestMapScreen(this));
 		fpsLogger = new FPSLogger();

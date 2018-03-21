@@ -21,6 +21,7 @@ import com.projectcastle.game.entities.Enemy;
 import com.projectcastle.game.entities.Hero;
 import com.projectcastle.game.gameplay.InputProcessorHelp;
 import com.projectcastle.game.util.Constants;
+import com.projectcastle.game.util.Enums;
 import com.projectcastle.game.util.TextureTools;
 
 /**
@@ -31,8 +32,6 @@ import com.projectcastle.game.util.TextureTools;
 public class TestMapScreen extends TemplateScreen implements InputProcessor {
 
     private static final String TAG = TestMapScreen.class.getName();
-
-    private final ProjectCastleGame game;
 
     public TestMapScreen(final ProjectCastleGame game){
         this.game = game;
@@ -171,7 +170,10 @@ public class TestMapScreen extends TemplateScreen implements InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        return inputProcessorHelp.ScreenTouchDown(this, screenX, screenY, pointer, button);
+        if (game.activeTurn == Enums.Turn.PLAYER)
+            return inputProcessorHelp.ScreenTouchDown(this, screenX, screenY, pointer, button);
+        else
+            return false;
 
     }
 
