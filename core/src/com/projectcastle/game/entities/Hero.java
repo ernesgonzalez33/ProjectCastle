@@ -24,6 +24,10 @@ public class Hero extends Unit {
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
+                if (screen.game.turnMessage.isVisible()){
+                    screen.game.turnMessage.setVisible(false);
+                }
+
                 if (screen.game.activeTurn == Enums.Turn.PLAYER){
                     actionMenu.setPosition(getX(), getY()); //TODO: (opcional) Hacer que el ActionMenu aparezca más centrado en la unidad
                     actionMenu.setVisible(true);

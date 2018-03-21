@@ -58,9 +58,6 @@ public class InputProcessorHelp {
                 }
                 screen.clearHighlightedTiles(game.actionMenu.getCalledBy());
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.MOVED);
-                if (!game.actionMenu.getCalledBy().canAttack()){
-                    game.actionMenu.getCalledBy().setState(Enums.UnitState.ATTACKED);
-                }
             }
         }
         return false;

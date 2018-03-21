@@ -1,6 +1,5 @@
 package com.projectcastle.game.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -27,6 +26,10 @@ public class Enemy extends Unit {
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
+                if (screen.game.turnMessage.isVisible()){
+                    screen.game.turnMessage.setVisible(false);
+                }
+
                 if (screen.game.activeTurn == Enums.Turn.PLAYER){
                     //Issue #1 solved
                     if (actionMenu.getCalledBy() == null || actionMenu.getCalledBy().getState() == Enums.UnitState.IDLE) {
@@ -43,18 +46,13 @@ public class Enemy extends Unit {
 
                     if (actionMenu.getCalledBy().getState() == Enums.UnitState.ATTACKING){
                         if (actionMenu.getCalledBy().isAdjacent(getThis())){
-                            Gdx.app.log(TAG, "Attacking " + getName() + " by " + actionMenu.getCalledBy().getName());
                             setStatsAfterAttack(actionMenu.getCalledBy(), getThis());
                             if (getHealth() < 1){
                                 remove();
                             }
                             actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
-                        } else {
-                            Gdx.app.log(TAG, "Can't attack that one");
-                        }
-                    } else {
-                        Gdx.app.log(TAG, "Can't move there");
-                    }
+                        } else {}
+                    } else {}
                 }
                 return true;
             }

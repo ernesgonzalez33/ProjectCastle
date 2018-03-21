@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.screens.TemplateScreen;
@@ -170,8 +171,27 @@ public class Unit extends Actor {
 
     }
 
-    public boolean canAttack(){
-        return true;
+    public boolean canAttack(Stage stage){
+
+        String test = this.getClass().getName();
+
+        for (Actor actor: stage.getActors()){
+            if (this.getClass().getName().equals(Constants.HERO_CLASS_NAME)){
+                if (actor.getClass().getName().equals(Constants.ENEMY_CLASS_NAME)){
+                    if (isAdjacent((Unit) actor)){
+                        return true;
+                    }
+                }
+            }
+            else {
+                if (actor.getClass().getName().equals(Constants.HERO_CLASS_NAME)){
+                    if (isAdjacent((Unit) actor)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 }

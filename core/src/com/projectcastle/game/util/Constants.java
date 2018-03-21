@@ -38,4 +38,8 @@ public class Constants {
     public static final int TURN_MESSAGE_OFFSET_X = 75;
     public static final int TURN_MESSAGE_OFFSET_Y = 35;
 
+    //Other
+    public static final String HERO_CLASS_NAME = "com.projectcastle.game.entities.Hero";
+    public static final String ENEMY_CLASS_NAME = "com.projectcastle.game.entities.Enemy";
+
 }
