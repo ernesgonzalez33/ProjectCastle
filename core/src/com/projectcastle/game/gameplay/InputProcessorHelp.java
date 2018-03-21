@@ -47,7 +47,8 @@ public class InputProcessorHelp {
                 }
             }
         } else {
-
+            if (game.actionMenu.getCalledBy() == null)
+                return false;
             if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
                 Vector2 position = screen.getTextureTools().tileFinder(screenX, screen.getViewport().getScreenHeight() - screenY);
                 Vector2 cellPosition = new Vector2(position.x / Constants.TILE_SIZE, position.y / Constants.TILE_SIZE);

@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.screens.TestMapScreen;
+import com.projectcastle.game.screens.TurnMessage;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
 
@@ -21,7 +22,8 @@ public class ProjectCastleGame extends Game {
 	public OrthogonalTiledMapRenderer tiledMapRenderer;
 	public AssetManager manager;
 	public ActionMenu actionMenu;
-	public Skin actionMenuSkin;
+	public TurnMessage turnMessage;
+	public Skin skin;
 	public Enums.Turn activeTurn;
 
 	@Override
@@ -30,15 +32,16 @@ public class ProjectCastleGame extends Game {
 		manager = new AssetManager();
 		batch = new SpriteBatch();
 
-		//Creating Action Menu
-		actionMenuSkin = new Skin(Gdx.files.internal(Constants.FLAT_SKIN));
-		actionMenu = new ActionMenu(actionMenuSkin);
+		//Creating Action Menu and Turn Message
+		skin = new Skin(Gdx.files.internal(Constants.FLAT_SKIN));
+		actionMenu = new ActionMenu(skin);
+        turnMessage = new TurnMessage(skin);
 
-		activeTurn = Enums.Turn.PLAYER;
+		activeTurn = Enums.Turn.ENEMY;
+		changeTurn();
 
 		this.setScreen(new TestMapScreen(this));
 		fpsLogger = new FPSLogger();
-
 
 	}
 
@@ -50,4 +53,16 @@ public class ProjectCastleGame extends Game {
 	public void dispose(){
 		batch.dispose();
 	}
+
+	public void changeTurn(){
+
+	    if (this.activeTurn == Enums.Turn.PLAYER) {
+            this.activeTurn = Enums.Turn.ENEMY;
+            this.turnMessage.setTurn(Enums.Turn.ENEMY);
+        } else {
+	        this.activeTurn = Enums.Turn.PLAYER;
+            this.turnMessage.setTurn(Enums.Turn.PLAYER);
+        }
+
+    }
 }

@@ -65,6 +65,7 @@ public class TestMapScreen extends TemplateScreen implements InputProcessor {
         //Setting the stage
         stage = new Stage();
         stage.addActor(this.game.actionMenu);
+        stage.addActor(this.game.turnMessage);
 
         // Creating the characters
         Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
