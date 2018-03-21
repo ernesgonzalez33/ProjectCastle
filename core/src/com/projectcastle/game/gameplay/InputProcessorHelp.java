@@ -1,5 +1,6 @@
 package com.projectcastle.game.gameplay;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.projectcastle.game.ProjectCastleGame;
@@ -58,6 +59,10 @@ public class InputProcessorHelp {
                 }
                 screen.clearHighlightedTiles(game.actionMenu.getCalledBy());
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.MOVED);
+                if (!game.actionMenu.getCalledBy().canAttack(position, screen.getStage())){
+                    game.actionMenu.getCalledBy().setState(Enums.UnitState.ATTACKED);
+                    Gdx.app.log(TAG, game.actionMenu.getCalledBy().getState().toString());
+                }
             }
         }
         return false;

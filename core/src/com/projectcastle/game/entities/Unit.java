@@ -171,14 +171,32 @@ public class Unit extends Actor {
 
     }
 
-    public boolean canAttack(Stage stage){
+    public boolean isAdjacent(Vector2 callingUnit, Unit attackedUnit){
 
-        String test = this.getClass().getName();
+        int attackingX = (int) (callingUnit.x / Constants.TILE_SIZE);
+        int attackingY = (int) (callingUnit.y / Constants.TILE_SIZE);
+        int attackedX = (int) (attackedUnit.getX() / Constants.TILE_SIZE);
+        int attackedY = (int) (attackedUnit.getY() / Constants.TILE_SIZE);
+
+        if (attackingX + 1 == attackedX && attackingY == attackedY)
+            return true;
+
+        if (attackingX - 1 == attackedX && attackingY == attackedY)
+            return true;
+
+        if (attackingX == attackedX && attackingY + 1 == attackedY)
+            return true;
+
+        return attackingX == attackedX && attackingY - 1 == attackedY;
+
+    }
+
+    public boolean canAttack(Vector2 newPosition, Stage stage){
 
         for (Actor actor: stage.getActors()){
             if (this.getClass().getName().equals(Constants.HERO_CLASS_NAME)){
                 if (actor.getClass().getName().equals(Constants.ENEMY_CLASS_NAME)){
-                    if (isAdjacent((Unit) actor)){
+                    if (isAdjacent(newPosition, (Unit) actor)){
                         return true;
                     }
                 }
