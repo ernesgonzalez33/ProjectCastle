@@ -47,6 +47,9 @@ public class InputProcessorHelp {
                 }
             }
         } else {
+            if (game.turnMessage.isVisible()){
+                game.turnMessage.setVisible(false);
+            }
             if (game.actionMenu.getCalledBy() == null)
                 return false;
             if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){

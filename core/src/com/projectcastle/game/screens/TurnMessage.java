@@ -34,4 +34,12 @@ public class TurnMessage extends Window {
         }
 
     }
+
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+        if (visible == false){
+            this.getChildren().clear();
+        }
+    }
 }
