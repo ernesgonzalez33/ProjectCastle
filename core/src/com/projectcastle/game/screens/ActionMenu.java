@@ -43,17 +43,25 @@ public class ActionMenu extends Window {
         move.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                calledBy.getScreen().highlightTilesToMove(calledBy);
-                calledBy.setState(Enums.UnitState.MOVING);
-                setVisible(false);
+                if (calledBy.getState() == Enums.UnitState.MOVED){
+                    setVisible(false);
+                } else {
+                    calledBy.getScreen().highlightTilesToMove(calledBy);
+                    calledBy.setState(Enums.UnitState.MOVING);
+                    setVisible(false);
+                }
             }
         });
 
         attack.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                calledBy.setState(Enums.UnitState.ATTACKING);
-                setVisible(false);
+                if (calledBy.getState() == Enums.UnitState.ATTACKED){
+                    setVisible(false);
+                } else {
+                    calledBy.setState(Enums.UnitState.ATTACKING);
+                    setVisible(false);
+                }
             }
         });
 

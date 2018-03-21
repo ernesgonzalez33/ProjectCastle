@@ -1,6 +1,5 @@
 package com.projectcastle.game.gameplay;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.projectcastle.game.ProjectCastleGame;
@@ -36,14 +35,12 @@ public class InputProcessorHelp {
                     game.actionMenu.setVisible(false);
                     if (game.actionMenu.getCalledBy().getState() != Enums.UnitState.IDLE){
                         game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
-                        Gdx.app.log(TAG, "Unit " + game.actionMenu.getCalledBy().getName() + " state is now " + game.actionMenu.getCalledBy().getState());
                     }
                 }
             } else {
                 game.actionMenu.setVisible(false);
                 if (game.actionMenu.getCalledBy().getState() != Enums.UnitState.IDLE){
                     game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
-                    Gdx.app.log(TAG, "Unit " + game.actionMenu.getCalledBy().getName() + " state is now " + game.actionMenu.getCalledBy().getState());
                 }
             }
         } else {
@@ -60,7 +57,10 @@ public class InputProcessorHelp {
                     game.actionMenu.getCalledBy().addAction(Actions.moveTo(position.x, position.y, 2)); //TODO: (opcional) Que los personajes no se muevan en diagonal
                 }
                 screen.clearHighlightedTiles(game.actionMenu.getCalledBy());
-                game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
+                game.actionMenu.getCalledBy().setState(Enums.UnitState.MOVED);
+                if (!game.actionMenu.getCalledBy().canAttack()){
+                    game.actionMenu.getCalledBy().setState(Enums.UnitState.ATTACKED);
+                }
             }
         }
         return false;

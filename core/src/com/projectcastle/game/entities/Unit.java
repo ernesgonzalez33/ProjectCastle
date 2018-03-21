@@ -170,4 +170,8 @@ public class Unit extends Actor {
 
     }
 
+    public boolean canAttack(){
+        return true;
+    }
+
 }
