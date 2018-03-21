@@ -1,6 +1,5 @@
 package com.projectcastle.game.gameplay;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.projectcastle.game.ProjectCastleGame;
@@ -34,15 +33,9 @@ public class InputProcessorHelp {
                     return false;
                 } else {
                     game.actionMenu.setVisible(false);
-                    if (game.actionMenu.getCalledBy().getState() != Enums.UnitState.IDLE){
-                        game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
-                    }
                 }
             } else {
                 game.actionMenu.setVisible(false);
-                if (game.actionMenu.getCalledBy().getState() != Enums.UnitState.IDLE){
-                    game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
-                }
             }
         } else {
             if (game.turnMessage.isVisible()){
@@ -61,7 +54,6 @@ public class InputProcessorHelp {
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.MOVED);
                 if (!game.actionMenu.getCalledBy().canAttack(position, screen.getStage())){
                     game.actionMenu.getCalledBy().setState(Enums.UnitState.ATTACKED);
-                    Gdx.app.log(TAG, game.actionMenu.getCalledBy().getState().toString());
                 }
             }
         }

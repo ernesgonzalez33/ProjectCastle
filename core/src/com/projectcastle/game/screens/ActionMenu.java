@@ -43,7 +43,7 @@ public class ActionMenu extends Window {
         move.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (calledBy.getState() == Enums.UnitState.MOVED){
+                if (calledBy.getState() == Enums.UnitState.MOVED || calledBy.getState() == Enums.UnitState.ATTACKED){
                     setVisible(false);
                 } else {
                     calledBy.getScreen().highlightTilesToMove(calledBy);

@@ -50,7 +50,7 @@ public class Enemy extends Unit {
                             if (getHealth() < 1){
                                 remove();
                             }
-                            actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
+                            actionMenu.getCalledBy().setState(Enums.UnitState.ATTACKED);
                         } else {}
                     } else {}
                 }
