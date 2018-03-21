@@ -34,7 +34,7 @@ public class Enemy extends Unit {
                         showingInfo = true;
                     }
                     else {
-                        screen.clearHighlightedTiles();
+                        screen.clearHighlightedTiles(getThis());
                         showingInfo = false;
                     }
                     return true;

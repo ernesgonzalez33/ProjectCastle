@@ -3,12 +3,15 @@ package com.projectcastle.game.entities;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.screens.TemplateScreen;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
+
+import java.util.ArrayList;
 
 /**
  * Created by Ernesto Gonzalez on 12/5/17.
@@ -26,6 +29,7 @@ public class Unit extends Actor {
     private Enums.UnitState state;
     private int moveLimit;
     private TemplateScreen screen;
+    private ArrayList<Vector2> canMovePositions;
 
     Unit(float positionX, float positionY, int attack, int defense, String name, final int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, TemplateScreen screen) {
 
@@ -42,6 +46,7 @@ public class Unit extends Actor {
         this.setState(Enums.UnitState.IDLE);
         this.moveLimit = moveLimit;
         this.screen = screen;
+        this.canMovePositions = new ArrayList<Vector2>();
 
     }
 
@@ -135,6 +140,14 @@ public class Unit extends Actor {
 
     public void setScreen(TemplateScreen screen) {
         this.screen = screen;
+    }
+
+    public ArrayList<Vector2> getCanMovePositions() {
+        return canMovePositions;
+    }
+
+    public void setCanMovePositions(ArrayList<Vector2> canMovePositions) {
+        this.canMovePositions = canMovePositions;
     }
 
     public boolean isAdjacent(Unit attackedUnit){

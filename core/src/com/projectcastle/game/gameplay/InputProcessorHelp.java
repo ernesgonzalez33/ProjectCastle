@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.screens.TemplateScreen;
+import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
 
 /**
@@ -45,13 +46,16 @@ public class InputProcessorHelp {
                     Gdx.app.log(TAG, "Unit " + game.actionMenu.getCalledBy().getName() + " state is now " + game.actionMenu.getCalledBy().getState());
                 }
             }
-
         } else {
 
             if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
                 Vector2 position = screen.getTextureTools().tileFinder(screenX, screen.getViewport().getScreenHeight() - screenY);
-                game.actionMenu.getCalledBy().addAction(Actions.moveTo(position.x, position.y, 2)); //TODO: (opcional) Que los personajes no se muevan en diagonal
-                screen.clearHighlightedTiles();
+                Vector2 cellPosition = new Vector2(position.x / Constants.TILE_SIZE, position.y / Constants.TILE_SIZE);
+                //Verifying move limit
+                if (game.actionMenu.getCalledBy().getCanMovePositions().contains(cellPosition)){
+                    game.actionMenu.getCalledBy().addAction(Actions.moveTo(position.x, position.y, 2)); //TODO: (opcional) Que los personajes no se muevan en diagonal
+                }
+                screen.clearHighlightedTiles(game.actionMenu.getCalledBy());
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.IDLE);
             }
         }

@@ -30,5 +30,6 @@ public class Constants {
     public static final String SELECTED_TILE_SET_NAME = "SelectedTile";
     public static final String CHARACTERS_TILE_LAYER_NAME = "Characters";
     public static final int MOVE_LIMIT = 4;
+    public static final int SELECTED_TILE_ID = 1765;
 
 }

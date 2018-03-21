@@ -102,14 +102,12 @@ public abstract class TemplateScreen implements Screen {
 
         int tileLimit = calledBy.getMoveLimit();
         Vector2 initialPosition = new Vector2(calledBy.getX() / Constants.TILE_SIZE, calledBy.getY() / Constants.TILE_SIZE);
-        ArrayList<Vector2> canMovePositions = new ArrayList<Vector2>();
-        canMovePositions.add(initialPosition);
+        calledBy.getCanMovePositions().add(initialPosition);
+        createCellsList(initialPosition.x, initialPosition.y, tileLimit, calledBy.getCanMovePositions());
 
-        createCellsList(initialPosition.x, initialPosition.y, tileLimit, canMovePositions);
-
-        for (Vector2 position:canMovePositions) {
+        for (Vector2 position:calledBy.getCanMovePositions()) {
             TiledMapTileLayer.Cell selectedCell = new TiledMapTileLayer.Cell();
-            selectedCell.setTile(calledBy.getScreen().selectedTileSet.getTile(1765));
+            selectedCell.setTile(calledBy.getScreen().selectedTileSet.getTile(Constants.SELECTED_TILE_ID));
             StaticTiledMapTile selectedTile = new StaticTiledMapTile(calledBy.getScreen().selectedSpriteRegion);
             selectedCell.setTile(selectedTile);
             calledBy.getScreen().selectedTileLayer.setCell((int) position.x, (int) position.y, selectedCell);
@@ -144,13 +142,14 @@ public abstract class TemplateScreen implements Screen {
 
     }
 
-    public void clearHighlightedTiles(){
+    public void clearHighlightedTiles(Unit calledBy){
 
         for (int ii = 0; ii < Constants.WIDTH / Constants.TILE_SIZE; ii++){
             for (int jj = 0; jj < Constants.HEIGHT / Constants.TILE_SIZE; jj++){
                 selectedTileLayer.setCell(ii, jj, null);
             }
         }
+        calledBy.getCanMovePositions().clear();
 
     }
 }
