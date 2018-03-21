@@ -16,7 +16,7 @@ public class TurnMessage extends Window {
 
         //Setting the attributes
         super("Turn", skin);
-        this.setPosition(Constants.WIDTH / 2, Constants.HEIGHT / 2);
+        this.setPosition((Constants.WIDTH / 2) - Constants.TURN_MESSAGE_OFFSET_X, (Constants.HEIGHT / 2) - Constants.TURN_MESSAGE_OFFSET_Y);
         this.setBounds(this.getX(), this.getY(), Constants.TURN_MESSAGE_WIDTH, Constants.TURN_MESSAGE_HEIGHT);
         this.setVisible(false);
 

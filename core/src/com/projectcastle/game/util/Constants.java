@@ -31,7 +31,11 @@ public class Constants {
     public static final String CHARACTERS_TILE_LAYER_NAME = "Characters";
     public static final int MOVE_LIMIT = 4;
     public static final int SELECTED_TILE_ID = 1765;
+
+    //Turn Message
     public static final int TURN_MESSAGE_WIDTH = 150;
     public static final int TURN_MESSAGE_HEIGHT = 70;
+    public static final int TURN_MESSAGE_OFFSET_X = 75;
+    public static final int TURN_MESSAGE_OFFSET_Y = 35;
 
 }
