@@ -32,7 +32,7 @@ public class Enemy extends Unit {
 
                 if (screen.game.activeTurn == Enums.Turn.PLAYER){
                     //Issue #1 solved
-                    if (actionMenu.getCalledBy() == null || actionMenu.getCalledBy().getState() == Enums.UnitState.IDLE) {
+                    if (actionMenu.getCalledBy() == null || (actionMenu.getCalledBy().getState() != Enums.UnitState.MOVING && actionMenu.getCalledBy().getState() != Enums.UnitState.ATTACKING)) {
                         if (!showingInfo){
                             screen.highlightTilesToMove(getThis());
                             showingInfo = true;
@@ -49,6 +49,7 @@ public class Enemy extends Unit {
                             setStatsAfterAttack(actionMenu.getCalledBy(), getThis());
                             if (getHealth() < 1){
                                 remove();
+                                screen.getEnemies().removeValue((Enemy) getThis(), false);
                             }
                             actionMenu.getCalledBy().setState(Enums.UnitState.ATTACKED);
                         } else {}
@@ -59,4 +60,13 @@ public class Enemy extends Unit {
         });
 
     }
+
+    public boolean isShowingInfo() {
+        return showingInfo;
+    }
+
+    public void setShowingInfo(boolean showingInfo) {
+        this.showingInfo = showingInfo;
+    }
+
 }

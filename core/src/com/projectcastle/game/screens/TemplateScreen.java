@@ -10,8 +10,11 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
+import com.projectcastle.game.entities.Enemy;
+import com.projectcastle.game.entities.Hero;
 import com.projectcastle.game.entities.Unit;
 import com.projectcastle.game.gameplay.InputProcessorHelp;
 import com.projectcastle.game.util.Constants;
@@ -28,6 +31,8 @@ public abstract class TemplateScreen implements Screen {
     Viewport viewport;
     Texture characters;
     Stage stage;
+    SnapshotArray<Enemy> enemies;
+    SnapshotArray<Hero> heroes;
     TextureRegion[][] charactersRegions;
     TextureTools textureTools;
     InputProcessorHelp inputProcessorHelp;
@@ -74,6 +79,22 @@ public abstract class TemplateScreen implements Screen {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public SnapshotArray<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public void setEnemies(SnapshotArray<Enemy> enemies) {
+        this.enemies = enemies;
+    }
+
+    public SnapshotArray<Hero> getHeroes() {
+        return heroes;
+    }
+
+    public void setHeroes(SnapshotArray<Hero> heroes) {
+        this.heroes = heroes;
     }
 
     public TextureRegion[][] getCharactersRegions() {
@@ -152,6 +173,10 @@ public abstract class TemplateScreen implements Screen {
             }
         }
         calledBy.getCanMovePositions().clear();
+        //Clear the showing info variable in all enemies
+        for (Enemy enemy: this.getEnemies()){
+            enemy.setShowingInfo(false);
+        }
 
     }
 }

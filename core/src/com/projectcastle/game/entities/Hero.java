@@ -17,12 +17,13 @@ public class Hero extends Unit {
     public final static String TAG = Hero.class.getName();
 
 
-
     public Hero(float positionX, float positionY, int attack, int defense, final String name, int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, final TemplateScreen screen) {
         super(positionX, positionY, attack, defense, name, health, region, actionMenu, moveLimit, screen);
 
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+
+                screen.clearHighlightedTiles(getThis());
 
                 if (screen.game.turnMessage.isVisible()){
                     screen.game.turnMessage.setVisible(false);

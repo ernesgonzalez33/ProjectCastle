@@ -15,6 +15,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.entities.Enemy;
@@ -75,7 +76,12 @@ public class TestMapScreen extends TemplateScreen implements InputProcessor {
         Hero number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, "Number2", 11, charactersRegions[0][3], this.game.actionMenu, Constants.MOVE_LIMIT, this);
         Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, charactersRegions[0][9], this.game.actionMenu, Constants.MOVE_LIMIT, this);
 
-        //Adding the heroes and enemies to the Stage
+        //Adding the heroes and enemies to the Stage and their lists
+        enemies = new SnapshotArray<Enemy>();
+        heroes = new SnapshotArray<Hero>();
+        enemies.add(theOne);
+        heroes.add(number1);
+        heroes.add(number2);
         stage.addActor(number1);
         stage.addActor(number2);
         stage.addActor(theOne);
