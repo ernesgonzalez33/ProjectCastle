@@ -3,6 +3,7 @@ package com.projectcastle.game.gameplay;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.projectcastle.game.ProjectCastleGame;
+import com.projectcastle.game.entities.Hero;
 import com.projectcastle.game.screens.TemplateScreen;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
@@ -54,6 +55,16 @@ public class InputProcessorHelp {
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.MOVED);
                 if (!game.actionMenu.getCalledBy().canAttack(position, screen.getStage())){
                     game.actionMenu.getCalledBy().setState(Enums.UnitState.ATTACKED);
+                    //Does it need to change turn?
+                    int cont = 0;
+                    for (Hero hero: screen.getHeroes()){
+                        if (hero.getState() == Enums.UnitState.ATTACKED){
+                            cont++;
+                        }
+                    }
+                    if (cont == screen.getHeroes().size){
+                        screen.changeTurn();
+                    }
                 }
             }
         }

@@ -37,8 +37,7 @@ public class ProjectCastleGame extends Game {
 		actionMenu = new ActionMenu(skin);
         turnMessage = new TurnMessage(skin);
 
-		activeTurn = Enums.Turn.ENEMY;
-		changeTurn();
+		activeTurn = Enums.Turn.PLAYER;
 
 		this.setScreen(new TestMapScreen(this));
 		fpsLogger = new FPSLogger();
@@ -54,15 +53,4 @@ public class ProjectCastleGame extends Game {
 		batch.dispose();
 	}
 
-	public void changeTurn(){
-
-	    if (this.activeTurn == Enums.Turn.PLAYER) {
-            this.activeTurn = Enums.Turn.ENEMY;
-            this.turnMessage.setTurn(Enums.Turn.ENEMY);
-        } else {
-	        this.activeTurn = Enums.Turn.PLAYER;
-            this.turnMessage.setTurn(Enums.Turn.PLAYER);
-        }
-
-    }
 }

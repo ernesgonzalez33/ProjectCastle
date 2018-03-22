@@ -18,6 +18,7 @@ import com.projectcastle.game.entities.Hero;
 import com.projectcastle.game.entities.Unit;
 import com.projectcastle.game.gameplay.InputProcessorHelp;
 import com.projectcastle.game.util.Constants;
+import com.projectcastle.game.util.Enums;
 import com.projectcastle.game.util.TextureTools;
 
 import java.util.ArrayList;
@@ -178,5 +179,25 @@ public abstract class TemplateScreen implements Screen {
             enemy.setShowingInfo(false);
         }
 
+    }
+
+    public void changeTurn() {
+
+        //Changing turn and displaying turn message
+        if (game.activeTurn == Enums.Turn.PLAYER) {
+            game.activeTurn = Enums.Turn.ENEMY;
+            game.turnMessage.setTurn(Enums.Turn.ENEMY);
+        } else {
+            game.activeTurn = Enums.Turn.PLAYER;
+            game.turnMessage.setTurn(Enums.Turn.PLAYER);
+        }
+
+        //Resetting all units to IDLE
+        for (Enemy enemy : getEnemies()) {
+            enemy.setState(Enums.UnitState.IDLE);
+        }
+        for (Hero hero : getHeroes()) {
+            hero.setState(Enums.UnitState.IDLE);
+        }
     }
 }
