@@ -200,4 +200,16 @@ public abstract class TemplateScreen implements Screen {
             hero.setState(Enums.UnitState.IDLE);
         }
     }
+
+    public void verifyTurnChange(){
+        int cont = 0;
+        for (Hero hero: this.getHeroes()){
+            if (hero.getState() == Enums.UnitState.ATTACKED){
+                cont++;
+            }
+        }
+        if (cont == this.getHeroes().size){
+            this.changeTurn();
+        }
+    }
 }

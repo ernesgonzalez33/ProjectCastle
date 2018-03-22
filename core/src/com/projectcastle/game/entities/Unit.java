@@ -118,7 +118,11 @@ public class Unit extends Actor {
     }
 
     public void setState(Enums.UnitState state) {
+
         this.state = state;
+        if (state == Enums.UnitState.ATTACKED)
+            screen.verifyTurnChange();
+
     }
 
     public int getMoveLimit() { return moveLimit; }
