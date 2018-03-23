@@ -1,5 +1,6 @@
 package com.projectcastle.game.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.screens.TemplateScreen;
+import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
 
 /**
@@ -78,7 +80,7 @@ public class Enemy extends Unit {
             //If the enemy can't attack, it has to move
             Vector2 positionToMove = selectMove();
             positionToMove = getScreen().getTextureTools().tileFinder((int) positionToMove.x, (int) positionToMove.y);
-            addAction(Actions.moveTo(positionToMove.x, positionToMove.y, 2)); //TODO: Ver por qué se va a tomar por culo
+            addAction(Actions.moveTo(positionToMove.x, positionToMove.y, 2));
             getScreen().clearHighlightedTiles(this);
             setState(Enums.UnitState.MOVED);
             //Verify if I can attack
@@ -136,13 +138,19 @@ public class Enemy extends Unit {
         Vector2 auxiliarVector = new Vector2();
         float distance = 10000;
         for (Vector2 position : this.getCanMovePositions()){
-            if (Math.abs(position.x-heroToPursuePosition.x) + Math.abs(position.y-heroToPursuePosition.y) < distance){
-                distance = Math.abs(position.x-heroToPursuePosition.x) + Math.abs(position.y-heroToPursuePosition.y);
-                auxiliarVector = position;
+            if (position.x == (heroToPursuePosition.x / Constants.TILE_SIZE) && position.y == (heroToPursuePosition.y / Constants.TILE_SIZE)){
+                Gdx.app.log(TAG, "Son iguales");
+            } else {
+                if (Math.abs(position.x - (heroToPursuePosition.x / Constants.TILE_SIZE)) + Math.abs(position.y - (heroToPursuePosition.y / Constants.TILE_SIZE)) < distance){
+                    distance = Math.abs(position.x - (heroToPursuePosition.x / Constants.TILE_SIZE)) + Math.abs(position.y- (heroToPursuePosition.y / Constants.TILE_SIZE));
+                    auxiliarVector = position;
+                }
             }
         }
 
         //Return the nearest position
+        auxiliarVector.x = auxiliarVector.x * Constants.TILE_SIZE;
+        auxiliarVector.y = auxiliarVector.y * Constants.TILE_SIZE;
         return auxiliarVector;
 
     }
