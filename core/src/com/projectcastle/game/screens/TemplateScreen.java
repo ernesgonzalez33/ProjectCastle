@@ -219,9 +219,10 @@ public abstract class TemplateScreen implements Screen {
 
         Gdx.app.log(TAG, "Running IA");
 
-        for (Enemy enemy: getEnemies()){
-            enemy.runAI();
+        for (int ii = 0; ii < getEnemies().size; ii++){
+            getEnemies().get(ii).runAI();
         }
+        changeTurn();
 
     }
 

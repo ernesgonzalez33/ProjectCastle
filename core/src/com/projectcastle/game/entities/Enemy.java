@@ -77,7 +77,9 @@ public class Enemy extends Unit {
         } else {
             //If the enemy can't attack, it has to move
             Vector2 positionToMove = selectMove();
-            addAction(Actions.moveTo(positionToMove.x, positionToMove.y, 2));
+            positionToMove = getScreen().getTextureTools().tileFinder((int) positionToMove.x, (int) positionToMove.y);
+            addAction(Actions.moveTo(positionToMove.x, positionToMove.y, 2)); //TODO: Ver por qué se va a tomar por culo
+            getScreen().clearHighlightedTiles(this);
             setState(Enums.UnitState.MOVED);
             //Verify if I can attack
             heroesICanAttack = this.canAttack(positionToMove);
@@ -122,7 +124,47 @@ public class Enemy extends Unit {
     }
 
     private Vector2 selectMove(){
-        return null;
+
+        //Find the hero to pursue
+        Vector2 heroToPursuePosition = new Vector2();
+        heroToPursuePosition = findHeroToPursue();
+
+        //Find the positions I can get
+        getScreen().highlightTilesToMove(this);
+
+        //Find the best nearest position to the hero I have to pursue
+        Vector2 auxiliarVector = new Vector2();
+        float distance = 10000;
+        for (Vector2 position : this.getCanMovePositions()){
+            if (Math.abs(position.x-heroToPursuePosition.x) + Math.abs(position.y-heroToPursuePosition.y) < distance){
+                distance = Math.abs(position.x-heroToPursuePosition.x) + Math.abs(position.y-heroToPursuePosition.y);
+                auxiliarVector = position;
+            }
+        }
+
+        //Return the nearest position
+        return auxiliarVector;
+
+    }
+
+    private Vector2 findHeroToPursue(){
+
+        //Hero to compare defense
+        Hero auxiliarHero = this.getScreen().getHeroes().get(0);
+
+        for (Hero hero : this.getScreen().getHeroes()){
+            //If I can kill it, I attack it
+            if ((this.getAttack() - hero.getDefense()) > hero.getHealth()){
+                return new Vector2(hero.getX(), hero.getY());
+            } else {
+                if (hero.getDefense() < auxiliarHero.getDefense()){
+                    auxiliarHero = hero;
+                }
+            }
+        }
+        //If I can't kill a hero, I attack the one with less defense
+        return new Vector2(auxiliarHero.getX(), auxiliarHero.getY());
+
     }
 
     public boolean isShowingInfo() {
