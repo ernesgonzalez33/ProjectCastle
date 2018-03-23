@@ -1,8 +1,11 @@
 package com.projectcastle.game.entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.utils.SnapshotArray;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.screens.TemplateScreen;
 import com.projectcastle.game.util.Enums;
@@ -49,7 +52,7 @@ public class Enemy extends Unit {
                             setStatsAfterAttack(actionMenu.getCalledBy(), getThis());
                             if (getHealth() < 1){
                                 remove();
-                                screen.getEnemies().removeValue((Enemy) getThis(), false);
+                                screen.getEnemies().removeValue((Enemy) getThis(), true);
                             }
                             actionMenu.getCalledBy().setState(Enums.UnitState.ATTACKED);
                         } else {}
@@ -61,6 +64,67 @@ public class Enemy extends Unit {
 
     }
 
+    public void runAI(){
+
+        //Actual position of this enemy
+        Vector2 actualPosition = new Vector2(getX(), getY());
+
+        //If the enemy can attack, it attacks depending on the selectAttack method result
+        SnapshotArray<Hero> heroesICanAttack =  this.canAttack(actualPosition);
+
+        if (heroesICanAttack.size > 0){
+            attackHero(selectAttack(heroesICanAttack));
+        } else {
+            //If the enemy can't attack, it has to move
+            Vector2 positionToMove = selectMove();
+            addAction(Actions.moveTo(positionToMove.x, positionToMove.y, 2));
+            setState(Enums.UnitState.MOVED);
+            //Verify if I can attack
+            heroesICanAttack = this.canAttack(positionToMove);
+            if (heroesICanAttack.size > 0){
+                attackHero(selectAttack(heroesICanAttack));
+            } else {
+                setState(Enums.UnitState.ATTACKED);
+            }
+        }
+
+    }
+
+    private Hero selectAttack(SnapshotArray<Hero> heroes){
+
+        //Hero to compare defense
+        Hero auxiliarHero = heroes.get(0);
+
+        for (Hero hero : heroes){
+            //If I can kill it, I attack it
+            if ((this.getAttack() - hero.getDefense()) > hero.getHealth()){
+                return hero;
+            } else {
+                if (hero.getDefense() < auxiliarHero.getDefense()){
+                    auxiliarHero = hero;
+                }
+            }
+        }
+        //If I can't kill a hero, I attack the one with less defense
+        return auxiliarHero;
+
+    }
+
+    private void attackHero (Hero hero){
+
+        setStatsAfterAttack(this, hero);
+        if (hero.getHealth() < 0){
+            hero.remove();
+            getScreen().getHeroes().removeValue(hero, true);
+        }
+        this.setState(Enums.UnitState.ATTACKED);
+
+    }
+
+    private Vector2 selectMove(){
+        return null;
+    }
+
     public boolean isShowingInfo() {
         return showingInfo;
     }
@@ -68,5 +132,6 @@ public class Enemy extends Unit {
     public void setShowingInfo(boolean showingInfo) {
         this.showingInfo = showingInfo;
     }
+
 
 }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.utils.SnapshotArray;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.screens.TemplateScreen;
 import com.projectcastle.game.util.Constants;
@@ -89,27 +90,27 @@ public class Unit extends Actor {
         this.name = name;
     }
 
-    private int getAttack() {
+    public int getAttack() {
         return attack;
     }
 
-    private void setAttack(int attack) {
+    public void setAttack(int attack) {
         this.attack = attack;
     }
 
-    private int getDefense() {
+    public int getDefense() {
         return defense;
     }
 
-    private void setDefense(int defense) {
+    public void setDefense(int defense) {
         this.defense = defense;
     }
 
-    int getHealth() {
+    public int getHealth() {
         return health;
     }
 
-    private void setHealth(int health) {
+    public void setHealth(int health) {
         this.health = health;
     }
 
@@ -214,6 +215,20 @@ public class Unit extends Actor {
             }
         }
         return false;
+    }
+
+    public SnapshotArray<Hero> canAttack(Vector2 position){
+
+        SnapshotArray<Hero> heroesICanAttack = new SnapshotArray<Hero>();
+
+        for (Hero hero:screen.getHeroes()){
+            if (isAdjacent(position, hero)){
+                heroesICanAttack.add(hero);
+            }
+        }
+
+        return heroesICanAttack;
+
     }
 
 }

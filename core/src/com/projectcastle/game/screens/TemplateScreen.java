@@ -1,5 +1,6 @@
 package com.projectcastle.game.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -183,21 +184,22 @@ public abstract class TemplateScreen implements Screen {
 
     public void changeTurn() {
 
-        //Changing turn and displaying turn message
-        if (game.activeTurn == Enums.Turn.PLAYER) {
-            game.activeTurn = Enums.Turn.ENEMY;
-            game.turnMessage.setTurn(Enums.Turn.ENEMY);
-        } else {
-            game.activeTurn = Enums.Turn.PLAYER;
-            game.turnMessage.setTurn(Enums.Turn.PLAYER);
-        }
-
         //Resetting all units to IDLE
         for (Enemy enemy : getEnemies()) {
             enemy.setState(Enums.UnitState.IDLE);
         }
         for (Hero hero : getHeroes()) {
             hero.setState(Enums.UnitState.IDLE);
+        }
+
+        //Changing turn and displaying turn message
+        if (game.activeTurn == Enums.Turn.PLAYER) {
+            game.activeTurn = Enums.Turn.ENEMY;
+            game.turnMessage.setTurn(Enums.Turn.ENEMY);
+            this.runAI();
+        } else {
+            game.activeTurn = Enums.Turn.PLAYER;
+            game.turnMessage.setTurn(Enums.Turn.PLAYER);
         }
     }
 
@@ -212,4 +214,15 @@ public abstract class TemplateScreen implements Screen {
             this.changeTurn();
         }
     }
+
+    private void runAI(){
+
+        Gdx.app.log(TAG, "Running IA");
+
+        for (Enemy enemy: getEnemies()){
+            enemy.runAI();
+        }
+
+    }
+
 }
