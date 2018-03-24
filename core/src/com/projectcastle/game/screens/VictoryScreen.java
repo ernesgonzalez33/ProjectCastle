@@ -41,7 +41,7 @@ public class VictoryScreen implements Screen {
         //Setting the game over text
         congratulations = new Label("CONGRATULATIONS!", game.skin);
         congratulations.setFontScale(2);
-        congratulations.setPosition((Constants.WIDTH / 2) - Constants.CONGRATULATIONS_OFFSET_X, (Constants.HEIGHT / 2) - Constants.CONGRATULATIONS_OFFSET_Y + 100);
+        congratulations.setPosition((Constants.WIDTH / 2) - Constants.CONGRATULATIONS_OFFSET_X - 65, (Constants.HEIGHT / 2) - Constants.CONGRATULATIONS_OFFSET_Y + 100);
         congratulations.setBounds(congratulations.getX(), congratulations.getY(), Constants.CONGRATULATIONS_WIDTH, Constants.CONGRATULATIONS_HEIGHT);
 
         //Setting the see credits button
