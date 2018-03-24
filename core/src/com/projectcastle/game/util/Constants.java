@@ -73,4 +73,10 @@ public class Constants {
     public static final int SEE_CREDITS_OFFSET_X = 50;
     public static final int SEE_CREDITS_OFFSET_Y = 15;
 
+    //Congratulations
+    public static final int CONGRATULATIONS_WIDTH = 170;
+    public static final int CONGRATULATIONS_HEIGHT = 70;
+    public static final int CONGRATULATIONS_OFFSET_X = 85;
+    public static final int CONGRATULATIONS_OFFSET_Y = 35;
+
 }
