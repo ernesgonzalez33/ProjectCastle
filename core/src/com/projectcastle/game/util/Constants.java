@@ -61,4 +61,16 @@ public class Constants {
     public static final int PLAY_OFFSET_X = 50;
     public static final int PLAY_OFFSET_Y = 15;
 
+    //Game over
+    public static final int GAME_OVER_WIDTH = 170;
+    public static final int GAME_OVER_HEIGHT = 70;
+    public static final int GAME_OVER_OFFSET_X = 85;
+    public static final int GAME_OVER_OFFSET_Y = 35;
+
+    //See credits button
+    public static final int SEE_CREDITS_WIDTH = 100;
+    public static final int SEE_CREDITS_HEIGHT = 30;
+    public static final int SEE_CREDITS_OFFSET_X = 50;
+    public static final int SEE_CREDITS_OFFSET_Y = 15;
+
 }
