@@ -158,7 +158,7 @@ public class Enemy extends Unit {
     private Vector2 findHeroToPursue(){
 
         //Hero to compare defense
-        Hero auxiliarHero = this.getScreen().getHeroes().get(0);
+        Hero auxiliarHero = new Hero(1000);
 
         for (Hero hero : this.getScreen().getHeroes()){
             //If I can kill it, I attack it

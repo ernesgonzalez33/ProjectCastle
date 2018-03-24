@@ -40,4 +40,8 @@ public class Hero extends Unit {
         });
 
     }
+
+    public Hero (int defense){
+        super(defense);
+    }
 }

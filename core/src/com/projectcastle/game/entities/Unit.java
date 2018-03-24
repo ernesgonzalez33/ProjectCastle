@@ -52,6 +52,12 @@ public class Unit extends Actor {
 
     }
 
+    public Unit (int defense){
+
+        this.setDefense(defense);
+
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         Color color = getColor();

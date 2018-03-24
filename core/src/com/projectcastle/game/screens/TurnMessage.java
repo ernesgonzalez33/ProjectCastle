@@ -10,7 +10,7 @@ import com.projectcastle.game.util.Enums;
 public class TurnMessage extends Window {
 
 
-    private final static String TAG = ActionMenu.class.getName();
+    private final static String TAG = TurnMessage.class.getName();
 
     public TurnMessage (Skin skin) {
 
@@ -19,7 +19,6 @@ public class TurnMessage extends Window {
         this.setPosition((Constants.WIDTH / 2) - Constants.TURN_MESSAGE_OFFSET_X, (Constants.HEIGHT / 2) - Constants.TURN_MESSAGE_OFFSET_Y);
         this.setBounds(this.getX(), this.getY(), Constants.TURN_MESSAGE_WIDTH, Constants.TURN_MESSAGE_HEIGHT);
         this.setVisible(false);
-
 
     }
 

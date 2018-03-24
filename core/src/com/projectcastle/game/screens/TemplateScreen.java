@@ -1,6 +1,5 @@
 package com.projectcastle.game.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -196,7 +195,11 @@ public abstract class TemplateScreen implements Screen {
         if (game.activeTurn == Enums.Turn.PLAYER) {
             game.activeTurn = Enums.Turn.ENEMY;
             game.turnMessage.setTurn(Enums.Turn.ENEMY);
-            this.runAI();
+            if (this.getHeroes().size == 0){
+                this.game.setScreen(new GameOverScreen(game));
+            } else {
+                this.runAI();
+            }
         } else {
             game.activeTurn = Enums.Turn.PLAYER;
             game.turnMessage.setTurn(Enums.Turn.PLAYER);
@@ -216,8 +219,6 @@ public abstract class TemplateScreen implements Screen {
     }
 
     private void runAI(){
-
-        Gdx.app.log(TAG, "Running IA");
 
         for (int ii = 0; ii < getEnemies().size; ii++){
             getEnemies().get(ii).runAI();
