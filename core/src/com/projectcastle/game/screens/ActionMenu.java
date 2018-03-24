@@ -43,6 +43,7 @@ public class ActionMenu extends Window {
         move.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                calledBy.getScreen().game.information.setVisible(false);
                 if (calledBy.getState() == Enums.UnitState.MOVED || calledBy.getState() == Enums.UnitState.ATTACKED){
                     setVisible(false);
                 } else {
@@ -56,6 +57,7 @@ public class ActionMenu extends Window {
         attack.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                calledBy.getScreen().game.information.setVisible(false);
                 if (calledBy.getState() == Enums.UnitState.ATTACKED){
                     setVisible(false);
                 } else {

@@ -40,10 +40,13 @@ public class Enemy extends Unit {
                     if (actionMenu.getCalledBy() == null || (actionMenu.getCalledBy().getState() != Enums.UnitState.MOVING && actionMenu.getCalledBy().getState() != Enums.UnitState.ATTACKING)) {
                         if (!showingInfo){
                             screen.highlightTilesToMove(getThis());
+                            screen.game.information.setCalledBy(getThis());
+                            screen.game.information.setVisible(true);
                             showingInfo = true;
                         }
                         else {
                             screen.clearHighlightedTiles(getThis());
+                            screen.game.information.setVisible(false);
                             showingInfo = false;
                         }
                         return true;
@@ -142,7 +145,7 @@ public class Enemy extends Unit {
                 Gdx.app.log(TAG, "Son iguales");
             } else {
                 if (Math.abs(position.x - (heroToPursuePosition.x / Constants.TILE_SIZE)) + Math.abs(position.y - (heroToPursuePosition.y / Constants.TILE_SIZE)) < distance){
-                    distance = Math.abs(position.x - (heroToPursuePosition.x / Constants.TILE_SIZE)) + Math.abs(position.y- (heroToPursuePosition.y / Constants.TILE_SIZE));
+                    distance = Math.abs(position.x - (heroToPursuePosition.x / Constants.TILE_SIZE)) + Math.abs(position.y - (heroToPursuePosition.y / Constants.TILE_SIZE));
                     auxiliarVector = position;
                 }
             }

@@ -33,6 +33,8 @@ public class Hero extends Unit {
                     actionMenu.setPosition(getX(), getY()); //TODO: (opcional) Hacer que el ActionMenu aparezca más centrado en la unidad
                     actionMenu.setVisible(true);
                     actionMenu.setCalledBy(Hero.this);
+                    screen.game.information.setCalledBy(Hero.this);
+                    screen.game.information.setVisible(true);
                 }
 
                 return true;

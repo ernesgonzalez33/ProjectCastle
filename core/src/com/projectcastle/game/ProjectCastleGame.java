@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Timer;
 import com.projectcastle.game.screens.ActionMenu;
+import com.projectcastle.game.screens.Information;
 import com.projectcastle.game.screens.TestMapScreen;
 import com.projectcastle.game.screens.TurnMessage;
 import com.projectcastle.game.util.Constants;
@@ -24,6 +25,7 @@ public class ProjectCastleGame extends Game {
 	public AssetManager manager;
 	public ActionMenu actionMenu;
 	public TurnMessage turnMessage;
+	public Information information;
 	public Skin skin;
 	public Enums.Turn activeTurn;
 	public Timer timer;
@@ -39,6 +41,7 @@ public class ProjectCastleGame extends Game {
 		skin = new Skin(Gdx.files.internal(Constants.FLAT_SKIN));
 		actionMenu = new ActionMenu(skin);
         turnMessage = new TurnMessage(skin);
+        information = new Information(skin);
 
 		activeTurn = Enums.Turn.PLAYER;
 

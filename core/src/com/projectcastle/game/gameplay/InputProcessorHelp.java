@@ -33,9 +33,11 @@ public class InputProcessorHelp {
                     return false;
                 } else {
                     game.actionMenu.setVisible(false);
+                    game.information.setVisible(false);
                 }
             } else {
                 game.actionMenu.setVisible(false);
+                game.information.setVisible(false);
             }
         } else {
             if (game.turnMessage.isVisible()){
