@@ -42,4 +42,7 @@ public class Constants {
     public static final String HERO_CLASS_NAME = "com.projectcastle.game.entities.Hero";
     public static final String ENEMY_CLASS_NAME = "com.projectcastle.game.entities.Enemy";
 
+    //Timer
+    public static final int DELAY = 3;
+
 }

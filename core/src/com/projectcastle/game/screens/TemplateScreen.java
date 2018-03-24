@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.SnapshotArray;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.entities.Enemy;
@@ -194,16 +195,22 @@ public abstract class TemplateScreen implements Screen {
         //Changing turn and displaying turn message
         if (game.activeTurn == Enums.Turn.PLAYER) {
             game.activeTurn = Enums.Turn.ENEMY;
-            game.turnMessage.setTurn(Enums.Turn.ENEMY);
-            if (this.getHeroes().size == 0){
-                this.game.setScreen(new GameOverScreen(game));
+            if (getHeroes().size == 0){
+                game.setScreen(new GameOverScreen(game));
             } else {
-                this.runAI();
+                game.turnMessage.setTurn(Enums.Turn.ENEMY);
+                game.timer.scheduleTask(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        runAI();
+                    }
+                }, Constants.DELAY);
             }
         } else {
             game.activeTurn = Enums.Turn.PLAYER;
             game.turnMessage.setTurn(Enums.Turn.PLAYER);
         }
+
     }
 
     public void verifyTurnChange(){
@@ -220,10 +227,15 @@ public abstract class TemplateScreen implements Screen {
 
     private void runAI(){
 
-        for (int ii = 0; ii < getEnemies().size; ii++){
+        for (int ii = 0; ii < getEnemies().size; ii++) {
             getEnemies().get(ii).runAI();
         }
-        changeTurn();
+        game.timer.scheduleTask(new Timer.Task() {
+            @Override
+            public void run() {
+                changeTurn();
+            }
+        }, Constants.DELAY);
 
     }
 

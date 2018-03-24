@@ -72,7 +72,7 @@ public class Enemy extends Unit {
         Vector2 actualPosition = new Vector2(getX(), getY());
 
         //If the enemy can attack, it attacks depending on the selectAttack method result
-        SnapshotArray<Hero> heroesICanAttack =  this.canAttack(actualPosition);
+        SnapshotArray<Hero> heroesICanAttack =  canAttack(actualPosition);
 
         if (heroesICanAttack.size > 0){
             attackHero(selectAttack(heroesICanAttack));
@@ -81,10 +81,10 @@ public class Enemy extends Unit {
             Vector2 positionToMove = selectMove();
             positionToMove = getScreen().getTextureTools().tileFinder((int) positionToMove.x, (int) positionToMove.y);
             addAction(Actions.moveTo(positionToMove.x, positionToMove.y, 2));
-            getScreen().clearHighlightedTiles(this);
+            getScreen().clearHighlightedTiles(getThis());
             setState(Enums.UnitState.MOVED);
             //Verify if I can attack
-            heroesICanAttack = this.canAttack(positionToMove);
+            heroesICanAttack = canAttack(positionToMove);
             if (heroesICanAttack.size > 0){
                 attackHero(selectAttack(heroesICanAttack));
             } else {

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Timer;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.screens.TestMapScreen;
 import com.projectcastle.game.screens.TurnMessage;
@@ -25,12 +26,14 @@ public class ProjectCastleGame extends Game {
 	public TurnMessage turnMessage;
 	public Skin skin;
 	public Enums.Turn activeTurn;
+	public Timer timer;
 
 	@Override
 	public void create() {
 
 		manager = new AssetManager();
 		batch = new SpriteBatch();
+		timer = new Timer();
 
 		//Creating Action Menu and Turn Message
 		skin = new Skin(Gdx.files.internal(Constants.FLAT_SKIN));
