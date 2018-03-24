@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Timer;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.screens.Information;
-import com.projectcastle.game.screens.TestMapScreen;
+import com.projectcastle.game.screens.MainMenuScreen;
 import com.projectcastle.game.screens.TurnMessage;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
@@ -45,7 +45,7 @@ public class ProjectCastleGame extends Game {
 
 		activeTurn = Enums.Turn.PLAYER;
 
-		this.setScreen(new TestMapScreen(this));
+		this.setScreen(new MainMenuScreen(this));
 		fpsLogger = new FPSLogger();
 
 	}

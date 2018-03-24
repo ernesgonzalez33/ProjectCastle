@@ -49,4 +49,16 @@ public class Constants {
     //Timer
     public static final int DELAY = 3;
 
+    //Title
+    public static final int TITLE_WIDTH = 170;
+    public static final int TITLE_HEIGHT = 70;
+    public static final int TITLE_OFFSET_X = 85;
+    public static final int TITLE_OFFSET_Y = 35;
+
+    //Play button
+    public static final int PLAY_WIDTH = 100;
+    public static final int PLAY_HEIGHT = 30;
+    public static final int PLAY_OFFSET_X = 50;
+    public static final int PLAY_OFFSET_Y = 15;
+
 }
