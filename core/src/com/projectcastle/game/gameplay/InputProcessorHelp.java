@@ -3,6 +3,7 @@ package com.projectcastle.game.gameplay;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.projectcastle.game.ProjectCastleGame;
+import com.projectcastle.game.entities.Enemy;
 import com.projectcastle.game.screens.TemplateScreen;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
@@ -43,8 +44,14 @@ public class InputProcessorHelp {
             if (game.turnMessage.isVisible()){
                 game.turnMessage.setVisible(false);
             }
-            if (game.actionMenu.getCalledBy() == null)
+            if (game.actionMenu.getCalledBy() == null){
+                for (Enemy enemy : screen.getEnemies()){
+                    if (enemy.isShowingInfo()){
+                        enemy.setShowingInfo(false);
+                    }
+                }
                 return false;
+            }
             if (game.actionMenu.getCalledBy().getState() == Enums.UnitState.MOVING){
                 Vector2 position = screen.getTextureTools().tileFinder(screenX, screen.getViewport().getScreenHeight() - screenY);
                 Vector2 cellPosition = new Vector2(position.x / Constants.TILE_SIZE, position.y / Constants.TILE_SIZE);
@@ -57,6 +64,11 @@ public class InputProcessorHelp {
                 if (!game.actionMenu.getCalledBy().canAttack(position, screen.getStage())){
                     game.actionMenu.getCalledBy().setState(Enums.UnitState.ATTACKED);
                 }
+            }
+        }
+        for (Enemy enemy : screen.getEnemies()){
+            if (enemy.isShowingInfo()){
+                enemy.setShowingInfo(false);
             }
         }
         return false;

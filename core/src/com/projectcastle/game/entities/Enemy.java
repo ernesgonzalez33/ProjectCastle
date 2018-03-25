@@ -40,15 +40,15 @@ public class Enemy extends Unit {
                     //Issue #1 solved
                     if (actionMenu.getCalledBy() == null || (actionMenu.getCalledBy().getState() != Enums.UnitState.MOVING && actionMenu.getCalledBy().getState() != Enums.UnitState.ATTACKING)) {
                         if (!showingInfo){
-                            screen.highlightTilesToMove(getThis());
-                            screen.game.information.setCalledBy(getThis());
-                            screen.game.information.setVisible(true);
-                            showingInfo = true;
+                            //screen.highlightTilesToMove(getThis());
+                            //screen.game.information.setCalledBy(getThis());
+                            //screen.game.information.setVisible(true);
+                            setShowingInfo(true);
                         }
                         else {
-                            screen.clearHighlightedTiles(getThis());
-                            screen.game.information.setVisible(false);
-                            showingInfo = false;
+                           // screen.clearHighlightedTiles(getThis());
+                           // screen.game.information.setVisible(false);
+                            setShowingInfo(false);
                         }
                         return true;
                     }
@@ -187,7 +187,17 @@ public class Enemy extends Unit {
     }
 
     public void setShowingInfo(boolean showingInfo) {
+
         this.showingInfo = showingInfo;
+        if (!showingInfo){
+            getScreen().clearHighlightedTiles(this);
+            getScreen().game.information.setVisible(false);
+        } else {
+            getScreen().highlightTilesToMove(getThis());
+            getScreen().game.information.setCalledBy(getThis());
+            getScreen().game.information.setVisible(true);
+        }
+
     }
 
 

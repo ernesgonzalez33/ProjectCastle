@@ -176,13 +176,14 @@ public abstract class TemplateScreen implements Screen {
         }
         calledBy.getCanMovePositions().clear();
         //Clear the showing info variable in all enemies
-        for (Enemy enemy: this.getEnemies()){
-            enemy.setShowingInfo(false);
+        if (calledBy.getClass().getName().equals(Constants.HERO_CLASS_NAME)){
+            for (Enemy enemy: this.getEnemies()){
+                enemy.setShowingInfo(false);
+            }
         }
-
     }
 
-    public void changeTurn() {
+    private void changeTurn() {
 
         //Resetting all units to IDLE
         for (Enemy enemy : getEnemies()) {
