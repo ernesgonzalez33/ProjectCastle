@@ -21,7 +21,6 @@ public class Information extends Window {
         this.setPosition(0, 0);
         this.setBounds(this.getX(), this.getY(), Constants.INFORMATION_WIDTH, Constants.INFORMATION_HEIGHT);
         this.setVisible(false);
-        debugAll();
 
     }
 
