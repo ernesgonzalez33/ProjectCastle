@@ -1,10 +1,8 @@
 package com.projectcastle.game.screens;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.utils.SnapshotArray;
 import com.projectcastle.game.entities.Unit;
 import com.projectcastle.game.util.Constants;
 
@@ -27,10 +25,7 @@ public class Information extends Window {
     @Override
     public void setVisible(boolean visible) {
         if (!visible){
-            SnapshotArray<Actor> actors = this.getChildren();
-            while (actors.size > 0){
-                actors.get(0).remove();
-            }
+            this.clearChildren();
         } else {
             this.add(new Label("Name: " + getCalledBy().getName(), getSkin()));
             this.row();
