@@ -4,7 +4,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.projectcastle.game.entities.Unit;
-import com.projectcastle.game.util.Constants;
 
 public class Information extends Window {
 
@@ -17,7 +16,6 @@ public class Information extends Window {
         //Setting the attributes
         super("Information", skin);
         this.setPosition(0, 0);
-        this.setBounds(this.getX(), this.getY(), Constants.INFORMATION_WIDTH, Constants.INFORMATION_HEIGHT);
         this.setVisible(false);
 
     }
