@@ -8,7 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.SnapshotArray;
+import com.badlogic.gdx.utils.Timer;
 import com.projectcastle.game.screens.ActionMenu;
+import com.projectcastle.game.screens.DamageOverlay;
 import com.projectcastle.game.screens.TemplateScreen;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
@@ -69,7 +71,17 @@ public class Unit extends Actor {
     void setStatsAfterAttack (Unit attackingUnit, Unit defendingUnit){
 
         //Setting health
-        defendingUnit.setHealth(defendingUnit.getHealth() - (attackingUnit.getAttack() - defendingUnit.getDefense()));
+        int damage = attackingUnit.getAttack() - defendingUnit.getDefense();
+        int newHealth = defendingUnit.getHealth() - damage;
+        defendingUnit.setHealth(newHealth);
+        final DamageOverlay damageOverlay = new DamageOverlay("" + damage, screen.game.skin, defendingUnit.getX(), defendingUnit.getY());
+        screen.getStage().addActor(damageOverlay);
+        screen.game.timer.scheduleTask(new Timer.Task() {
+            @Override
+            public void run() {
+                damageOverlay.remove();
+            }
+        }, 1);
 
         //Setting defense
         if (attackingUnit.getDefense() > defendingUnit.getDefense() + 5){

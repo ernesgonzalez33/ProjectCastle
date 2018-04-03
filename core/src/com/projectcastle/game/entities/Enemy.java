@@ -40,14 +40,9 @@ public class Enemy extends Unit {
                     //Issue #1 solved
                     if (actionMenu.getCalledBy() == null || (actionMenu.getCalledBy().getState() != Enums.UnitState.MOVING && actionMenu.getCalledBy().getState() != Enums.UnitState.ATTACKING)) {
                         if (!showingInfo){
-                            //screen.highlightTilesToMove(getThis());
-                            //screen.game.information.setCalledBy(getThis());
-                            //screen.game.information.setVisible(true);
                             setShowingInfo(true);
                         }
                         else {
-                           // screen.clearHighlightedTiles(getThis());
-                           // screen.game.information.setVisible(false);
                             setShowingInfo(false);
                         }
                         return true;
