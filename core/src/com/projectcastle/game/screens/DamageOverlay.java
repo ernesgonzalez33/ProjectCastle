@@ -1,5 +1,6 @@
 package com.projectcastle.game.screens;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
@@ -17,6 +18,8 @@ public class DamageOverlay extends Label {
         this.setY(y);
         this.setBounds(x, y, Constants.TILE_SIZE, Constants.TILE_SIZE);
         this.setAlignment(Align.center);
+        this.setColor(Color.RED);
+        this.setFontScale(Constants.DAMAGE_FONT_SCALE);
 
     }
 

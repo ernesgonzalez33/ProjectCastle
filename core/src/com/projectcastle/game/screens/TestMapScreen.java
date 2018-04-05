@@ -77,19 +77,19 @@ public class TestMapScreen extends TemplateScreen implements InputProcessor {
         Hero number1 = new Hero(positionNumber1.x, positionNumber1.y, 15, 16, "Number1", 11, charactersRegions[0][0], this.game.actionMenu, Constants.MOVE_LIMIT, this);
         Hero number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, "Number2", 11, charactersRegions[0][3], this.game.actionMenu, Constants.MOVE_LIMIT, this);
         Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, charactersRegions[0][9], this.game.actionMenu, Constants.MOVE_LIMIT, this);
-        //Enemy theTwo = new Enemy(positionTheTwo.x, positionTheTwo.y, 30, 1, "TheTwo", 50, charactersRegions[0][9], this.game.actionMenu, Constants.MOVE_LIMIT, this);
+        Enemy theTwo = new Enemy(positionTheTwo.x, positionTheTwo.y, 30, 1, "TheTwo", 50, charactersRegions[0][9], this.game.actionMenu, Constants.MOVE_LIMIT, this);
 
         //Adding the heroes and enemies to the Stage and their lists
         enemies = new SnapshotArray<Enemy>();
         heroes = new SnapshotArray<Hero>();
         enemies.add(theOne);
-        //enemies.add(theTwo);
+        enemies.add(theTwo);
         heroes.add(number1);
         heroes.add(number2);
         stage.addActor(number1);
         stage.addActor(number2);
         stage.addActor(theOne);
-        //stage.addActor(theTwo);
+        stage.addActor(theTwo);
 
         //Input processors
         InputMultiplexer inputMultiplexer = new InputMultiplexer();

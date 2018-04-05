@@ -79,10 +79,9 @@ public class Constants {
     public static final int CONGRATULATIONS_OFFSET_X = 85;
     public static final int CONGRATULATIONS_OFFSET_Y = 35;
 
-    //Credits
-    public static final int CREDITS_WIDTH = 170;
-    public static final int CREDITS_HEIGHT = 70;
-    public static final int CREDITS_OFFSET_X = 85;
-    public static final int CREDITS_OFFSET_Y = 35;
+    //DamageOverlay
+    public static final float DAMAGE_FONT_SCALE = 1.5f;
+
+
 
 }
