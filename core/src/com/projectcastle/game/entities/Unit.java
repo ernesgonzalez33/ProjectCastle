@@ -68,38 +68,45 @@ public class Unit extends Actor {
                 getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
     }
 
-    void setStatsAfterAttack (Unit attackingUnit, Unit defendingUnit){
+    void setStatsAfterAttack (final Unit attackingUnit, final Unit defendingUnit){
 
-        //Setting health
-        int damage = attackingUnit.getAttack() - defendingUnit.getDefense();
-        int newHealth = defendingUnit.getHealth() - damage;
-        defendingUnit.setHealth(newHealth);
-        final DamageOverlay damageOverlay = new DamageOverlay("" + damage, screen.game.skin, defendingUnit.getX(), defendingUnit.getY());
-        screen.getStage().addActor(damageOverlay);
         screen.game.timer.scheduleTask(new Timer.Task() {
             @Override
             public void run() {
-                damageOverlay.remove();
+                //Setting health
+                int damage = attackingUnit.getAttack() - defendingUnit.getDefense();
+                int newHealth = defendingUnit.getHealth() - damage;
+                defendingUnit.setHealth(newHealth);
+                final DamageOverlay damageOverlay = new DamageOverlay("" + damage, screen.game.skin, defendingUnit.getX(), defendingUnit.getY());
+                screen.getStage().addActor(damageOverlay);
+                screen.game.timer.scheduleTask(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        damageOverlay.remove();
+                    }
+                }, 1);
+
+                //Setting defense
+                if (attackingUnit.getDefense() > defendingUnit.getDefense() + 5){
+                    defendingUnit.setDefense(defendingUnit.getDefense() + 3);
+                } else if (attackingUnit.getDefense() < defendingUnit.getDefense() + 5) {
+                    defendingUnit.setDefense(defendingUnit.getDefense() + 1);
+                } else {
+                    defendingUnit.setDefense(defendingUnit.getDefense() + 2);
+                }
+
+                //Setting attack
+                if (attackingUnit.getAttack() > defendingUnit.getAttack() + 5){
+                    attackingUnit.setAttack(attackingUnit.getAttack() + 1);
+                } else if (attackingUnit.getAttack() < defendingUnit.getAttack() + 5) {
+                    attackingUnit.setAttack(attackingUnit.getAttack() + 3);
+                } else {
+                    attackingUnit.setAttack(attackingUnit.getAttack() + 2);
+                }
             }
         }, 1);
 
-        //Setting defense
-        if (attackingUnit.getDefense() > defendingUnit.getDefense() + 5){
-            defendingUnit.setDefense(defendingUnit.getDefense() + 3);
-        } else if (attackingUnit.getDefense() < defendingUnit.getDefense() + 5) {
-            defendingUnit.setDefense(defendingUnit.getDefense() + 1);
-        } else {
-            defendingUnit.setDefense(defendingUnit.getDefense() + 2);
-        }
 
-        //Setting attack
-        if (attackingUnit.getAttack() > defendingUnit.getAttack() + 5){
-            attackingUnit.setAttack(attackingUnit.getAttack() + 1);
-        } else if (attackingUnit.getAttack() < defendingUnit.getAttack() + 5) {
-            attackingUnit.setAttack(attackingUnit.getAttack() + 3);
-        } else {
-            attackingUnit.setAttack(attackingUnit.getAttack() + 2);
-        }
     }
 
     public String getName() { return name; }
