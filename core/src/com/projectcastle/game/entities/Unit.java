@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.screens.DamageOverlay;
 import com.projectcastle.game.screens.TemplateScreen;
+import com.projectcastle.game.screens.VictoryScreen;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
 
@@ -70,44 +71,50 @@ public class Unit extends Actor {
 
     void setStatsAfterAttack (final Unit attackingUnit, final Unit defendingUnit){
 
+        //Setting health
+        int damage = attackingUnit.getAttack() - defendingUnit.getDefense();
+        int newHealth = defendingUnit.getHealth() - damage;
+        defendingUnit.setHealth(newHealth);
+        final DamageOverlay damageOverlay = new DamageOverlay("" + damage, screen.game.skin, defendingUnit.getX(), defendingUnit.getY());
+        screen.getStage().addActor(damageOverlay);
         screen.game.timer.scheduleTask(new Timer.Task() {
             @Override
             public void run() {
-                //Setting health
-                int damage = attackingUnit.getAttack() - defendingUnit.getDefense();
-                int newHealth = defendingUnit.getHealth() - damage;
-                defendingUnit.setHealth(newHealth);
-                final DamageOverlay damageOverlay = new DamageOverlay("" + damage, screen.game.skin, defendingUnit.getX(), defendingUnit.getY());
-                screen.getStage().addActor(damageOverlay);
-                screen.game.timer.scheduleTask(new Timer.Task() {
-                    @Override
-                    public void run() {
-                        damageOverlay.remove();
-                    }
-                }, 1);
-
-                //Setting defense
-                if (attackingUnit.getDefense() > defendingUnit.getDefense() + 5){
-                    defendingUnit.setDefense(defendingUnit.getDefense() + 3);
-                } else if (attackingUnit.getDefense() < defendingUnit.getDefense() + 5) {
-                    defendingUnit.setDefense(defendingUnit.getDefense() + 1);
-                } else {
-                    defendingUnit.setDefense(defendingUnit.getDefense() + 2);
-                }
-
-                //Setting attack
-                if (attackingUnit.getAttack() > defendingUnit.getAttack() + 5){
-                    attackingUnit.setAttack(attackingUnit.getAttack() + 1);
-                } else if (attackingUnit.getAttack() < defendingUnit.getAttack() + 5) {
-                    attackingUnit.setAttack(attackingUnit.getAttack() + 3);
-                } else {
-                    attackingUnit.setAttack(attackingUnit.getAttack() + 2);
-                }
+                damageOverlay.remove();
             }
         }, 1);
+        if (defendingUnit.getHealth() < 1){
+            defendingUnit.remove();
+            if (this.getClass().getName().equals(Constants.ENEMY_CLASS_NAME)){
+                screen.getEnemies().removeValue((Enemy) defendingUnit, true);
+                if (screen.getEnemies().size == 0){
+                    screen.game.setScreen(new VictoryScreen(screen.game));
+                }
+            } else {
+                getScreen().getHeroes().removeValue((Hero) defendingUnit, true);
+            }
 
+        }
 
+        //Setting defense
+        if (attackingUnit.getDefense() > defendingUnit.getDefense() + 5){
+            defendingUnit.setDefense(defendingUnit.getDefense() + 3);
+        } else if (attackingUnit.getDefense() < defendingUnit.getDefense() + 5) {
+            defendingUnit.setDefense(defendingUnit.getDefense() + 1);
+        } else {
+            defendingUnit.setDefense(defendingUnit.getDefense() + 2);
+        }
+
+        //Setting attack
+        if (attackingUnit.getAttack() > defendingUnit.getAttack() + 5){
+            attackingUnit.setAttack(attackingUnit.getAttack() + 1);
+        } else if (attackingUnit.getAttack() < defendingUnit.getAttack() + 5) {
+            attackingUnit.setAttack(attackingUnit.getAttack() + 3);
+        } else {
+            attackingUnit.setAttack(attackingUnit.getAttack() + 2);
+        }
     }
+
 
     public String getName() { return name; }
 

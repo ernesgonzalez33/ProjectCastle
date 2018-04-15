@@ -7,9 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.SnapshotArray;
+import com.badlogic.gdx.utils.Timer;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.screens.TemplateScreen;
-import com.projectcastle.game.screens.VictoryScreen;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
 
@@ -50,14 +50,12 @@ public class Enemy extends Unit {
 
                     if (actionMenu.getCalledBy().getState() == Enums.UnitState.ATTACKING){
                         if (actionMenu.getCalledBy().isAdjacent(getThis())){
-                            setStatsAfterAttack(actionMenu.getCalledBy(), getThis());
-                            if (getHealth() < 1){
-                                remove();
-                                screen.getEnemies().removeValue((Enemy) getThis(), true);
-                                if (screen.getEnemies().size == 0){
-                                    screen.game.setScreen(new VictoryScreen(screen.game));
+                            screen.game.timer.scheduleTask(new Timer.Task() {
+                                @Override
+                                public void run() {
+                                    setStatsAfterAttack(actionMenu.getCalledBy(), getThis());
                                 }
-                            }
+                            }, 1);
                             actionMenu.getCalledBy().setState(Enums.UnitState.ATTACKED);
                         } else {}
                     } else {}
@@ -116,13 +114,14 @@ public class Enemy extends Unit {
 
     }
 
-    private void attackHero (Hero hero){
+    private void attackHero (final Hero hero){
 
-        setStatsAfterAttack(this, hero);
-        if (hero.getHealth() < 0){
-            hero.remove();
-            getScreen().getHeroes().removeValue(hero, true);
-        }
+        getScreen().game.timer.scheduleTask(new Timer.Task() {
+            @Override
+            public void run() {
+                setStatsAfterAttack(getThis(), hero);
+            }
+        }, 1);
         this.setState(Enums.UnitState.ATTACKED);
 
     }
