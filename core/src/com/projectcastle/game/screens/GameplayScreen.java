@@ -3,8 +3,7 @@ package com.projectcastle.game.screens;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 
-public class GameplayScreen extends Screen implements InputProcessor {
-
+public class GameplayScreen implements InputProcessor, Screen {
 
 
 
