@@ -41,6 +41,7 @@ public abstract class TemplateScreen implements Screen {
     TiledMapTileLayer selectedTileLayer;
     TiledMapTileSet selectedTileSet;
     TextureRegion selectedSpriteRegion;
+
     public ProjectCastleGame game;
 
     public OrthographicCamera getCamera() {

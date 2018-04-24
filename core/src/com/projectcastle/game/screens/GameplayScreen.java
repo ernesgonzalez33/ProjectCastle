@@ -24,7 +24,6 @@ public class GameplayScreen implements InputProcessor, Screen {
     Viewport viewport;
     Stage stage;
     TextureTools textureTools;
-    InputProcessorHelp inputProcessorHelp;
 
     public GameplayScreen(final ProjectCastleGame game){
 
@@ -36,8 +35,6 @@ public class GameplayScreen implements InputProcessor, Screen {
         camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
         stage = new Stage();
         textureTools = new TextureTools();
-        inputProcessorHelp = new InputProcessorHelp(game);
-
 
     }
 
