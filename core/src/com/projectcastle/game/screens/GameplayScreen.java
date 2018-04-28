@@ -6,14 +6,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.Map;
 import com.projectcastle.game.ProjectCastleGame;
-import com.projectcastle.game.gameplay.InputProcessorHelp;
 import com.projectcastle.game.util.Constants;
-import com.projectcastle.game.util.TextureTools;
 
 public class GameplayScreen implements InputProcessor, Screen {
 
@@ -21,9 +16,7 @@ public class GameplayScreen implements InputProcessor, Screen {
     SpriteBatch batch;
     private Map map;
     OrthographicCamera camera;
-    Viewport viewport;
-    Stage stage;
-    TextureTools textureTools;
+
 
     public GameplayScreen(final ProjectCastleGame game){
 
@@ -31,10 +24,7 @@ public class GameplayScreen implements InputProcessor, Screen {
         this.game = game;
         this.batch = game.batch;
         camera = new OrthographicCamera();
-        viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
         camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
-        stage = new Stage();
-        textureTools = new TextureTools();
 
     }
 
@@ -92,25 +82,18 @@ public class GameplayScreen implements InputProcessor, Screen {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
 
+        //TODO: Esto irá al mapa
         game.tiledMapRenderer.setView(camera);
         game.tiledMapRenderer.render();
-        stage.act(delta); //In the case something need to move
 
-        game.batch.begin();
+        map.update(delta);
 
-        stage.draw();
-
-        game.batch.end();
+        map.render(game.batch);
 
     }
 
     @Override
-    public void resize(int width, int height) {
-
-        viewport.update(width, height);
-        stage.getViewport().update(width, height, true);
-
-    }
+    public void resize(int width, int height) {}
 
     @Override
     public void pause() {
@@ -130,7 +113,7 @@ public class GameplayScreen implements InputProcessor, Screen {
     @Override
     public void dispose() {
 
-        stage.dispose();
+        map.dispose();
 
     }
 }
