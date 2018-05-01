@@ -80,11 +80,13 @@ public class Map extends TiledMap {
 
     private void initializeDebugMap(){
 
+
+
         // Creating the characters
-        Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
-        Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
-        Vector2 positionTheOne = textureTools.positionConverter(10, 5);
-        Vector2 positionTheTwo = textureTools.positionConverter(10, 15);
+//        Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
+//        Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
+//        Vector2 positionTheOne = textureTools.positionConverter(10, 5);
+//        Vector2 positionTheTwo = textureTools.positionConverter(10, 15);
 //        Hero number1 = new Hero(positionNumber1.x, positionNumber1.y, 15, 16, "Number1", 11, charactersRegions[0][0], this.game.actionMenu, Constants.MOVE_LIMIT, this);
 //        Hero number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, "Number2", 11, charactersRegions[0][3], this.game.actionMenu, Constants.MOVE_LIMIT, this);
 //        Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, charactersRegions[0][9], this.game.actionMenu, Constants.MOVE_LIMIT, this);

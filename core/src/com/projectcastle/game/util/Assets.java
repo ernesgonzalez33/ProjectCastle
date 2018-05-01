@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Disposable;
+import com.projectcastle.game.Map;
 
 import java.util.ArrayList;
 
@@ -47,6 +48,9 @@ public class Assets implements Disposable, AssetErrorListener {
         //Splitting sprites
         TextureRegion[][] characters;
         characters = TextureRegion.split(assetManager.get(Constants.CHARACTERS_ASSET, Texture.class), Constants.TILE_SIZE / 2, Constants.TILE_SIZE / 2);
+
+        mapAssets = new MapAssets(maps);
+        unitsAssets = new UnitsAssets(characters);
 
 
     }
