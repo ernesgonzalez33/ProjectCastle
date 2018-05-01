@@ -15,8 +15,6 @@ public class Constants {
     public static final String PRINCESS_NAME = "Erika";
     public static final String PRINCE_NAME = "Christian";
     public static final String COMMANDER_NAME = "Airmanagild";
-    public static final String GUARD_NAME = "Rebecca";
-    public static final String CLERIC_NAME = "Peter";
     public static final String CHARACTERS_ASSET = "Characters/characters_1.png";
     public static final String SELECTED_SPRITE_ASSET = "Maps/SelectedSprite.png";
     public static final int TILE_SIZE = 32;
