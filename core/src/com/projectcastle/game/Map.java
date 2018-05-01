@@ -4,19 +4,20 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.entities.Enemy;
 import com.projectcastle.game.entities.Hero;
+import com.projectcastle.game.util.Assets;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.TextureTools;
 
-public class Map extends TiledMap {
+public class Map {
 
     public static final String TAG = Map.class.getName();
+    private TiledMap tiledMap;
     public boolean gameOver;
     public boolean victory;
     SnapshotArray<Enemy> enemies;
@@ -27,7 +28,7 @@ public class Map extends TiledMap {
     public OrthogonalTiledMapRenderer tiledMapRenderer;
 
 
-    public Map(){
+    public Map(int mapID){
 
         gameOver = false;
         victory = false;
@@ -37,7 +38,11 @@ public class Map extends TiledMap {
         stage = new Stage();
         textureTools = new TextureTools();
         viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT);
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(this, Constants.UNIT_SCALE);
+
+        if (mapID == 0){
+            tiledMap = Assets.instance.mapAssets.testMap;
+        }
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(this.tiledMap, Constants.UNIT_SCALE);
 
     }
 
@@ -72,7 +77,7 @@ public class Map extends TiledMap {
 
     public static Map debugMap(){
 
-        Map map = new Map();
+        Map map = new Map(0);
         map.initializeDebugMap();
         return map;
 

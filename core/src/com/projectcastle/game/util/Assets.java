@@ -66,7 +66,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.dispose();
     }
 
-    public class MapAssets {
+    public static class MapAssets {
 
         public final TiledMap testMap;
 
