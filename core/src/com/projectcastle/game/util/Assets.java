@@ -21,6 +21,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public MapAssets mapAssets;
     public UnitsAssets unitsAssets;
+    public SelectedAssets selectedAssets;
 
     private AssetManager assetManager;
 
@@ -44,14 +45,16 @@ public class Assets implements Disposable, AssetErrorListener {
         ArrayList<TiledMap> maps = new ArrayList<TiledMap>();
         maps.add(assetManager.get(Constants.TEST_MAP, TiledMap.class));
 
-        //TODO: Separar los sprites aquí
         //Splitting sprites
         TextureRegion[][] characters;
         characters = TextureRegion.split(assetManager.get(Constants.CHARACTERS_ASSET, Texture.class), Constants.TILE_SIZE / 2, Constants.TILE_SIZE / 2);
 
+        //Converting selected sprite
+        TextureRegion selectedSprite = new TextureRegion(assetManager.get(Constants.SELECTED_SPRITE_ASSET, Texture.class), Constants.TILE_SIZE, Constants.TILE_SIZE);
+
         mapAssets = new MapAssets(maps);
         unitsAssets = new UnitsAssets(characters);
-
+        selectedAssets = new SelectedAssets(selectedSprite);
 
     }
 
@@ -93,6 +96,18 @@ public class Assets implements Disposable, AssetErrorListener {
             christianRegion = unitsAssets [0][4];
             skeletonRegion = unitsAssets [0][10];
             limeRegion = unitsAssets[4][1];
+
+        }
+
+    }
+
+    public class SelectedAssets{
+
+        public final TextureRegion selectedRegion;
+
+        public SelectedAssets (TextureRegion selectedRegion) {
+
+            this.selectedRegion = selectedRegion;
 
         }
 
