@@ -8,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.Timer;
+import com.projectcastle.game.Map;
 import com.projectcastle.game.screens.ActionMenu;
-import com.projectcastle.game.screens.TemplateScreen;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
 
@@ -24,19 +24,19 @@ public class Enemy extends Unit {
 
     private boolean showingInfo;
 
-    public Enemy(float positionX, float positionY, int attack, int defense, final String name, final int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, final TemplateScreen screen) {
-        super(positionX, positionY, attack, defense, name, health, region, actionMenu, moveLimit, screen);
+    public Enemy(float positionX, float positionY, int attack, int defense, final String name, final int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, final Map map) {
+        super(positionX, positionY, attack, defense, name, health, region, moveLimit, map);
 
         this.showingInfo = false;
 
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
-                if (screen.game.turnMessage.isVisible()){
-                    screen.game.turnMessage.setVisible(false);
+                if (map.game.turnMessage.isVisible()){
+                    map.game.turnMessage.setVisible(false);
                 }
 
-                if (screen.game.activeTurn == Enums.Turn.PLAYER){
+                if (map.game.activeTurn == Enums.Turn.PLAYER){
                     //Issue #1 solved
                     if (actionMenu.getCalledBy() == null || (actionMenu.getCalledBy().getState() != Enums.UnitState.MOVING && actionMenu.getCalledBy().getState() != Enums.UnitState.ATTACKING)) {
                         if (!showingInfo){
@@ -50,7 +50,7 @@ public class Enemy extends Unit {
 
                     if (actionMenu.getCalledBy().getState() == Enums.UnitState.ATTACKING){
                         if (actionMenu.getCalledBy().isAdjacent(getThis())){
-                            screen.game.timer.scheduleTask(new Timer.Task() {
+                            map.game.timer.scheduleTask(new Timer.Task() {
                                 @Override
                                 public void run() {
                                     setStatsAfterAttack(actionMenu.getCalledBy(), getThis());
@@ -79,9 +79,9 @@ public class Enemy extends Unit {
         } else {
             //If the enemy can't attack, it has to move
             Vector2 positionToMove = selectMove();
-            positionToMove = getScreen().getTextureTools().tileFinder((int) positionToMove.x, (int) positionToMove.y);
+            positionToMove = getMap().getTextureTools().tileFinder((int) positionToMove.x, (int) positionToMove.y);
             addAction(Actions.moveTo(positionToMove.x, positionToMove.y, 2));
-            getScreen().clearHighlightedTiles(getThis());
+            getMap().clearHighlightedTiles(getThis());
             setState(Enums.UnitState.MOVED);
             //Verify if I can attack
             heroesICanAttack = canAttack(positionToMove);
@@ -116,7 +116,7 @@ public class Enemy extends Unit {
 
     private void attackHero (final Hero hero){
 
-        getScreen().game.timer.scheduleTask(new Timer.Task() {
+        getMap().game.timer.scheduleTask(new Timer.Task() {
             @Override
             public void run() {
                 setStatsAfterAttack(getThis(), hero);
@@ -133,7 +133,7 @@ public class Enemy extends Unit {
         heroToPursuePosition = findHeroToPursue();
 
         //Find the positions I can get
-        getScreen().highlightTilesToMove(this);
+        getMap().highlightTilesToMove(this);
 
         //Find the best nearest position to the hero I have to pursue
         Vector2 auxiliarVector = new Vector2();
@@ -161,7 +161,7 @@ public class Enemy extends Unit {
         //Hero to compare defense
         Hero auxiliarHero = new Hero(1000);
 
-        for (Hero hero : this.getScreen().getHeroes()){
+        for (Hero hero : this.getMap().getHeroes()){
             //If I can kill it, I attack it
             if ((this.getAttack() - hero.getDefense()) > hero.getHealth()){
                 return new Vector2(hero.getX(), hero.getY());
@@ -184,12 +184,12 @@ public class Enemy extends Unit {
 
         this.showingInfo = showingInfo;
         if (!showingInfo){
-            getScreen().clearHighlightedTiles(this);
-            getScreen().game.information.setVisible(false);
+            getMap().clearHighlightedTiles(this);
+            getMap().game.information.setVisible(false);
         } else {
-            getScreen().highlightTilesToMove(getThis());
-            getScreen().game.information.setCalledBy(getThis());
-            getScreen().game.information.setVisible(true);
+            getMap().highlightTilesToMove(getThis());
+            getMap().game.information.setCalledBy(getThis());
+            getMap().game.information.setVisible(true);
         }
 
     }

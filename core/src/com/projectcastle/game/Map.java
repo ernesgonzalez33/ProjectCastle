@@ -1,11 +1,17 @@
 package com.projectcastle.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
@@ -17,6 +23,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.entities.Enemy;
 import com.projectcastle.game.entities.Hero;
 import com.projectcastle.game.entities.Unit;
+import com.projectcastle.game.gameplay.InputProcessorHelp;
 import com.projectcastle.game.screens.GameOverScreen;
 import com.projectcastle.game.util.Assets;
 import com.projectcastle.game.util.Constants;
@@ -25,7 +32,7 @@ import com.projectcastle.game.util.TextureTools;
 
 import java.util.ArrayList;
 
-public class Map {
+public class Map implements InputProcessor {
 
     public static final String TAG = Map.class.getName();
     private TiledMap tiledMap;
@@ -40,6 +47,10 @@ public class Map {
     public OrthographicCamera camera;
     public ShapeRenderer shapeRenderer;
     public ProjectCastleGame game;
+    TiledMapTileLayer selectedTileLayer;
+    TiledMapTileSet selectedTileSet;
+    TextureRegion selectedSpriteRegion;
+    InputProcessorHelp inputProcessorHelp;
 
 
     public Map(int mapID, final ProjectCastleGame game){
@@ -61,6 +72,23 @@ public class Map {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, Constants.UNIT_SCALE);
         shapeRenderer = new ShapeRenderer();
         this.game = game;
+
+        stage.addActor(game.actionMenu);
+        stage.addActor(game.information);
+        stage.addActor(game.turnMessage);
+
+        //Input processors
+        InputMultiplexer inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(stage);
+        inputMultiplexer.addProcessor(this);
+        Gdx.input.setInputProcessor(inputMultiplexer);
+        inputProcessorHelp = new InputProcessorHelp(this.game);
+
+        // Setting the selected layer
+        selectedTileLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Selected");
+        selectedTileSet = tiledMap.getTileSets().getTileSet("SelectedSprite");
+        selectedTileLayer.setOpacity(0.6f);
+        selectedSpriteRegion = Assets.instance.selectedAssets.selectedRegion;
 
     }
 
@@ -113,8 +141,6 @@ public class Map {
 
     private void initializeDebugMap(){
 
-
-
         // Creating the characters
         Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
         Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
@@ -144,10 +170,10 @@ public class Map {
 
         for (Vector2 position:calledBy.getCanMovePositions()) {
             TiledMapTileLayer.Cell selectedCell = new TiledMapTileLayer.Cell();
-            selectedCell.setTile(calledBy.getScreen().selectedTileSet.getTile(Constants.SELECTED_TILE_ID));
-            StaticTiledMapTile selectedTile = new StaticTiledMapTile(calledBy.getScreen().selectedSpriteRegion);
+            selectedCell.setTile(calledBy.getMap().selectedTileSet.getTile(Constants.SELECTED_TILE_ID));
+            StaticTiledMapTile selectedTile = new StaticTiledMapTile(calledBy.getMap().selectedSpriteRegion);
             selectedCell.setTile(selectedTile);
-            calledBy.getScreen().selectedTileLayer.setCell((int) position.x, (int) position.y, selectedCell);
+            calledBy.getMap().selectedTileLayer.setCell((int) position.x, (int) position.y, selectedCell);
         }
 
     }
@@ -346,5 +372,48 @@ public class Map {
 
     public void setGame(ProjectCastleGame game) {
         this.game = game;
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (game.activeTurn == Enums.Turn.PLAYER)
+            return inputProcessorHelp.MapTouchDown(this, screenX, screenY, pointer, button);
+        else
+            return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
     }
 }
