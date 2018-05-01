@@ -7,7 +7,6 @@ package com.projectcastle.game.util;
 
 public class Constants {
 
-    public static final String MAP_ERROR_MESSAGE = "Could not load map";
     public static final String TEST_MAP = "Maps/TestMap3.tmx";
     public static final float UNIT_SCALE = 1;
     public static final int WIDTH = 640;
@@ -20,7 +19,7 @@ public class Constants {
     public static final int TILE_SIZE = 32;
     public static final int CHARACTER_SIZE = 16;
     public static final int CHARACTER_SCALE = 2;
-    public static final String FLAT_SKIN = "skin.json";
+    public static final String FLAT_SKIN = "UI/skin.json";
     public static final float ACTION_MENU_WIDTH = 70;
     public static final float ACTION_MENU_HEIGHT = 70;
     public static final float ACTION_MENU_BUTTON_WIDTH = 45;

@@ -21,7 +21,6 @@ public class ProjectCastleGame extends Game {
 
 	public FPSLogger fpsLogger;
 	public SpriteBatch batch;
-	public OrthogonalTiledMapRenderer tiledMapRenderer;
 	public AssetManager manager;
 	public ActionMenu actionMenu;
 	public TurnMessage turnMessage;

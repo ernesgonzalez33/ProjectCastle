@@ -45,7 +45,7 @@ public class MainMenuScreen implements Screen {
         title.setBounds(title.getX(), title.getY(), Constants.TITLE_WIDTH, Constants.TITLE_HEIGHT);
 
         //Setting the play button
-        play = new TextButton("Play the game", game.skin);
+        play = new TextButton("Play the game!", game.skin);
         play.setPosition((Constants.WIDTH / 2) - Constants.PLAY_OFFSET_X, (Constants.HEIGHT / 2) - Constants.PLAY_OFFSET_Y - 100);
         play.setBounds(play.getX(), play.getY(), Constants.PLAY_WIDTH, Constants.PLAY_HEIGHT);
 
@@ -57,7 +57,7 @@ public class MainMenuScreen implements Screen {
         play.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.setScreen(new TestMapScreen(game));
+                game.setScreen(new GameplayScreen(game));
             }
         });
 

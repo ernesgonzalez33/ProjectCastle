@@ -1,7 +1,9 @@
 package com.projectcastle.game;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.SnapshotArray;
@@ -20,8 +22,9 @@ public class Map extends TiledMap {
     SnapshotArray<Enemy> enemies;
     SnapshotArray<Hero> heroes;
     TextureTools textureTools;
-    Stage stage;
-    Viewport viewport;
+    public Stage stage;
+    public Viewport viewport;
+    public OrthogonalTiledMapRenderer tiledMapRenderer;
 
 
     public Map(){
@@ -34,6 +37,7 @@ public class Map extends TiledMap {
         stage = new Stage();
         textureTools = new TextureTools();
         viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT);
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(this, Constants.UNIT_SCALE);
 
     }
 
@@ -51,6 +55,9 @@ public class Map extends TiledMap {
         batch.begin();
 
         //TODO: Renderizar el mapa
+        //Rendering map
+        tiledMapRenderer.setView((OrthographicCamera) viewport.getCamera());
+        tiledMapRenderer.render();
 
         batch.end();
 

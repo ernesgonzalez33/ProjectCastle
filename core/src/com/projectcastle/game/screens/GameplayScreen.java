@@ -3,11 +3,13 @@ package com.projectcastle.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.projectcastle.game.Map;
 import com.projectcastle.game.ProjectCastleGame;
+import com.projectcastle.game.util.Assets;
 import com.projectcastle.game.util.Constants;
 
 public class GameplayScreen implements InputProcessor, Screen {
@@ -25,6 +27,16 @@ public class GameplayScreen implements InputProcessor, Screen {
         this.batch = game.batch;
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
+
+        Assets.instance.init(game.manager);
+
+        startNewMap();
+
+    }
+
+    private void startNewMap(){
+
+        map = Map.debugMap();
 
     }
 
@@ -71,6 +83,7 @@ public class GameplayScreen implements InputProcessor, Screen {
     @Override
     public void show() {
 
+
     }
 
     @Override
@@ -82,10 +95,6 @@ public class GameplayScreen implements InputProcessor, Screen {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
 
-        //TODO: Esto irá al mapa
-        game.tiledMapRenderer.setView(camera);
-        game.tiledMapRenderer.render();
-
         map.update(delta);
 
         map.render(game.batch);
@@ -93,7 +102,12 @@ public class GameplayScreen implements InputProcessor, Screen {
     }
 
     @Override
-    public void resize(int width, int height) {}
+    public void resize(int width, int height) {
+
+        map.viewport.update(width, height);
+        map.stage.getViewport().update(width, height);
+
+    }
 
     @Override
     public void pause() {
@@ -113,7 +127,7 @@ public class GameplayScreen implements InputProcessor, Screen {
     @Override
     public void dispose() {
 
-        map.dispose();
+        Assets.instance.dispose();
 
     }
 }

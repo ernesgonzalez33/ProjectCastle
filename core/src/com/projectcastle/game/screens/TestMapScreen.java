@@ -54,7 +54,7 @@ public class TestMapScreen extends TemplateScreen implements InputProcessor {
         // once the asset manager is done loading
         map = game.manager.get(Constants.TEST_MAP);
 //        map.getLayers().get("Roof").setOpacity(0.9f); //TODO: (opcional) transparentar ciertas capas para que se vean los personajes
-        game.tiledMapRenderer = new OrthogonalTiledMapRenderer(map, Constants.UNIT_SCALE);
+//        game.tiledMapRenderer = new OrthogonalTiledMapRenderer(map, Constants.UNIT_SCALE);
 
         // Treating the textures
         characters = game.manager.get(Constants.CHARACTERS_ASSET);
@@ -121,8 +121,8 @@ public class TestMapScreen extends TemplateScreen implements InputProcessor {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
-        game.tiledMapRenderer.setView(camera);
-        game.tiledMapRenderer.render();
+//        game.tiledMapRenderer.setView(camera);
+//        game.tiledMapRenderer.render();
         stage.act(delta); //In the case something need to move
 
         game.batch.begin();
