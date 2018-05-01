@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.Timer;
+import com.projectcastle.game.Map;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.screens.DamageOverlay;
 import com.projectcastle.game.screens.TemplateScreen;
@@ -33,10 +34,10 @@ public class Unit extends Actor {
     private TextureRegion region;
     private Enums.UnitState state;
     private int moveLimit;
-    private TemplateScreen screen;
+    private Map map;
     private ArrayList<Vector2> canMovePositions;
 
-    Unit(float positionX, float positionY, int attack, int defense, String name, final int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, TemplateScreen screen) {
+    Unit(float positionX, float positionY, int attack, int defense, String name, final int health, TextureRegion region, int moveLimit, Map map) {
 
         this.setPosition(positionX, positionY);
         this.setBounds(this.getX(), this.getY(), region.getRegionWidth(), region.getRegionHeight());
@@ -50,7 +51,7 @@ public class Unit extends Actor {
         this.setRotation(0);
         this.setState(Enums.UnitState.IDLE);
         this.moveLimit = moveLimit;
-        this.screen = screen;
+        this.map = map;
         this.canMovePositions = new ArrayList<Vector2>();
 
     }
@@ -75,9 +76,9 @@ public class Unit extends Actor {
         int damage = attackingUnit.getAttack() - defendingUnit.getDefense();
         int newHealth = defendingUnit.getHealth() - damage;
         defendingUnit.setHealth(newHealth);
-        final DamageOverlay damageOverlay = new DamageOverlay("" + damage, screen.game.skin, defendingUnit.getX(), defendingUnit.getY());
-        screen.getStage().addActor(damageOverlay);
-        screen.game.timer.scheduleTask(new Timer.Task() {
+        final DamageOverlay damageOverlay = new DamageOverlay("" + damage, map.game.skin, defendingUnit.getX(), defendingUnit.getY());
+        map.getStage().addActor(damageOverlay);
+        map.game.timer.scheduleTask(new Timer.Task() {
             @Override
             public void run() {
                 damageOverlay.remove();
@@ -86,12 +87,12 @@ public class Unit extends Actor {
         if (defendingUnit.getHealth() < 1){
             defendingUnit.remove();
             if (this.getClass().getName().equals(Constants.ENEMY_CLASS_NAME)){
-                screen.getEnemies().removeValue((Enemy) defendingUnit, true);
-                if (screen.getEnemies().size == 0){
-                    screen.game.setScreen(new VictoryScreen(screen.game));
+                map.getEnemies().removeValue((Enemy) defendingUnit, true);
+                if (map.getEnemies().size == 0){
+                    map.game.setScreen(new VictoryScreen(map.game));
                 }
             } else {
-                getScreen().getHeroes().removeValue((Hero) defendingUnit, true);
+                getMap().getHeroes().removeValue((Hero) defendingUnit, true);
             }
 
         }
@@ -154,7 +155,7 @@ public class Unit extends Actor {
 
         this.state = state;
         if (state == Enums.UnitState.ATTACKED)
-            screen.verifyTurnChange();
+            map.verifyTurnChange();
 
     }
 
@@ -172,12 +173,12 @@ public class Unit extends Actor {
         this.region = region;
     }
 
-    public TemplateScreen getScreen() {
-        return screen;
+    public Map getMap() {
+        return map;
     }
 
-    public void setScreen(TemplateScreen screen) {
-        this.screen = screen;
+    public void setMap(Map map) {
+        this.map = map;
     }
 
     public ArrayList<Vector2> getCanMovePositions() {
@@ -253,7 +254,7 @@ public class Unit extends Actor {
 
         SnapshotArray<Hero> heroesICanAttack = new SnapshotArray<Hero>();
 
-        for (Hero hero:screen.getHeroes()){
+        for (Hero hero:map.getHeroes()){
             if (isAdjacent(position, hero)){
                 heroesICanAttack.add(hero);
             }

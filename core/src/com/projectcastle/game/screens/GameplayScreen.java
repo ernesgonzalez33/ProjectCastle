@@ -3,21 +3,17 @@ package com.projectcastle.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.projectcastle.game.Map;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.util.Assets;
-import com.projectcastle.game.util.Constants;
 
 public class GameplayScreen implements InputProcessor, Screen {
 
     ProjectCastleGame game;
     SpriteBatch batch;
     private Map map;
-    OrthographicCamera camera;
 
 
     public GameplayScreen(final ProjectCastleGame game){
@@ -25,8 +21,6 @@ public class GameplayScreen implements InputProcessor, Screen {
         //Initializing
         this.game = game;
         this.batch = game.batch;
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
 
         Assets.instance.init(game.manager);
 
@@ -36,7 +30,7 @@ public class GameplayScreen implements InputProcessor, Screen {
 
     private void startNewMap(){
 
-        map = Map.debugMap();
+        map = Map.debugMap(this.game);
 
     }
 
@@ -92,8 +86,8 @@ public class GameplayScreen implements InputProcessor, Screen {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        camera.update();
-        batch.setProjectionMatrix(camera.combined);
+        map.camera.update();
+        batch.setProjectionMatrix(map.camera.combined);
 
         map.update(delta);
 
