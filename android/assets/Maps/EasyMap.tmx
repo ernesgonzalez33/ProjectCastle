@@ -227,12 +227,54 @@
 </data>
  </layer>
  <objectgroup name="Characters">
-  <object id="14" name="Airmanagild" gid="2" x="160" y="512" width="32" height="32"/>
-  <object id="15" name="Eirika" gid="8" x="224" y="512" width="32" height="32"/>
-  <object id="16" name="Christian" gid="5" x="288" y="512" width="32" height="32"/>
-  <object id="17" name="Skeleton3" gid="11" x="192" y="256" width="32" height="32"/>
-  <object id="18" name="Skeleton2" gid="11" x="288" y="192" width="32" height="32"/>
-  <object id="19" name="Skeleton1" gid="11" x="64" y="192" width="32" height="32"/>
-  <object id="20" name="Lime" gid="50" x="416" y="288" width="32" height="32"/>
+  <object id="14" name="Airmanagild" gid="2" x="160" y="512" width="32" height="32">
+   <properties>
+    <property name="attack" type="int" value="10"/>
+    <property name="defense" type="int" value="2"/>
+    <property name="health" type="int" value="7"/>
+   </properties>
+  </object>
+  <object id="15" name="Eirika" gid="8" x="224" y="512" width="32" height="32">
+   <properties>
+    <property name="attack" type="int" value="8"/>
+    <property name="defense" type="int" value="4"/>
+    <property name="health" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="16" name="Christian" gid="5" x="288" y="512" width="32" height="32">
+   <properties>
+    <property name="attack" type="int" value="7"/>
+    <property name="defense" type="int" value="3"/>
+    <property name="health" type="int" value="9"/>
+   </properties>
+  </object>
+  <object id="17" name="Skeleton3" type="skeleton" gid="11" x="192" y="256" width="32" height="32">
+   <properties>
+    <property name="attack" type="int" value="7"/>
+    <property name="defense" type="int" value="1"/>
+    <property name="health" type="int" value="5"/>
+   </properties>
+  </object>
+  <object id="18" name="Skeleton2" type="skeleton" gid="11" x="288" y="192" width="32" height="32">
+   <properties>
+    <property name="attack" type="int" value="7"/>
+    <property name="defense" type="int" value="1"/>
+    <property name="health" type="int" value="5"/>
+   </properties>
+  </object>
+  <object id="19" name="Skeleton1" type="skeleton" gid="11" x="64" y="192" width="32" height="32">
+   <properties>
+    <property name="attack" type="int" value="7"/>
+    <property name="defense" type="int" value="1"/>
+    <property name="health" type="int" value="5"/>
+   </properties>
+  </object>
+  <object id="20" name="Lime" type="lime" gid="50" x="416" y="288" width="32" height="32">
+   <properties>
+    <property name="attack" type="int" value="5"/>
+    <property name="defense" type="int" value="5"/>
+    <property name="health" type="int" value="6"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
