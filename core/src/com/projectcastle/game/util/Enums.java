@@ -14,4 +14,8 @@ public class Enums {
     public enum Turn {
         PLAYER, ENEMY
     }
+
+    public enum Level {
+        EASY, MEDIUM, HARD
+    }
 }

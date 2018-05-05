@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.projectcastle.game.Map;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.util.Assets;
+import com.projectcastle.game.util.Constants;
+import com.projectcastle.game.util.Enums;
 
 public class GameplayScreen implements InputProcessor, Screen {
 
@@ -16,7 +18,7 @@ public class GameplayScreen implements InputProcessor, Screen {
     private Map map;
 
 
-    public GameplayScreen(final ProjectCastleGame game){
+    public GameplayScreen(final ProjectCastleGame game, Enums.Level level){
 
         //Initializing
         this.game = game;
@@ -24,13 +26,17 @@ public class GameplayScreen implements InputProcessor, Screen {
 
         Assets.instance.init(game.manager);
 
-        startNewMap();
+        startNewMap(level);
 
     }
 
-    private void startNewMap(){
+    private void startNewMap(Enums.Level level){
 
-        map = Map.debugMap(this.game);
+        if (level == Enums.Level.EASY){
+            map = new Map(Constants.EASY_MAP_ID, this.game);
+        }
+
+        //map = Map.debugMap(this.game);
 
     }
 

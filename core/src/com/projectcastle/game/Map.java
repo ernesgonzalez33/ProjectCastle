@@ -5,7 +5,6 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -68,6 +67,8 @@ public class Map implements InputProcessor {
 
         if (mapID == 0){
             tiledMap = Assets.instance.mapAssets.testMap;
+        } else if (mapID == Constants.EASY_MAP_ID){
+            tiledMap = Assets.instance.mapAssets.easyMap;
         }
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, Constants.UNIT_SCALE);
         shapeRenderer = new ShapeRenderer();

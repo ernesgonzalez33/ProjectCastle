@@ -11,7 +11,6 @@ import java.util.List;
 
 public class Constants {
 
-    public static final String TEST_MAP = "Maps/TestMap3.tmx";
     public static final float UNIT_SCALE = 1;
     public static final int WIDTH = 640;
     public static final int HEIGHT = 640;
@@ -53,10 +52,10 @@ public class Constants {
     public static final int TITLE_OFFSET_Y = 35;
 
     //Play button
-    public static final int PLAY_WIDTH = 100;
-    public static final int PLAY_HEIGHT = 30;
-    public static final int PLAY_OFFSET_X = 50;
-    public static final int PLAY_OFFSET_Y = 15;
+    public static final int EASY_WIDTH = 100;
+    public static final int EASY_HEIGHT = 30;
+    public static final int EASY_OFFSET_X = 50;
+    public static final int EASY_OFFSET_Y = 15;
 
     //Game over
     public static final int GAME_OVER_WIDTH = 170;
@@ -84,4 +83,10 @@ public class Constants {
     public static final List<Integer> FORBIDDEN_ID_CELLS =
             Collections.unmodifiableList(Arrays.asList(0,1,2,21,23,42,43,44,70,126,127,128,147,149,168,169,170,171,172));
 
+    //Maps
+    public static final int EASY_MAP_ID = 1;
+    public static final int MEDIUM_MAP_ID = 2;
+    public static final int HARD_MAP_ID = 3;
+    public static final String TEST_MAP = "Maps/TestMap3.tmx";
+    public static final String EASY_MAP = "Maps/EasyMap.tmx";
 }

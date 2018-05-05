@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.util.Constants;
+import com.projectcastle.game.util.Enums;
 
 public class MainMenuScreen implements Screen {
 
@@ -23,7 +24,7 @@ public class MainMenuScreen implements Screen {
     Viewport viewport;
     Stage stage;
     Label title;
-    TextButton play;
+    TextButton easy;
 
     public MainMenuScreen (final ProjectCastleGame game){
 
@@ -44,20 +45,20 @@ public class MainMenuScreen implements Screen {
         title.setPosition((Constants.WIDTH / 2) - Constants.TITLE_OFFSET_X, (Constants.HEIGHT / 2) - Constants.TITLE_OFFSET_Y + 100);
         title.setBounds(title.getX(), title.getY(), Constants.TITLE_WIDTH, Constants.TITLE_HEIGHT);
 
-        //Setting the play button
-        play = new TextButton("Play the game!", game.skin);
-        play.setPosition((Constants.WIDTH / 2) - Constants.PLAY_OFFSET_X, (Constants.HEIGHT / 2) - Constants.PLAY_OFFSET_Y - 100);
-        play.setBounds(play.getX(), play.getY(), Constants.PLAY_WIDTH, Constants.PLAY_HEIGHT);
+        //Setting the easy button
+        easy = new TextButton("Easy", game.skin);
+        easy.setPosition((Constants.WIDTH / 2) - Constants.EASY_OFFSET_X, (Constants.HEIGHT / 2) - Constants.EASY_OFFSET_Y - 100);
+        easy.setBounds(easy.getX(), easy.getY(), Constants.EASY_WIDTH, Constants.EASY_HEIGHT);
 
         //Adding the actors to the stage
         stage.addActor(title);
-        stage.addActor(play);
+        stage.addActor(easy);
 
         //Setting the listener to the button
-        play.addListener(new ChangeListener() {
+        easy.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.setScreen(new GameplayScreen(game));
+                game.setScreen(new GameplayScreen(game, Enums.Level.EASY));
             }
         });
 
