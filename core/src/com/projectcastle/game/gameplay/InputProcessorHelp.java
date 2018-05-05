@@ -57,7 +57,7 @@ public class InputProcessorHelp {
                 Vector2 cellPosition = new Vector2(position.x / Constants.TILE_SIZE, position.y / Constants.TILE_SIZE);
                 //Verifying move limit
                 if (game.actionMenu.getCalledBy().getCanMovePositions().contains(cellPosition)){
-                    game.actionMenu.getCalledBy().addAction(Actions.moveTo(position.x, position.y, 2)); //TODO: (opcional) Que los personajes no se muevan en diagonal
+                    game.actionMenu.getCalledBy().addAction(Actions.moveTo(position.x, position.y, 2));
                 }
                 map.clearHighlightedTiles(game.actionMenu.getCalledBy());
                 game.actionMenu.getCalledBy().setState(Enums.UnitState.MOVED);

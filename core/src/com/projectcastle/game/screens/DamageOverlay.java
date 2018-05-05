@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.projectcastle.game.util.Constants;
 
-//TODO: Transform this class into a Label
 public class DamageOverlay extends Label {
 
     private final static String TAG = DamageOverlay.class.getName();

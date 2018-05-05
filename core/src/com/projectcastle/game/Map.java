@@ -108,19 +108,39 @@ public class Map implements InputProcessor {
 
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
-        stage.draw();
 
         batch.end();
 
-        //TODO: Renderizar de forma correcta las líneas
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Point);
         shapeRenderer.setColor(Color.DARK_GRAY);
-        for (int ii = 1; ii < 20; ii++){
-            shapeRenderer.line(0, ii * 32, 640, ii * 32);
-            shapeRenderer.line(ii * 32, 0, ii * 32, 640);
+        //Horizontal lines
+        int ii = 0;
+        while (ii < Constants.HEIGHT){
+            int jj = 0;
+            while (jj < Constants.WIDTH){
+                shapeRenderer.point(jj, ii, 0);
+                jj += 2;
+            }
+            ii += Constants.TILE_SIZE;
+        }
+        //Vertical lines
+        ii = 0;
+        while (ii < Constants.WIDTH){
+            int jj = 0;
+            while (jj < Constants.HEIGHT){
+                shapeRenderer.point(ii, jj, 0);
+                jj += 2;
+            }
+            ii += Constants.TILE_SIZE;
         }
         shapeRenderer.end();
 
+        //Drawing stage after the lines
+        batch.begin();
+
+        stage.draw();
+
+        batch.end();
 
     }
 
