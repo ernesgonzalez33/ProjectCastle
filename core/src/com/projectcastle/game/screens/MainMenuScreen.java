@@ -24,6 +24,7 @@ public class MainMenuScreen implements Screen {
     Viewport viewport;
     Stage stage;
     Label title;
+    TextButton debug;
     TextButton easy;
 
     public MainMenuScreen (final ProjectCastleGame game){
@@ -45,6 +46,11 @@ public class MainMenuScreen implements Screen {
         title.setPosition((Constants.WIDTH / 2) - Constants.TITLE_OFFSET_X, (Constants.HEIGHT / 2) - Constants.TITLE_OFFSET_Y + 100);
         title.setBounds(title.getX(), title.getY(), Constants.TITLE_WIDTH, Constants.TITLE_HEIGHT);
 
+        //Setting the debug button
+        debug = new TextButton("Debug", game.skin);
+        debug.setPosition((Constants.WIDTH / 2) - Constants.EASY_OFFSET_X, (Constants.HEIGHT / 2) - Constants.EASY_OFFSET_Y - 50);
+        debug.setBounds(debug.getX(), debug.getY(), Constants.EASY_WIDTH, Constants.EASY_HEIGHT);
+
         //Setting the easy button
         easy = new TextButton("Easy", game.skin);
         easy.setPosition((Constants.WIDTH / 2) - Constants.EASY_OFFSET_X, (Constants.HEIGHT / 2) - Constants.EASY_OFFSET_Y - 100);
@@ -53,12 +59,20 @@ public class MainMenuScreen implements Screen {
         //Adding the actors to the stage
         stage.addActor(title);
         stage.addActor(easy);
+        stage.addActor(debug);
 
-        //Setting the listener to the button
+        //Setting the listeners to the buttons
         easy.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(new GameplayScreen(game, Enums.Level.EASY));
+            }
+        });
+
+        debug.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(new GameplayScreen(game, Enums.Level.DEBUG));
             }
         });
 

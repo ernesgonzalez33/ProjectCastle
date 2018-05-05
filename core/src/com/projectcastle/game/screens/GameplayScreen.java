@@ -32,11 +32,12 @@ public class GameplayScreen implements InputProcessor, Screen {
 
     private void startNewMap(Enums.Level level){
 
+        if (level == Enums.Level.DEBUG)
+            map = Map.debugMap(this.game);
+
         if (level == Enums.Level.EASY){
             map = new Map(Constants.EASY_MAP_ID, this.game);
         }
-
-        //map = Map.debugMap(this.game);
 
     }
 

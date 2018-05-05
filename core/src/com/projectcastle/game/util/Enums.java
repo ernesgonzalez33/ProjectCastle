@@ -16,6 +16,6 @@ public class Enums {
     }
 
     public enum Level {
-        EASY, MEDIUM, HARD
+        DEBUG, EASY, MEDIUM, HARD
     }
 }
