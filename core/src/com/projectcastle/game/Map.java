@@ -166,8 +166,8 @@ public class Map implements InputProcessor {
         Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
         Vector2 positionNumber2 = textureTools.positionConverter(15, 3);
         Vector2 positionTheOne = textureTools.positionConverter(10, 5);
-        Hero number1 = new Hero(positionNumber1.x, positionNumber1.y, 15, 16, "Number1", 11, Assets.instance.unitsAssets.eirikaRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
-        Hero number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, "Number2", 11, Assets.instance.unitsAssets.christianRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
+        Hero number1 = new Hero(positionNumber1.x, positionNumber1.y, 15, 16, Constants.PRINCESS_NAME, 11, Assets.instance.unitsAssets.eirikaRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
+        Hero number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, Constants.PRINCE_NAME, 11, Assets.instance.unitsAssets.christianRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
         Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
 
         //Adding the heroes and enemies to the Stage and their lists
@@ -201,23 +201,15 @@ public class Map implements InputProcessor {
         for (int ii = 0; ii < calledBy.getCanMovePositions().size(); ii++){
             auxCell = groundTileLayer.getCell((int) calledBy.getCanMovePositions().get(ii).x, (int) calledBy.getCanMovePositions().get(ii).y);
 
-            //Debug
-            if (calledBy.getCanMovePositions().get(ii).x == 18 && calledBy.getCanMovePositions().get(ii).y == 2)
-                Gdx.app.log(TAG, "ID is " + auxCell.getTile().getId());
-
             //Removing out-of-map positions
             if (auxCell == null) {
                 positionsToRemove.add(calledBy.getCanMovePositions().get(ii));
             } else {
-                //TODO: arreglar los ids, pueden estar mal
                 //Removing water positions
-                switch (auxCell.getTile().getId()){
-                    case Constants.FIRST_GID_OVERWORLD + Constants.WATER_ID_1: positionsToRemove.add(calledBy.getCanMovePositions().get(ii));
-                        break;
-                    case Constants.FIRST_GID_OVERWORLD + Constants.WATER_ID_2: positionsToRemove.add(calledBy.getCanMovePositions().get(ii));
-                        break;
-                    case Constants.FIRST_GID_OVERWORLD + Constants.WATER_ID_3: positionsToRemove.add(calledBy.getCanMovePositions().get(ii));
-                        break;
+                for (int cont = 0; cont < Constants.FORBIDDEN_ID_CELLS.size(); cont++){
+                    if (auxCell.getTile().getId() == Constants.FIRST_GID_OVERWORLD + Constants.FORBIDDEN_ID_CELLS.get(cont)){
+                        removeNextTiles(calledBy.getCanMovePositions(), positionsToRemove, calledBy.getX() / Constants.TILE_SIZE, calledBy.getY() / Constants.TILE_SIZE, calledBy.getCanMovePositions().get(ii).x, calledBy.getCanMovePositions().get(ii).y);
+                    }
                 }
             }
         }
@@ -232,6 +224,50 @@ public class Map implements InputProcessor {
             StaticTiledMapTile selectedTile = new StaticTiledMapTile(calledBy.getMap().selectedSpriteRegion);
             selectedCell.setTile(selectedTile);
             calledBy.getMap().selectedTileLayer.setCell((int) position.x, (int) position.y, selectedCell);
+        }
+
+    }
+
+    private void removeNextTiles(ArrayList<Vector2> cells, ArrayList<Vector2> positionsToRemove, float originX, float originY, float x, float y){
+
+        //All tiles after the X
+        if (originX < x){
+            for (int ii = 0; ii < cells.size(); ii++){
+                if (cells.get(ii).y == y){
+                    if (cells.get(ii).x >= x)
+                        positionsToRemove.add(cells.get(ii));
+                }
+            }
+        }
+
+        //All tiles before the X
+        if (originX > x){
+            for (int ii = 0; ii < cells.size(); ii++){
+                if (cells.get(ii).y == y){
+                    if (cells.get(ii).x <= x)
+                        positionsToRemove.add(cells.get(ii));
+                }
+            }
+        }
+
+        //All tiles after the Y
+        if (originY < y){
+            for (int ii = 0; ii < cells.size(); ii++){
+                if (cells.get(ii).x == x){
+                    if (cells.get(ii).y >= y)
+                        positionsToRemove.add(cells.get(ii));
+                }
+            }
+        }
+
+        //All tiles before the Y
+        if (originY > y){
+            for (int ii = 0; ii < cells.size(); ii++){
+                if (cells.get(ii).x == x){
+                    if (cells.get(ii).y <= y)
+                        positionsToRemove.add(cells.get(ii));
+                }
+            }
         }
 
     }

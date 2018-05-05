@@ -1,5 +1,9 @@
 package com.projectcastle.game.util;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by Ernesto Gonzalez on 12/5/17.
  * Kind of class: ${PACKAGE_NAME}
@@ -11,7 +15,7 @@ public class Constants {
     public static final float UNIT_SCALE = 1;
     public static final int WIDTH = 640;
     public static final int HEIGHT = 640;
-    public static final String PRINCESS_NAME = "Erika";
+    public static final String PRINCESS_NAME = "Eirika";
     public static final String PRINCE_NAME = "Christian";
     public static final String COMMANDER_NAME = "Airmanagild";
     public static final String CHARACTERS_ASSET = "Characters/characters_1.png";
@@ -34,10 +38,6 @@ public class Constants {
     public static final int TURN_MESSAGE_HEIGHT = 70;
     public static final int TURN_MESSAGE_OFFSET_X = 75;
     public static final int TURN_MESSAGE_OFFSET_Y = 35;
-
-    //Information
-    public static final int INFORMATION_WIDTH = 220;
-    public static final int INFORMATION_HEIGHT = 100;
 
     //Other
     public static final String HERO_CLASS_NAME = "com.projectcastle.game.entities.Hero";
@@ -81,8 +81,7 @@ public class Constants {
 
     //Tiled
     public static final int FIRST_GID_OVERWORLD = 97;
-    public static final int WATER_ID_1 = 70;
-    public static final int WATER_ID_2 = 171;
-    public static final int WATER_ID_3 = 172;
+    public static final List<Integer> FORBIDDEN_ID_CELLS =
+            Collections.unmodifiableList(Arrays.asList(0,1,2,21,23,42,43,44,70,126,127,128,147,149,168,169,170,171,172));
 
 }

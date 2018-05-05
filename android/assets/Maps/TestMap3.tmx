@@ -227,12 +227,12 @@
 </data>
  </layer>
  <objectgroup name="Characters">
-  <object id="14" gid="2" x="160" y="512" width="32" height="32"/>
-  <object id="15" gid="8" x="224" y="512" width="32" height="32"/>
-  <object id="16" gid="5" x="288" y="512" width="32" height="32"/>
-  <object id="17" gid="11" x="192" y="256" width="32" height="32"/>
-  <object id="18" gid="11" x="288" y="192" width="32" height="32"/>
-  <object id="19" gid="11" x="64" y="192" width="32" height="32"/>
-  <object id="20" gid="50" x="416" y="288" width="32" height="32"/>
+  <object id="14" name="Airmanagild" gid="2" x="160" y="512" width="32" height="32"/>
+  <object id="15" name="Eirika" gid="8" x="224" y="512" width="32" height="32"/>
+  <object id="16" name="Christian" gid="5" x="288" y="512" width="32" height="32"/>
+  <object id="17" name="Skeleton3" gid="11" x="192" y="256" width="32" height="32"/>
+  <object id="18" name="Skeleton2" gid="11" x="288" y="192" width="32" height="32"/>
+  <object id="19" name="Skeleton1" gid="11" x="64" y="192" width="32" height="32"/>
+  <object id="20" name="Lime" gid="50" x="416" y="288" width="32" height="32"/>
  </objectgroup>
 </map>
