@@ -66,6 +66,7 @@ public class Enemy extends Unit {
 
     }
 
+    //TODO: Mejorar la IA para que no vayan todos a por el mismo
     public void runAI(){
 
         //Actual position of this enemy

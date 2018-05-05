@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
@@ -91,6 +93,9 @@ public class Map implements InputProcessor {
         selectedTileLayer.setOpacity(0.6f);
         selectedSpriteRegion = Assets.instance.selectedAssets.selectedRegion;
 
+        //Initializing the Map Objects
+        initializeMapObjects();
+
     }
 
     public void update (float delta) {
@@ -109,7 +114,6 @@ public class Map implements InputProcessor {
 
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
-        renderMapObjects();
 
         batch.end();
 
@@ -146,9 +150,36 @@ public class Map implements InputProcessor {
 
     }
 
-    private void renderMapObjects(){
+    private void initializeMapObjects(){
 
-        //TODO: Renderizar los personajes del mapa
+        //Get the characters layer
+        MapLayer objectsLayer = tiledMap.getLayers().get("Characters");
+        MapObjects characters = objectsLayer.getObjects();
+
+        //Loop to create the characters
+        for (int ii = 0; ii < characters.getCount(); ii++){
+            if (characters.get(ii).getName().equals(Constants.COMMANDER_NAME)){
+                Hero airmanagild = new Hero((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.airmanagildRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
+                heroes.add(airmanagild);
+                stage.addActor(airmanagild);
+            } else if (characters.get(ii).getName().equals(Constants.PRINCESS_NAME)){
+                Hero eirika = new Hero((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.eirikaRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
+                heroes.add(eirika);
+                stage.addActor(eirika);
+            } else if (characters.get(ii).getName().equals(Constants.PRINCE_NAME)){
+                Hero christian = new Hero((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.christianRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
+                heroes.add(christian);
+                stage.addActor(christian);
+            } else if (characters.get(ii).getProperties().get("type").equals("skeleton")){
+                Enemy auxSkeleton = new Enemy((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
+                enemies.add(auxSkeleton);
+                stage.addActor(auxSkeleton);
+            } else {
+                Enemy auxLime = new Enemy((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.limeRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
+                enemies.add(auxLime);
+                stage.addActor(auxLime);
+            }
+        }
 
     }
 
@@ -179,8 +210,6 @@ public class Map implements InputProcessor {
         Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
 
         //Adding the heroes and enemies to the Stage and their lists
-        enemies = new SnapshotArray<Enemy>();
-        heroes = new SnapshotArray<Hero>();
         enemies.add(theOne);
         heroes.add(number1);
         heroes.add(number2);
