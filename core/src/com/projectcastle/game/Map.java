@@ -109,6 +109,7 @@ public class Map implements InputProcessor {
 
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
+        renderMapObjects();
 
         batch.end();
 
@@ -142,6 +143,12 @@ public class Map implements InputProcessor {
         stage.draw();
 
         batch.end();
+
+    }
+
+    private void renderMapObjects(){
+
+        //TODO: Renderizar los personajes del mapa
 
     }
 
