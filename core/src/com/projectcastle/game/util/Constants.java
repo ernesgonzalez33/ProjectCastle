@@ -79,6 +79,10 @@ public class Constants {
     //DamageOverlay
     public static final float DAMAGE_FONT_SCALE = 1.5f;
 
-
+    //Tiled
+    public static final int FIRST_GID_OVERWORLD = 97;
+    public static final int WATER_ID_1 = 70;
+    public static final int WATER_ID_2 = 171;
+    public static final int WATER_ID_3 = 172;
 
 }

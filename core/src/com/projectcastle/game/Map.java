@@ -164,7 +164,7 @@ public class Map implements InputProcessor {
 
         // Creating the characters
         Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
-        Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
+        Vector2 positionNumber2 = textureTools.positionConverter(15, 3);
         Vector2 positionTheOne = textureTools.positionConverter(10, 5);
         Hero number1 = new Hero(positionNumber1.x, positionNumber1.y, 15, 16, "Number1", 11, Assets.instance.unitsAssets.eirikaRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
         Hero number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, "Number2", 11, Assets.instance.unitsAssets.christianRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
@@ -189,6 +189,43 @@ public class Map implements InputProcessor {
         calledBy.getCanMovePositions().add(initialPosition);
         createCellsList(initialPosition.x, initialPosition.y, tileLimit, calledBy.getCanMovePositions());
 
+        //Removing not valid positions
+
+        //Setting the variables
+        TiledMapTileLayer groundTileLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Ground");
+        TiledMapTileSet overworldTileSet = tiledMap.getTileSets().getTileSet("overworld_1");
+        TiledMapTileLayer.Cell auxCell = new TiledMapTileLayer.Cell();
+        ArrayList<Vector2> positionsToRemove = new ArrayList<Vector2>();
+
+        //Checking the getCanMovePositions
+        for (int ii = 0; ii < calledBy.getCanMovePositions().size(); ii++){
+            auxCell = groundTileLayer.getCell((int) calledBy.getCanMovePositions().get(ii).x, (int) calledBy.getCanMovePositions().get(ii).y);
+
+            //Debug
+            if (calledBy.getCanMovePositions().get(ii).x == 18 && calledBy.getCanMovePositions().get(ii).y == 2)
+                Gdx.app.log(TAG, "ID is " + auxCell.getTile().getId());
+
+            //Removing out-of-map positions
+            if (auxCell == null) {
+                positionsToRemove.add(calledBy.getCanMovePositions().get(ii));
+            } else {
+                //TODO: arreglar los ids, pueden estar mal
+                //Removing water positions
+                switch (auxCell.getTile().getId()){
+                    case Constants.FIRST_GID_OVERWORLD + Constants.WATER_ID_1: positionsToRemove.add(calledBy.getCanMovePositions().get(ii));
+                        break;
+                    case Constants.FIRST_GID_OVERWORLD + Constants.WATER_ID_2: positionsToRemove.add(calledBy.getCanMovePositions().get(ii));
+                        break;
+                    case Constants.FIRST_GID_OVERWORLD + Constants.WATER_ID_3: positionsToRemove.add(calledBy.getCanMovePositions().get(ii));
+                        break;
+                }
+            }
+        }
+
+        //Actually remove the positions
+        calledBy.getCanMovePositions().removeAll(positionsToRemove);
+
+        //Highlight tiles
         for (Vector2 position:calledBy.getCanMovePositions()) {
             TiledMapTileLayer.Cell selectedCell = new TiledMapTileLayer.Cell();
             selectedCell.setTile(calledBy.getMap().selectedTileSet.getTile(Constants.SELECTED_TILE_ID));
