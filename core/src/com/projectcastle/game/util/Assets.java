@@ -39,12 +39,16 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load(Constants.TEST_MAP, TiledMap.class);
         assetManager.load(Constants.EASY_MAP, TiledMap.class);
+        assetManager.load(Constants.MEDIUM_MAP, TiledMap.class);
+        assetManager.load(Constants.HARD_MAP, TiledMap.class);
         assetManager.finishLoading();
 
         //Retrieving maps
         ArrayList<TiledMap> maps = new ArrayList<TiledMap>();
         maps.add(assetManager.get(Constants.TEST_MAP, TiledMap.class));
         maps.add(assetManager.get(Constants.EASY_MAP, TiledMap.class));
+        maps.add(assetManager.get(Constants.MEDIUM_MAP, TiledMap.class));
+        maps.add(assetManager.get(Constants.HARD_MAP, TiledMap.class));
 
         //Splitting sprites
         TextureRegion[][] characters;
@@ -74,11 +78,15 @@ public class Assets implements Disposable, AssetErrorListener {
 
         public final TiledMap testMap;
         public final TiledMap easyMap;
+        public final TiledMap mediumMap;
+        public final TiledMap hardMap;
 
         public MapAssets(ArrayList<TiledMap> maps){
 
             testMap = maps.get(0);
             easyMap = maps.get(1);
+            mediumMap = maps.get(2);
+            hardMap = maps.get(3);
 
         }
 

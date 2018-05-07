@@ -39,6 +39,14 @@ public class GameplayScreen implements InputProcessor, Screen {
             map = new Map(Constants.EASY_MAP_ID, this.game);
         }
 
+        if (level == Enums.Level.MEDIUM){
+            map = new Map(Constants.MEDIUM_MAP_ID, this.game);
+        }
+
+        if (level == Enums.Level.HARD){
+            map = new Map(Constants.HARD_MAP_ID, this.game);
+        }
+
     }
 
     @Override

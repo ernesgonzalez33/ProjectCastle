@@ -67,11 +67,17 @@ public class Map implements InputProcessor {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
 
-        if (mapID == 0){
-            tiledMap = Assets.instance.mapAssets.testMap;
-        } else if (mapID == Constants.EASY_MAP_ID){
-            tiledMap = Assets.instance.mapAssets.easyMap;
+        //Tiled Map
+        switch (mapID){
+            case 0: tiledMap = Assets.instance.mapAssets.testMap;
+            break;
+            case Constants.EASY_MAP_ID: tiledMap = Assets.instance.mapAssets.easyMap;
+            break;
+            case Constants.MEDIUM_MAP_ID: tiledMap = Assets.instance.mapAssets.mediumMap;
+            break;
+            case Constants.HARD_MAP_ID: tiledMap = Assets.instance.mapAssets.hardMap;
         }
+
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, Constants.UNIT_SCALE);
         shapeRenderer = new ShapeRenderer();
         this.game = game;

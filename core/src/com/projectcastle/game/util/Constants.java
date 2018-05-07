@@ -51,11 +51,11 @@ public class Constants {
     public static final int TITLE_OFFSET_X = 85;
     public static final int TITLE_OFFSET_Y = 35;
 
-    //Play button
-    public static final int EASY_WIDTH = 100;
-    public static final int EASY_HEIGHT = 30;
-    public static final int EASY_OFFSET_X = 50;
-    public static final int EASY_OFFSET_Y = 15;
+    //Difficulty buttons
+    public static final int DIFFICULTY_WIDTH = 100;
+    public static final int DIFFICULTY_HEIGHT = 30;
+    public static final int DIFFICULTY_OFFSET_X = 50;
+    public static final int DIFFICULTY_OFFSET_Y = 15;
 
     //Game over
     public static final int GAME_OVER_WIDTH = 170;
@@ -89,4 +89,6 @@ public class Constants {
     public static final int HARD_MAP_ID = 3;
     public static final String TEST_MAP = "Maps/TestMap3.tmx";
     public static final String EASY_MAP = "Maps/EasyMap.tmx";
+    public static final String MEDIUM_MAP = "Maps/MediumMap.tmx";
+    public static final String HARD_MAP = "Maps/HardMap.tmx";
 }
