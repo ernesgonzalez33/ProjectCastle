@@ -84,7 +84,7 @@ public class Unit extends Actor {
         }, 1);
         if (defendingUnit.getHealth() < 1){
             defendingUnit.remove();
-            if (this.getClass().getName().equals(Constants.ENEMY_CLASS_NAME)){
+            if (defendingUnit.getClass().getName().equals(Constants.ENEMY_CLASS_NAME)){
                 map.getEnemies().removeValue((Enemy) defendingUnit, true);
                 if (map.getEnemies().size == 0){
                     map.game.setScreen(new VictoryScreen(map.game));
