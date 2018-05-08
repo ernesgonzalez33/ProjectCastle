@@ -72,6 +72,7 @@ public class Unit extends Actor {
 
         //Setting health
         int damage = attackingUnit.getAttack() - defendingUnit.getDefense();
+        if (damage < 0) damage = 0;
         int newHealth = defendingUnit.getHealth() - damage;
         defendingUnit.setHealth(newHealth);
         final DamageOverlay damageOverlay = new DamageOverlay("" + damage, map.game.skin, defendingUnit.getX(), defendingUnit.getY());

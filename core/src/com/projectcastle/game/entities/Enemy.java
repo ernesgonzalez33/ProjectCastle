@@ -73,10 +73,16 @@ public class Enemy extends Unit {
         Vector2 actualPosition = new Vector2(getX(), getY());
 
         //If the enemy can attack, it attacks depending on the selectAttack method result
-        SnapshotArray<Hero> heroesICanAttack =  canAttack(actualPosition);
+        SnapshotArray<Hero> heroesICanAttack =  canAttackInZone();
 
         if (heroesICanAttack.size > 0){
-            attackHero(selectAttack(heroesICanAttack));
+            Hero heroToAttack = selectAttack(heroesICanAttack);
+            //Move to an adjacent space where the hero is
+            Vector2 positionToMove = moveToAdjacent(heroToAttack);
+            positionToMove = getMap().getTextureTools().tileFinder((int) positionToMove.x, (int) positionToMove.y);
+            addAction(Actions.moveTo(positionToMove.x, positionToMove.y, 2));
+            getMap().clearHighlightedTiles(getThis());
+            attackHero(heroToAttack);
         } else {
             //If the enemy can't attack, it has to move
             Vector2 positionToMove = selectMove();
@@ -92,6 +98,75 @@ public class Enemy extends Unit {
                 setState(Enums.UnitState.ATTACKED);
             }
         }
+
+    }
+
+    private Vector2 moveToAdjacent(Hero heroToAttack){
+
+        //Find the positions I can get
+        getMap().highlightTilesToMove(this);
+
+        //Find the best nearest position to the hero I have to pursue
+        Vector2 auxiliarVector = new Vector2();
+        float distance = 10000;
+        for (Vector2 position : this.getCanMovePositions()){
+            if (position.x == (heroToAttack.getX() / Constants.TILE_SIZE) && position.y == (heroToAttack.getY() / Constants.TILE_SIZE)){
+                Gdx.app.log(TAG, "Son iguales");
+            } else {
+                if (Math.abs(position.x - (heroToAttack.getX() / Constants.TILE_SIZE)) + Math.abs(position.y - (heroToAttack.getY() / Constants.TILE_SIZE)) < distance){
+                    distance = Math.abs(position.x - (heroToAttack.getX() / Constants.TILE_SIZE)) + Math.abs(position.y - (heroToAttack.getY() / Constants.TILE_SIZE));
+                    auxiliarVector = position;
+                }
+            }
+        }
+
+        //Return the nearest position
+        auxiliarVector.x = auxiliarVector.x * Constants.TILE_SIZE;
+        auxiliarVector.y = auxiliarVector.y * Constants.TILE_SIZE;
+        return auxiliarVector;
+
+    }
+
+    private SnapshotArray<Hero> canAttackInZone(){
+
+        SnapshotArray<Hero> heroesICanAttack = new SnapshotArray<Hero>();
+
+        //Find the positions I can get
+        getMap().highlightTilesToMove(this);
+
+        for (Vector2 positionItCanMove:this.getCanMovePositions()){
+            for (Hero hero:getMap().getHeroes()){
+                if (isAdjacent(positionItCanMove, hero)){
+                    heroesICanAttack.add(hero);
+                }
+            }
+        }
+
+        //Clearing the highlighted tiles
+        getMap().clearHighlightedTiles(getThis());
+
+        return heroesICanAttack;
+
+    }
+
+    @Override
+    public boolean isAdjacent(Vector2 callingUnit, Unit attackedUnit) {
+
+        int attackingX = (int) callingUnit.x;
+        int attackingY = (int) callingUnit.y;
+        int attackedX = (int) (attackedUnit.getX() / Constants.TILE_SIZE);
+        int attackedY = (int) (attackedUnit.getY() / Constants.TILE_SIZE);
+
+        if (attackingX + 1 == attackedX && attackingY == attackedY)
+            return true;
+
+        if (attackingX - 1 == attackedX && attackingY == attackedY)
+            return true;
+
+        if (attackingX == attackedX && attackingY + 1 == attackedY)
+            return true;
+
+        return attackingX == attackedX && attackingY - 1 == attackedY;
 
     }
 
