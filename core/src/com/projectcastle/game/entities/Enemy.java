@@ -80,6 +80,7 @@ public class Enemy extends Unit {
             //Move to an adjacent space where the hero is
             Vector2 positionToMove = moveToAdjacent(heroToAttack);
             positionToMove = getMap().getTextureTools().tileFinder((int) positionToMove.x, (int) positionToMove.y);
+            getMap().enemiesNewPositions.add(positionToMove);
             addAction(Actions.moveTo(positionToMove.x, positionToMove.y, 2));
             getMap().clearHighlightedTiles(getThis());
             attackHero(heroToAttack);
@@ -87,6 +88,7 @@ public class Enemy extends Unit {
             //If the enemy can't attack, it has to move
             Vector2 positionToMove = selectMove();
             positionToMove = getMap().getTextureTools().tileFinder((int) positionToMove.x, (int) positionToMove.y);
+            getMap().enemiesNewPositions.add(positionToMove);
             addAction(Actions.moveTo(positionToMove.x, positionToMove.y, 2));
             getMap().clearHighlightedTiles(getThis());
             setState(Enums.UnitState.MOVED);
@@ -111,7 +113,6 @@ public class Enemy extends Unit {
         float distance = 10000;
         for (Vector2 position : this.getCanMovePositions()){
             if (position.x == (heroToAttack.getX() / Constants.TILE_SIZE) && position.y == (heroToAttack.getY() / Constants.TILE_SIZE)){
-                Gdx.app.log(TAG, "Son iguales");
             } else {
                 if (Math.abs(position.x - (heroToAttack.getX() / Constants.TILE_SIZE)) + Math.abs(position.y - (heroToAttack.getY() / Constants.TILE_SIZE)) < distance){
                     distance = Math.abs(position.x - (heroToAttack.getX() / Constants.TILE_SIZE)) + Math.abs(position.y - (heroToAttack.getY() / Constants.TILE_SIZE));

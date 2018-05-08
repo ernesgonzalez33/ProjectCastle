@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.Timer;
 import com.projectcastle.game.Map;
 import com.projectcastle.game.screens.DamageOverlay;
+import com.projectcastle.game.screens.GameOverScreen;
 import com.projectcastle.game.screens.VictoryScreen;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
@@ -92,6 +93,9 @@ public class Unit extends Actor {
                 }
             } else {
                 getMap().getHeroes().removeValue((Hero) defendingUnit, true);
+                if (map.getHeroes().size == 0){
+                    map.game.setScreen(new GameOverScreen(map.game));
+                }
             }
 
         }

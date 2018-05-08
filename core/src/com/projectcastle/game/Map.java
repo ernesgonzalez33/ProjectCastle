@@ -52,6 +52,7 @@ public class Map implements InputProcessor {
     TiledMapTileSet selectedTileSet;
     TextureRegion selectedSpriteRegion;
     InputProcessorHelp inputProcessorHelp;
+    public SnapshotArray<Vector2> enemiesNewPositions;
 
 
     public Map(int mapID, final ProjectCastleGame game){
@@ -60,6 +61,7 @@ public class Map implements InputProcessor {
         victory = false;
         enemies = new SnapshotArray<Enemy>();
         heroes = new SnapshotArray<Hero>();
+        enemiesNewPositions = new SnapshotArray<Vector2>();
         textureTools = new TextureTools();
         stage = new Stage();
         textureTools = new TextureTools();
@@ -211,17 +213,21 @@ public class Map implements InputProcessor {
         Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
         Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
         Vector2 positionTheOne = textureTools.positionConverter(10, 5);
+        Vector2 positionTheTwo = textureTools.positionConverter(9, 5);
         Hero number1 = new Hero(positionNumber1.x, positionNumber1.y, 15, 16, Constants.PRINCESS_NAME, 11, Assets.instance.unitsAssets.eirikaRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
         Hero number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, Constants.PRINCE_NAME, 11, Assets.instance.unitsAssets.christianRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
         Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
+        Enemy theTwo = new Enemy(positionTheTwo.x, positionTheTwo.y, 10, 9, "TheOne", 20, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
 
         //Adding the heroes and enemies to the Stage and their lists
         enemies.add(theOne);
         heroes.add(number1);
         heroes.add(number2);
+        enemies.add(theTwo);
         stage.addActor(number1);
         stage.addActor(number2);
         stage.addActor(theOne);
+        stage.addActor(theTwo);
 
     }
 
@@ -255,6 +261,15 @@ public class Map implements InputProcessor {
                     }
                 }
             }
+
+            //If calledBy is an enemy, also remove the positions where another enemies are situated
+            if (calledBy.getClass().getName().equals(Constants.ENEMY_CLASS_NAME)){
+                for (int jj = 0; jj < enemiesNewPositions.size; jj++){
+                    if (enemiesNewPositions.get(jj).x / Constants.TILE_SIZE == calledBy.getCanMovePositions().get(ii).x && enemiesNewPositions.get(jj).y / Constants.TILE_SIZE == calledBy.getCanMovePositions().get(ii).y)
+                        positionsToRemove.add(calledBy.getCanMovePositions().get(ii));
+                }
+            }
+
         }
 
         //Actually remove the positions
@@ -371,17 +386,13 @@ public class Map implements InputProcessor {
         //Changing turn and displaying turn message
         if (game.activeTurn == Enums.Turn.PLAYER) {
             game.activeTurn = Enums.Turn.ENEMY;
-            if (getHeroes().size == 0){
-                game.setScreen(new GameOverScreen(game));
-            } else {
-                game.turnMessage.setTurn(Enums.Turn.ENEMY);
-                game.timer.scheduleTask(new Timer.Task() {
+            game.turnMessage.setTurn(Enums.Turn.ENEMY);
+            game.timer.scheduleTask(new Timer.Task() {
                     @Override
                     public void run() {
                         runAI();
                     }
                 }, Constants.DELAY);
-            }
         } else {
             game.activeTurn = Enums.Turn.PLAYER;
             game.turnMessage.setTurn(Enums.Turn.PLAYER);
@@ -406,6 +417,8 @@ public class Map implements InputProcessor {
         for (int ii = 0; ii < getEnemies().size; ii++) {
             getEnemies().get(ii).runAI();
         }
+        //Clear the Array of new positions
+        this.enemiesNewPositions.clear();
         game.timer.scheduleTask(new Timer.Task() {
             @Override
             public void run() {
