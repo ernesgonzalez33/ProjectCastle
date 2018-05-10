@@ -1,5 +1,6 @@
 package com.projectcastle.game.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -74,16 +75,32 @@ public class Unit extends Actor {
         //Setting health
         int damage = attackingUnit.getAttack() - defendingUnit.getDefense();
         if (damage < 0) damage = 0;
-        int newHealth = defendingUnit.getHealth() - damage;
-        defendingUnit.setHealth(newHealth);
-        final DamageOverlay damageOverlay = new DamageOverlay("" + damage, map.game.skin, defendingUnit.getX(), defendingUnit.getY());
-        map.getStage().addActor(damageOverlay);
-        map.game.timer.scheduleTask(new Timer.Task() {
-            @Override
-            public void run() {
-                damageOverlay.remove();
-            }
-        }, 1);
+
+        //The attack can be missed.
+        double chance = Math.random();
+        if (chance > 0.7){
+            final DamageOverlay damageOverlay = new DamageOverlay("-", map.game.skin, defendingUnit.getX(), defendingUnit.getY(), Color.BLACK);
+            map.getStage().addActor(damageOverlay);
+            map.game.timer.scheduleTask(new Timer.Task() {
+                @Override
+                public void run() {
+                    damageOverlay.remove();
+                }
+            }, 1);
+        } else {
+            int newHealth = defendingUnit.getHealth() - damage;
+            defendingUnit.setHealth(newHealth);
+            final DamageOverlay damageOverlay = new DamageOverlay("" + damage, map.game.skin, defendingUnit.getX(), defendingUnit.getY(), Color.RED);
+            map.getStage().addActor(damageOverlay);
+            map.game.timer.scheduleTask(new Timer.Task() {
+                @Override
+                public void run() {
+                    damageOverlay.remove();
+                }
+            }, 1);
+        }
+
+        // Comprobations if the unit died
         if (defendingUnit.getHealth() < 1){
             defendingUnit.remove();
             if (defendingUnit.getClass().getName().equals(Constants.ENEMY_CLASS_NAME)){
