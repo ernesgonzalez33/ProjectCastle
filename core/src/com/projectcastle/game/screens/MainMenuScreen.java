@@ -71,7 +71,7 @@ public class MainMenuScreen implements Screen {
         //Adding the actors to the stage
         stage.addActor(title);
         stage.addActor(easy);
-        stage.addActor(debug);
+        //stage.addActor(debug);
         stage.addActor(medium);
         stage.addActor(hard);
 
