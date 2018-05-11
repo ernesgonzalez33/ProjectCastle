@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
@@ -53,13 +54,14 @@ public class GameOverScreen implements Screen {
         stage.addActor(gameOver);
         stage.addActor(seeCredits);
 
-        //Setting the listener to the button
-        seeCredits.addListener(new ChangeListener() {
+
+        //Timer to credits
+        game.timer.scheduleTask(new Timer.Task() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void run() {
                 game.setScreen(new CreditsScreen(game));
             }
-        });
+        }, 5);
 
     }
 
