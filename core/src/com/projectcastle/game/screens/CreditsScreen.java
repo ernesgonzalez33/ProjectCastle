@@ -4,12 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.util.Constants;
+import com.projectcastle.game.util.Enums;
 
 public class CreditsScreen implements Screen {
 
@@ -26,6 +30,7 @@ public class CreditsScreen implements Screen {
     Label spritesCreators;
     Label tutored;
     Label tutor;
+    TextButton returnMain;
 
     public CreditsScreen (final ProjectCastleGame game){
 
@@ -66,6 +71,9 @@ public class CreditsScreen implements Screen {
         tutor = new Label("Daniel Borrajo Millan", game.skin);
         tutor.setPosition(credits.getX() - 10, credits.getY() - 300);
 
+        returnMain = new TextButton("Back to Main Menu", game.skin);
+        returnMain.setBounds((Constants.WIDTH / 2) - (returnMain.getWidth() / 2), tutor.getY() - 100, returnMain.getWidth(), returnMain.getHeight());
+
         stage.addActor(credits);
         stage.addActor(developer);
         stage.addActor(myName);
@@ -73,6 +81,15 @@ public class CreditsScreen implements Screen {
         stage.addActor(spritesCreators);
         stage.addActor(tutored);
         stage.addActor(tutor);
+        stage.addActor(returnMain);
+
+        //Setting the listeners to the buttons
+        returnMain.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(new MainMenuScreen(game));
+            }
+        });
 
     }
 
