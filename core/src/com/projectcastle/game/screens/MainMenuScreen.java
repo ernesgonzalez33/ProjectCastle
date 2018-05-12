@@ -43,10 +43,9 @@ public class MainMenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         //Setting the title
-        title = new Label("Project Castle", game.skin);
+        title = new Label(Constants.GAME_TITLE, game.skin);
         title.setFontScale(2);
-        title.setPosition((Constants.WIDTH / 2) - Constants.TITLE_OFFSET_X, (Constants.HEIGHT / 2) - Constants.TITLE_OFFSET_Y + 100);
-        title.setBounds(title.getX(), title.getY(), Constants.TITLE_WIDTH, Constants.TITLE_HEIGHT);
+        title.setBounds((Constants.WIDTH / 2) - (title.getWidth() / 2), (Constants.HEIGHT / 2) - Constants.TITLE_OFFSET_Y + 100, title.getWidth(), title.getHeight());
 
         //Setting the debug button
         debug = new TextButton("Debug", game.skin);
