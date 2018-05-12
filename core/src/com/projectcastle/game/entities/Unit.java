@@ -78,7 +78,7 @@ public class Unit extends Actor {
 
         //The attack can be missed.
         double chance = Math.random();
-        if (chance > 0.7){
+        if (chance > Constants.ATTACK_CHANCE){
             final DamageOverlay damageOverlay = new DamageOverlay("-", map.game.skin, defendingUnit.getX(), defendingUnit.getY(), Color.BLACK);
             map.getStage().addActor(damageOverlay);
             map.game.timer.scheduleTask(new Timer.Task() {

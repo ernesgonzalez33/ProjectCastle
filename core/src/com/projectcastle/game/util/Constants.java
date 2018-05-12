@@ -41,6 +41,7 @@ public class Constants {
     //Other
     public static final String HERO_CLASS_NAME = "com.projectcastle.game.entities.Hero";
     public static final String ENEMY_CLASS_NAME = "com.projectcastle.game.entities.Enemy";
+    public static final double ATTACK_CHANCE = 0.85;
 
     //Timer
     public static final int DELAY = 3;
