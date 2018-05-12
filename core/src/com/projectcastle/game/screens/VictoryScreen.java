@@ -45,14 +45,8 @@ public class VictoryScreen implements Screen {
         congratulations.setPosition((Constants.WIDTH / 2) - Constants.CONGRATULATIONS_OFFSET_X - 65, (Constants.HEIGHT / 2) - Constants.CONGRATULATIONS_OFFSET_Y + 100);
         congratulations.setBounds(congratulations.getX(), congratulations.getY(), Constants.CONGRATULATIONS_WIDTH, Constants.CONGRATULATIONS_HEIGHT);
 
-        //Setting the see credits button
-        seeCredits = new TextButton("See credits", game.skin);
-        seeCredits.setPosition((Constants.WIDTH / 2) - Constants.SEE_CREDITS_OFFSET_X, (Constants.HEIGHT / 2) - Constants.SEE_CREDITS_OFFSET_Y - 100);
-        seeCredits.setBounds(seeCredits.getX(), seeCredits.getY(), Constants.SEE_CREDITS_WIDTH, Constants.SEE_CREDITS_HEIGHT);
-
         //Adding the actors to the stage
         stage.addActor(congratulations);
-        stage.addActor(seeCredits);
 
         //Timer to credits
         game.timer.scheduleTask(new Timer.Task() {
@@ -71,6 +65,7 @@ public class VictoryScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
         stage.draw();

@@ -45,14 +45,8 @@ public class GameOverScreen implements Screen {
         gameOver.setPosition((Constants.WIDTH / 2) - Constants.GAME_OVER_OFFSET_X, (Constants.HEIGHT / 2) - Constants.GAME_OVER_OFFSET_Y + 100);
         gameOver.setBounds(gameOver.getX(), gameOver.getY(), Constants.GAME_OVER_WIDTH, Constants.GAME_OVER_HEIGHT);
 
-        //Setting the see credits button
-        seeCredits = new TextButton("See credits", game.skin);
-        seeCredits.setPosition((Constants.WIDTH / 2) - Constants.SEE_CREDITS_OFFSET_X, (Constants.HEIGHT / 2) - Constants.SEE_CREDITS_OFFSET_Y - 100);
-        seeCredits.setBounds(seeCredits.getX(), seeCredits.getY(), Constants.SEE_CREDITS_WIDTH, Constants.SEE_CREDITS_HEIGHT);
-
         //Adding the actors to the stage
         stage.addActor(gameOver);
-        stage.addActor(seeCredits);
 
 
         //Timer to credits
@@ -72,6 +66,7 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
         stage.draw();
