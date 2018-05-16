@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
@@ -45,7 +46,7 @@ public class MainMenuScreen implements Screen {
         //Setting the title
         title = new Label(Constants.GAME_TITLE, game.skin);
         title.setFontScale(2);
-        title.setBounds((Constants.WIDTH / 2) - (title.getWidth() / 2), (Constants.HEIGHT / 2) - Constants.TITLE_OFFSET_Y + 100, title.getWidth(), title.getHeight());
+        title.setPosition((Constants.WIDTH / 2) - (title.getWidth() / 2), (Constants.HEIGHT / 2) + 100, Align.center);
 
         //Setting the debug button
         debug = new TextButton("Debug", game.skin);
@@ -85,7 +86,8 @@ public class MainMenuScreen implements Screen {
         debug.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.setScreen(new GameplayScreen(game, Enums.Level.DEBUG));
+                //game.setScreen(new GameplayScreen(game, Enums.Level.DEBUG));
+                game.setScreen(new CreditsScreen(game));
             }
         });
 

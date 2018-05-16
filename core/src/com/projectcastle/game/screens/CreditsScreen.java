@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
@@ -48,31 +49,36 @@ public class CreditsScreen implements Screen {
         //Setting the credits
         credits = new Label("Credits", game.skin);
         credits.setFontScale(2);
-        credits.setPosition(250 , (Constants.HEIGHT / 2) + 250);
+        //credits.setWidth(credits.getWidth() * 2);
+        credits.setPosition((Constants.WIDTH / 2) - (credits.getWidth() / 2), (Constants.HEIGHT / 2) + 250, Align.center);
 
         developer = new Label("Developed by", game.skin);
         developer.setFontScale(1.5f);
-        developer.setPosition(credits.getX() - 18, credits.getY() - 50);
+        developer.setWidth(developer.getWidth() * 1.5f);
+        developer.setPosition((Constants.WIDTH / 2) - (developer.getWidth() / 2), credits.getY() - 50);
 
         myName = new Label("Ernesto Gonzalez Chacon", game.skin);
-        myName.setPosition(credits.getX() - 25, credits.getY() - 100);
+        myName.setPosition((Constants.WIDTH / 2) - (myName.getWidth() / 2), credits.getY() - 100);
 
         sprites = new Label("Sprites by", game.skin);
         sprites.setFontScale(1.5f);
-        sprites.setPosition(credits.getX(), credits.getY() - 150);
+        sprites.setWidth(sprites.getWidth() * 1.5f);
+        sprites.setPosition((Constants.WIDTH / 2) - (sprites.getWidth() / 2), credits.getY() - 150);
 
         spritesCreators = new Label("Zabin, Daneeklu, Jetrel, Hyptosis, Redshrike, Bertram, Daniel Cook, Saphy and Sharm", game.skin);
-        spritesCreators.setPosition(45, credits.getY() - 200);
+        spritesCreators.setPosition((Constants.WIDTH / 2) - (spritesCreators.getWidth() / 2), credits.getY() - 200);
 
         tutored = new Label("Tutored by", game.skin);
         tutored.setFontScale(1.5f);
-        tutored.setPosition(credits.getX(), credits.getY() - 250);
+        tutored.setWidth(tutored.getWidth() * 1.5f);
+        tutored.setPosition((Constants.WIDTH / 2) - (tutored.getWidth() / 2), credits.getY() - 250);
 
         tutor = new Label("Daniel Borrajo Millan", game.skin);
-        tutor.setPosition(credits.getX() - 10, credits.getY() - 300);
+        tutor.setPosition((Constants.WIDTH / 2) - (tutor.getWidth() / 2), credits.getY() - 300);
 
         returnMain = new TextButton("Back to Main Menu", game.skin);
-        returnMain.setBounds((Constants.WIDTH / 2) - (returnMain.getWidth() / 2), tutor.getY() - 100, returnMain.getWidth(), returnMain.getHeight());
+        returnMain.setPosition((Constants.WIDTH / 2) - (returnMain.getWidth() / 2), credits.getY() - 400);
+        returnMain.setBounds(returnMain.getX(), returnMain.getY(), returnMain.getWidth(), returnMain.getHeight());
 
         stage.addActor(credits);
         stage.addActor(developer);
