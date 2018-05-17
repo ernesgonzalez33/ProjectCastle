@@ -28,6 +28,7 @@ public class ProjectCastleGame extends Game {
 	public Skin skin;
 	public Enums.Turn activeTurn;
 	public Timer timer;
+	private int mapCont;
 
 	@Override
 	public void create() {
@@ -35,12 +36,13 @@ public class ProjectCastleGame extends Game {
 		manager = new AssetManager();
 		batch = new SpriteBatch();
 		timer = new Timer();
+		mapCont = 0;
 
 		//Creating Action Menu and Turn Message
 		skin = new Skin(Gdx.files.internal(Constants.FLAT_SKIN));
 		actionMenu = new ActionMenu(skin);
         turnMessage = new TurnMessage(skin);
-        information = new Information(skin);
+        information = new Information(skin, this);
 
 		activeTurn = Enums.Turn.PLAYER;
 
@@ -56,6 +58,14 @@ public class ProjectCastleGame extends Game {
 
 	public void dispose(){
 		batch.dispose();
+	}
+
+	public int getMapCont() {
+		return mapCont;
+	}
+
+	public void setMapCont(int mapCont) {
+		this.mapCont = mapCont;
 	}
 
 }

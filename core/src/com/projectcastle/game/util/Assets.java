@@ -41,6 +41,9 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(Constants.EASY_MAP, TiledMap.class);
         assetManager.load(Constants.MEDIUM_MAP, TiledMap.class);
         assetManager.load(Constants.HARD_MAP, TiledMap.class);
+        assetManager.load(Constants.EASY_MAP_2, TiledMap.class);
+        assetManager.load(Constants.MEDIUM_MAP_2, TiledMap.class);
+        assetManager.load(Constants.HARD_MAP_2, TiledMap.class);
         assetManager.finishLoading();
 
         //Retrieving maps
@@ -49,6 +52,9 @@ public class Assets implements Disposable, AssetErrorListener {
         maps.add(assetManager.get(Constants.EASY_MAP, TiledMap.class));
         maps.add(assetManager.get(Constants.MEDIUM_MAP, TiledMap.class));
         maps.add(assetManager.get(Constants.HARD_MAP, TiledMap.class));
+        maps.add(assetManager.get(Constants.EASY_MAP_2, TiledMap.class));
+        maps.add(assetManager.get(Constants.MEDIUM_MAP_2, TiledMap.class));
+        maps.add(assetManager.get(Constants.HARD_MAP_2, TiledMap.class));
 
         //Splitting sprites
         TextureRegion[][] characters;
@@ -80,6 +86,9 @@ public class Assets implements Disposable, AssetErrorListener {
         public final TiledMap easyMap;
         public final TiledMap mediumMap;
         public final TiledMap hardMap;
+        public final TiledMap easyMap2;
+        public final TiledMap mediumMap2;
+        public final TiledMap hardMap2;
 
         public MapAssets(ArrayList<TiledMap> maps){
 
@@ -87,6 +96,9 @@ public class Assets implements Disposable, AssetErrorListener {
             easyMap = maps.get(1);
             mediumMap = maps.get(2);
             hardMap = maps.get(3);
+            easyMap2 = maps.get(4);
+            mediumMap2 = maps.get(5);
+            hardMap2 = maps.get(6);
 
         }
 

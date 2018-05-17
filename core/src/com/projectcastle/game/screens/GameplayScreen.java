@@ -26,25 +26,40 @@ public class GameplayScreen implements InputProcessor, Screen {
 
         Assets.instance.init(game.manager);
 
-        startNewMap(level);
+        startNewMap(level, game.getMapCont());
 
     }
 
-    private void startNewMap(Enums.Level level){
+    private void startNewMap(Enums.Level level, int mapCont){
 
-        if (level == Enums.Level.DEBUG)
-            map = Map.debugMap(this.game);
+        if (mapCont == 0){
+            if (level == Enums.Level.DEBUG)
+                map = Map.debugMap(this.game);
 
-        if (level == Enums.Level.EASY){
-            map = new Map(Constants.EASY_MAP_ID, this.game);
+            if (level == Enums.Level.EASY){
+                map = new Map(Constants.EASY_MAP_ID, this.game);
+            }
+
+            if (level == Enums.Level.MEDIUM){
+                map = new Map(Constants.MEDIUM_MAP_ID, this.game);
+            }
+
+            if (level == Enums.Level.HARD){
+                map = new Map(Constants.HARD_MAP_ID, this.game);
+            }
         }
+        if (mapCont == 1){
+            if (level == Enums.Level.EASY){
+                map = new Map(Constants.EASY_MAP_ID_2, this.game);
+            }
 
-        if (level == Enums.Level.MEDIUM){
-            map = new Map(Constants.MEDIUM_MAP_ID, this.game);
-        }
+            if (level == Enums.Level.MEDIUM){
+                map = new Map(Constants.MEDIUM_MAP_ID_2, this.game);
+            }
 
-        if (level == Enums.Level.HARD){
-            map = new Map(Constants.HARD_MAP_ID, this.game);
+            if (level == Enums.Level.HARD){
+                map = new Map(Constants.HARD_MAP_ID_2, this.game);
+            }
         }
 
     }

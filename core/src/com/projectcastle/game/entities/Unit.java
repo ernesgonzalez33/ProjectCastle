@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.projectcastle.game.Map;
 import com.projectcastle.game.screens.DamageOverlay;
 import com.projectcastle.game.screens.GameOverScreen;
+import com.projectcastle.game.screens.GameplayScreen;
 import com.projectcastle.game.screens.VictoryScreen;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
@@ -105,8 +106,11 @@ public class Unit extends Actor {
             defendingUnit.remove();
             if (defendingUnit.getClass().getName().equals(Constants.ENEMY_CLASS_NAME)){
                 map.getEnemies().removeValue((Enemy) defendingUnit, true);
-                if (map.getEnemies().size == 0){
+                if (map.getEnemies().size == 0 && map.game.getMapCont() == 1){
                     map.game.setScreen(new VictoryScreen(map.game));
+                } else if (map.getEnemies().size == 0 && map.game.getMapCont() == 0){
+                    map.game.setMapCont(1);
+                    map.game.setScreen(new GameplayScreen(map.game, map.selectedLevel));
                 }
             } else {
                 getMap().getHeroes().removeValue((Hero) defendingUnit, true);

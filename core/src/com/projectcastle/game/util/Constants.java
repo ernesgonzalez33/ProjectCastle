@@ -90,8 +90,14 @@ public class Constants {
     public static final int EASY_MAP_ID = 1;
     public static final int MEDIUM_MAP_ID = 2;
     public static final int HARD_MAP_ID = 3;
+    public static final int EASY_MAP_ID_2 = 4;
+    public static final int MEDIUM_MAP_ID_2 = 5;
+    public static final int HARD_MAP_ID_2 = 6;
     public static final String TEST_MAP = "Maps/TestMap3.tmx";
     public static final String EASY_MAP = "Maps/EasyMap.tmx";
     public static final String MEDIUM_MAP = "Maps/MediumMap.tmx";
     public static final String HARD_MAP = "Maps/HardMap.tmx";
+    public static final String EASY_MAP_2 = "Maps/EasyMap2.tmx";
+    public static final String MEDIUM_MAP_2 = "Maps/MediumMap2.tmx";
+    public static final String HARD_MAP_2 = "Maps/HardMap2.tmx";
 }
