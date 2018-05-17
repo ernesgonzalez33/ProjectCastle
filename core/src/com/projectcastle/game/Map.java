@@ -53,6 +53,7 @@ public class Map implements InputProcessor {
     TextureRegion selectedSpriteRegion;
     InputProcessorHelp inputProcessorHelp;
     public SnapshotArray<Vector2> enemiesNewPositions;
+    public Enums.Level selectedLevel;
 
 
     public Map(int mapID, final ProjectCastleGame game){
@@ -78,6 +79,26 @@ public class Map implements InputProcessor {
             case Constants.MEDIUM_MAP_ID: tiledMap = Assets.instance.mapAssets.mediumMap;
             break;
             case Constants.HARD_MAP_ID: tiledMap = Assets.instance.mapAssets.hardMap;
+            break;
+            case Constants.EASY_MAP_ID_2: tiledMap = Assets.instance.mapAssets.easyMap2;
+            break;
+            case Constants.MEDIUM_MAP_ID_2: tiledMap = Assets.instance.mapAssets.mediumMap2;
+            break;
+            case Constants.HARD_MAP_ID_2: tiledMap = Assets.instance.mapAssets.hardMap2;
+        }
+
+        //Selected level
+        if (mapID == 0){
+            selectedLevel = Enums.Level.DEBUG;
+        }
+        if (mapID == Constants.EASY_MAP_ID || mapID == Constants.EASY_MAP_ID_2){
+            selectedLevel = Enums.Level.EASY;
+        }
+        if (mapID == Constants.MEDIUM_MAP_ID || mapID == Constants.MEDIUM_MAP_ID_2){
+            selectedLevel = Enums.Level.MEDIUM;
+        }
+        if (mapID == Constants.HARD_MAP_ID || mapID == Constants.HARD_MAP_ID_2){
+            selectedLevel = Enums.Level.HARD;
         }
 
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, Constants.UNIT_SCALE);
@@ -267,6 +288,12 @@ public class Map implements InputProcessor {
                 for (int jj = 0; jj < enemiesNewPositions.size; jj++){
                     if (enemiesNewPositions.get(jj).x / Constants.TILE_SIZE == calledBy.getCanMovePositions().get(ii).x && enemiesNewPositions.get(jj).y / Constants.TILE_SIZE == calledBy.getCanMovePositions().get(ii).y)
                         positionsToRemove.add(calledBy.getCanMovePositions().get(ii));
+                }
+                //Also, eliminate the positions where another heroes are situated
+                for (int jj = 0; jj < getHeroes().size; jj++){
+                    if (getHeroes().get(jj).getX() / Constants.TILE_SIZE == calledBy.getCanMovePositions().get(ii).x && getHeroes().get(jj).getY() / Constants.TILE_SIZE == calledBy.getCanMovePositions().get(ii).y){
+                        positionsToRemove.add(calledBy.getCanMovePositions().get(ii));
+                    }
                 }
             }
 
