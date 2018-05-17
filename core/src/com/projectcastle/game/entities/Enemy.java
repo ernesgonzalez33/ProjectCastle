@@ -57,8 +57,8 @@ public class Enemy extends Unit {
                                 }
                             }, 1);
                             actionMenu.getCalledBy().setState(Enums.UnitState.ATTACKED);
-                        } else {}
-                    } else {}
+                        }
+                    }
                 }
                 return true;
             }
@@ -66,11 +66,8 @@ public class Enemy extends Unit {
 
     }
 
-    //TODO: Mejorar la IA para que no vayan todos a por el mismo
-    public void runAI(){
 
-        //Actual position of this enemy
-        Vector2 actualPosition = new Vector2(getX(), getY());
+    public void runAI(){
 
         //If the enemy can attack, it attacks depending on the selectAttack method result
         SnapshotArray<Hero> heroesICanAttack =  canAttackInZone();
@@ -109,22 +106,21 @@ public class Enemy extends Unit {
         getMap().highlightTilesToMove(this);
 
         //Find the best nearest position to the hero I have to pursue
-        Vector2 auxiliarVector = new Vector2();
+        Vector2 auxiliaryVector = new Vector2();
         float distance = 10000;
         for (Vector2 position : this.getCanMovePositions()){
-            if (position.x == (heroToAttack.getX() / Constants.TILE_SIZE) && position.y == (heroToAttack.getY() / Constants.TILE_SIZE)){
-            } else {
+            if (!(position.x == (heroToAttack.getX() / Constants.TILE_SIZE)) || !(position.y == (heroToAttack.getY() / Constants.TILE_SIZE))) {
                 if (Math.abs(position.x - (heroToAttack.getX() / Constants.TILE_SIZE)) + Math.abs(position.y - (heroToAttack.getY() / Constants.TILE_SIZE)) < distance){
                     distance = Math.abs(position.x - (heroToAttack.getX() / Constants.TILE_SIZE)) + Math.abs(position.y - (heroToAttack.getY() / Constants.TILE_SIZE));
-                    auxiliarVector = position;
+                    auxiliaryVector = position;
                 }
             }
         }
 
         //Return the nearest position
-        auxiliarVector.x = auxiliarVector.x * Constants.TILE_SIZE;
-        auxiliarVector.y = auxiliarVector.y * Constants.TILE_SIZE;
-        return auxiliarVector;
+        auxiliaryVector.x = auxiliaryVector.x * Constants.TILE_SIZE;
+        auxiliaryVector.y = auxiliaryVector.y * Constants.TILE_SIZE;
+        return auxiliaryVector;
 
     }
 
@@ -206,14 +202,14 @@ public class Enemy extends Unit {
     private Vector2 selectMove(){
 
         //Find the hero to pursue
-        Vector2 heroToPursuePosition = new Vector2();
+        Vector2 heroToPursuePosition;
         heroToPursuePosition = findHeroToPursue();
 
         //Find the positions I can get
         getMap().highlightTilesToMove(this);
 
         //Find the best nearest position to the hero I have to pursue
-        Vector2 auxiliarVector = new Vector2();
+        Vector2 auxiliaryVector = new Vector2();
         float distance = 10000;
         for (Vector2 position : this.getCanMovePositions()){
             if (position.x == (heroToPursuePosition.x / Constants.TILE_SIZE) && position.y == (heroToPursuePosition.y / Constants.TILE_SIZE)){
@@ -221,15 +217,15 @@ public class Enemy extends Unit {
             } else {
                 if (Math.abs(position.x - (heroToPursuePosition.x / Constants.TILE_SIZE)) + Math.abs(position.y - (heroToPursuePosition.y / Constants.TILE_SIZE)) < distance){
                     distance = Math.abs(position.x - (heroToPursuePosition.x / Constants.TILE_SIZE)) + Math.abs(position.y - (heroToPursuePosition.y / Constants.TILE_SIZE));
-                    auxiliarVector = position;
+                    auxiliaryVector = position;
                 }
             }
         }
 
         //Return the nearest position
-        auxiliarVector.x = auxiliarVector.x * Constants.TILE_SIZE;
-        auxiliarVector.y = auxiliarVector.y * Constants.TILE_SIZE;
-        return auxiliarVector;
+        auxiliaryVector.x = auxiliaryVector.x * Constants.TILE_SIZE;
+        auxiliaryVector.y = auxiliaryVector.y * Constants.TILE_SIZE;
+        return auxiliaryVector;
 
     }
 

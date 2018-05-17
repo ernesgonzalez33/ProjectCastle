@@ -229,22 +229,22 @@
  <objectgroup name="Characters">
   <object id="14" name="Airmanagild" type="hero" gid="2" x="32" y="640" width="32" height="32">
    <properties>
-    <property name="attack" type="int" value="10"/>
+    <property name="attack" type="int" value="11"/>
     <property name="defense" type="int" value="2"/>
-    <property name="health" type="int" value="7"/>
+    <property name="health" type="int" value="9"/>
    </properties>
   </object>
   <object id="15" name="Eirika" type="hero" gid="8" x="96" y="640" width="32" height="32">
    <properties>
-    <property name="attack" type="int" value="8"/>
-    <property name="defense" type="int" value="4"/>
-    <property name="health" type="int" value="10"/>
+    <property name="attack" type="int" value="9"/>
+    <property name="defense" type="int" value="7"/>
+    <property name="health" type="int" value="12"/>
    </properties>
   </object>
   <object id="16" name="Christian" type="hero" gid="5" x="64" y="640" width="32" height="32">
    <properties>
-    <property name="attack" type="int" value="7"/>
-    <property name="defense" type="int" value="3"/>
+    <property name="attack" type="int" value="10"/>
+    <property name="defense" type="int" value="5"/>
     <property name="health" type="int" value="9"/>
    </properties>
   </object>
