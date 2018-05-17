@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Assets implements Disposable, AssetErrorListener {
 
-    public static final String TAG = Assets.class.getName();
+    private static final String TAG = Assets.class.getName();
     public static final Assets instance = new Assets();
 
     public MapAssets mapAssets;
@@ -90,7 +90,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public final TiledMap mediumMap2;
         public final TiledMap hardMap2;
 
-        public MapAssets(ArrayList<TiledMap> maps){
+        MapAssets(ArrayList<TiledMap> maps){
 
             testMap = maps.get(0);
             easyMap = maps.get(1);
@@ -112,7 +112,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public final TextureRegion skeletonRegion;
         public final TextureRegion limeRegion;
 
-        public UnitsAssets (TextureRegion[][] unitsAssets){
+        UnitsAssets (TextureRegion[][] unitsAssets){
 
             eirikaRegion = unitsAssets[0][7];
             airmanagildRegion = unitsAssets [0][1];
@@ -128,7 +128,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
         public final TextureRegion selectedRegion;
 
-        public SelectedAssets (TextureRegion selectedRegion) {
+        SelectedAssets (TextureRegion selectedRegion) {
 
             this.selectedRegion = selectedRegion;
 

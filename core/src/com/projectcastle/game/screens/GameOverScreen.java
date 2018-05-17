@@ -4,11 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -17,22 +14,13 @@ import com.projectcastle.game.util.Constants;
 
 public class GameOverScreen implements Screen {
 
-    private ProjectCastleGame game;
-    private static final String TAG = GameOverScreen.class.getName();
-
-    OrthographicCamera camera;
-    Viewport viewport;
-    Stage stage;
-    Label gameOver;
-    TextButton seeCredits;
+    private Stage stage;
 
     public GameOverScreen (final ProjectCastleGame game){
 
-        this.game = game;
-
         //Setting the camera
-        camera = new OrthographicCamera();
-        viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
+        OrthographicCamera camera = new OrthographicCamera();
+        Viewport viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
         camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
 
         //Setting the stage
@@ -40,7 +28,7 @@ public class GameOverScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         //Setting the game over text
-        gameOver = new Label("Game Over", game.skin);
+        Label gameOver = new Label("Game Over", game.skin);
         gameOver.setFontScale(2);
         gameOver.setPosition((Constants.WIDTH / 2) - Constants.GAME_OVER_OFFSET_X, (Constants.HEIGHT / 2) - Constants.GAME_OVER_OFFSET_Y + 100);
         gameOver.setBounds(gameOver.getX(), gameOver.getY(), Constants.GAME_OVER_WIDTH, Constants.GAME_OVER_HEIGHT);

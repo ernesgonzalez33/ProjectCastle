@@ -1,6 +1,5 @@
 package com.projectcastle.game.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -19,8 +18,6 @@ import com.projectcastle.game.util.Enums;
  */
 
 public class Enemy extends Unit {
-
-    private final static String TAG = Enemy.class.getName();
 
     private boolean showingInfo;
 
@@ -170,20 +167,20 @@ public class Enemy extends Unit {
     private Hero selectAttack(SnapshotArray<Hero> heroes){
 
         //Hero to compare defense
-        Hero auxiliarHero = heroes.get(0);
+        Hero auxiliaryHero = heroes.get(0);
 
         for (Hero hero : heroes){
             //If I can kill it, I attack it
             if ((this.getAttack() - hero.getDefense()) > hero.getHealth()){
                 return hero;
             } else {
-                if (hero.getDefense() < auxiliarHero.getDefense()){
-                    auxiliarHero = hero;
+                if (hero.getDefense() < auxiliaryHero.getDefense()){
+                    auxiliaryHero = hero;
                 }
             }
         }
         //If I can't kill a hero, I attack the one with less defense
-        return auxiliarHero;
+        return auxiliaryHero;
 
     }
 
@@ -212,9 +209,7 @@ public class Enemy extends Unit {
         Vector2 auxiliaryVector = new Vector2();
         float distance = 10000;
         for (Vector2 position : this.getCanMovePositions()){
-            if (position.x == (heroToPursuePosition.x / Constants.TILE_SIZE) && position.y == (heroToPursuePosition.y / Constants.TILE_SIZE)){
-                Gdx.app.log(TAG, "Son iguales");
-            } else {
+            if (!(position.x == (heroToPursuePosition.x / Constants.TILE_SIZE)) || !(position.y == (heroToPursuePosition.y / Constants.TILE_SIZE))) {
                 if (Math.abs(position.x - (heroToPursuePosition.x / Constants.TILE_SIZE)) + Math.abs(position.y - (heroToPursuePosition.y / Constants.TILE_SIZE)) < distance){
                     distance = Math.abs(position.x - (heroToPursuePosition.x / Constants.TILE_SIZE)) + Math.abs(position.y - (heroToPursuePosition.y / Constants.TILE_SIZE));
                     auxiliaryVector = position;
@@ -232,20 +227,20 @@ public class Enemy extends Unit {
     private Vector2 findHeroToPursue(){
 
         //Hero to compare defense
-        Hero auxiliarHero = new Hero(1000);
+        Hero auxiliaryHero = new Hero(1000);
 
         for (Hero hero : this.getMap().getHeroes()){
             //If I can kill it, I attack it
             if ((this.getAttack() - hero.getDefense()) > hero.getHealth()){
                 return new Vector2(hero.getX(), hero.getY());
             } else {
-                if (hero.getDefense() < auxiliarHero.getDefense()){
-                    auxiliarHero = hero;
+                if (hero.getDefense() < auxiliaryHero.getDefense()){
+                    auxiliaryHero = hero;
                 }
             }
         }
         //If I can't kill a hero, I attack the one with less defense
-        return new Vector2(auxiliarHero.getX(), auxiliarHero.getY());
+        return new Vector2(auxiliaryHero.getX(), auxiliaryHero.getY());
 
     }
 

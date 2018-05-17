@@ -13,8 +13,8 @@ import com.projectcastle.game.util.Enums;
 
 public class GameplayScreen implements InputProcessor, Screen {
 
-    ProjectCastleGame game;
-    SpriteBatch batch;
+    private ProjectCastleGame game;
+    private SpriteBatch batch;
     private Map map;
 
 

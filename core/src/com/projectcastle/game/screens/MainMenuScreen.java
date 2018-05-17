@@ -18,25 +18,13 @@ import com.projectcastle.game.util.Enums;
 
 public class MainMenuScreen implements Screen {
 
-    private ProjectCastleGame game;
-    private static final String TAG = MainMenuScreen.class.getName();
-
-    OrthographicCamera camera;
-    Viewport viewport;
-    Stage stage;
-    Label title;
-    TextButton debug;
-    TextButton easy;
-    TextButton medium;
-    TextButton hard;
+    private Stage stage;
 
     public MainMenuScreen (final ProjectCastleGame game){
 
-        this.game = game;
-
         //Setting the camera
-        camera = new OrthographicCamera();
-        viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
+        OrthographicCamera camera = new OrthographicCamera();
+        Viewport viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
         camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
 
         //Setting the stage
@@ -44,27 +32,27 @@ public class MainMenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         //Setting the title
-        title = new Label(Constants.GAME_TITLE, game.skin);
+        Label title = new Label(Constants.GAME_TITLE, game.skin);
         title.setFontScale(2);
         title.setPosition((Constants.WIDTH / 2) - (title.getWidth() / 2), (Constants.HEIGHT / 2) + 100, Align.center);
 
         //Setting the debug button
-        debug = new TextButton("Debug", game.skin);
+        TextButton debug = new TextButton("Debug", game.skin);
         debug.setPosition((Constants.WIDTH / 2) - Constants.DIFFICULTY_OFFSET_X, (Constants.HEIGHT / 2) - Constants.DIFFICULTY_OFFSET_Y - 50);
         debug.setBounds(debug.getX(), debug.getY(), Constants.DIFFICULTY_WIDTH, Constants.DIFFICULTY_HEIGHT);
 
         //Setting the easy button
-        easy = new TextButton("Easy", game.skin);
+        TextButton easy = new TextButton("Easy", game.skin);
         easy.setPosition((Constants.WIDTH / 2) - Constants.DIFFICULTY_OFFSET_X, (Constants.HEIGHT / 2) - Constants.DIFFICULTY_OFFSET_Y - 100);
         easy.setBounds(easy.getX(), easy.getY(), Constants.DIFFICULTY_WIDTH, Constants.DIFFICULTY_HEIGHT);
 
         //Setting the medium button
-        medium = new TextButton("Medium", game.skin);
+        TextButton medium = new TextButton("Medium", game.skin);
         medium.setPosition((Constants.WIDTH / 2) - Constants.DIFFICULTY_OFFSET_X, (Constants.HEIGHT / 2) - Constants.DIFFICULTY_OFFSET_Y - 150);
         medium.setBounds(medium.getX(), medium.getY(), Constants.DIFFICULTY_WIDTH, Constants.DIFFICULTY_HEIGHT);
 
         //Setting the hard button
-        hard = new TextButton("Hard", game.skin);
+        TextButton hard = new TextButton("Hard", game.skin);
         hard.setPosition((Constants.WIDTH / 2) - Constants.DIFFICULTY_OFFSET_X, (Constants.HEIGHT / 2) - Constants.DIFFICULTY_OFFSET_Y - 200);
         hard.setBounds(hard.getX(), hard.getY(), Constants.DIFFICULTY_WIDTH, Constants.DIFFICULTY_HEIGHT);
 

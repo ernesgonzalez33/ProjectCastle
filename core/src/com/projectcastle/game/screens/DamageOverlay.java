@@ -8,8 +8,6 @@ import com.projectcastle.game.util.Constants;
 
 public class DamageOverlay extends Label {
 
-    private final static String TAG = DamageOverlay.class.getName();
-
     public DamageOverlay(CharSequence text, Skin skin, float x, float y, Color color){
 
         super(text, skin);

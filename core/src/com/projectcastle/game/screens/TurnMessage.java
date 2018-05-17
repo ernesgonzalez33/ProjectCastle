@@ -12,8 +12,6 @@ import com.projectcastle.game.util.Enums;
 
 public class TurnMessage extends Window {
 
-
-    private final static String TAG = TurnMessage.class.getName();
     private Timer turnTimer;
 
     public TurnMessage (Skin skin) {
@@ -48,7 +46,7 @@ public class TurnMessage extends Window {
     @Override
     public void setVisible(boolean visible) {
         super.setVisible(visible);
-        if (visible == false){
+        if (!visible){
             SnapshotArray<Actor> actors = this.getChildren();
             for (Actor child : actors){
                 child.remove();

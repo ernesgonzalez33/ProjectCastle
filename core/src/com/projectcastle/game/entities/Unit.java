@@ -1,6 +1,5 @@
 package com.projectcastle.game.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 
 public class Unit extends Actor {
 
-    public final static String TAG = Unit.class.getName();
     private int attack;
     private int defense;
     private String name;
@@ -57,9 +55,9 @@ public class Unit extends Actor {
 
     }
 
-    public Unit (int defense){
+    Unit(int defense) {
 
-        this.setDefense(defense);
+        this.defense = defense;
 
     }
 
@@ -101,7 +99,7 @@ public class Unit extends Actor {
             }, 1);
         }
 
-        // Comprobations if the unit died
+        // Checking if the unit died
         if (defendingUnit.getHealth() < 1){
             defendingUnit.remove();
             if (defendingUnit.getClass().getName().equals(Constants.ENEMY_CLASS_NAME)){
@@ -185,17 +183,7 @@ public class Unit extends Actor {
 
     public int getMoveLimit() { return moveLimit; }
 
-    public void setMoveLimit(int moveLimit) { this.moveLimit = moveLimit; }
-
     public Unit getThis() { return this; }
-
-    public TextureRegion getRegion() {
-        return region;
-    }
-
-    public void setRegion(TextureRegion region) {
-        this.region = region;
-    }
 
     public Map getMap() {
         return map;
@@ -209,11 +197,7 @@ public class Unit extends Actor {
         return canMovePositions;
     }
 
-    public void setCanMovePositions(ArrayList<Vector2> canMovePositions) {
-        this.canMovePositions = canMovePositions;
-    }
-
-    public boolean isAdjacent(Unit attackedUnit){
+    boolean isAdjacent(Unit attackedUnit){
 
         int attackingX = (int) (this.getX() / Constants.TILE_SIZE);
         int attackingY = (int) (this.getY() / Constants.TILE_SIZE);
@@ -274,7 +258,7 @@ public class Unit extends Actor {
         return false;
     }
 
-    public SnapshotArray<Hero> canAttack(Vector2 position){
+    SnapshotArray<Hero> canAttack(Vector2 position){
 
         SnapshotArray<Hero> heroesICanAttack = new SnapshotArray<Hero>();
 

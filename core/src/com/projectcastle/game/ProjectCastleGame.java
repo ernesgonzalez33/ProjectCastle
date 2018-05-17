@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Timer;
 import com.projectcastle.game.screens.ActionMenu;
@@ -17,9 +16,7 @@ import com.projectcastle.game.util.Enums;
 
 public class ProjectCastleGame extends Game {
 
-	public static final String TAG = ProjectCastleGame.class.getName();
-
-	public FPSLogger fpsLogger;
+	private FPSLogger fpsLogger;
 	public SpriteBatch batch;
 	public AssetManager manager;
 	public ActionMenu actionMenu;

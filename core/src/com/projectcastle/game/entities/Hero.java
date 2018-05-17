@@ -14,9 +14,6 @@ import com.projectcastle.game.util.Enums;
 
 public class Hero extends Unit {
 
-    public final static String TAG = Hero.class.getName();
-
-
     public Hero(float positionX, float positionY, int attack, int defense, final String name, int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, final Map map) {
         super(positionX, positionY, attack, defense, name, health, region, moveLimit, map);
 
@@ -40,10 +37,12 @@ public class Hero extends Unit {
                 return true;
             }
         });
-
     }
 
-    public Hero (int defense){
+    Hero (int defense){
+
         super(defense);
+
     }
+
 }

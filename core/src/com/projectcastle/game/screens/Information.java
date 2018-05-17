@@ -9,7 +9,6 @@ import com.projectcastle.game.util.Constants;
 
 public class Information extends Window {
 
-    private final static String TAG = Information.class.getName();
     private Unit calledBy; //Variable to know who is calling
     private ProjectCastleGame game;
 
@@ -45,7 +44,7 @@ public class Information extends Window {
         super.setVisible(visible);
     }
 
-    public Unit getCalledBy() {
+    private Unit getCalledBy() {
         return calledBy;
     }
 

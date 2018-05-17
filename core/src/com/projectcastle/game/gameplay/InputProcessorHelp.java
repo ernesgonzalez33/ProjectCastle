@@ -17,14 +17,12 @@ public class InputProcessorHelp {
 
     private final ProjectCastleGame game;
 
-    private static final String TAG = InputProcessorHelp.class.getName();
-
     public InputProcessorHelp(final ProjectCastleGame game){
         this.game = game;
 
     }
 
-    public boolean MapTouchDown(Map map, int screenX, int screenY, int pointer, int button){
+    public boolean MapTouchDown(Map map, int screenX, int screenY){
 
         if (game.actionMenu.isVisible()){
 

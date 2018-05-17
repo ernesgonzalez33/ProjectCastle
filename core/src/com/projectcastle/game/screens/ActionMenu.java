@@ -16,9 +16,6 @@ import com.projectcastle.game.util.Enums;
 
 public class ActionMenu extends Window {
 
-    private final static String TAG = ActionMenu.class.getName();
-    private TextButton move;
-    private TextButton attack;
     private Unit calledBy; //Variable to know who is calling
 
 
@@ -31,8 +28,8 @@ public class ActionMenu extends Window {
         this.setVisible(false);
 
         //Initializing the labels
-        move = new TextButton("Move", skin);
-        attack = new TextButton("Attack", skin);
+        TextButton move = new TextButton("Move", skin);
+        TextButton attack = new TextButton("Attack", skin);
 
         //Setting the rows
         this.add(move).width(Constants.ACTION_MENU_BUTTON_WIDTH).pad(Constants.ACTION_MENU_BUTTON_PADDING);

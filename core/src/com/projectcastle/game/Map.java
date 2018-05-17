@@ -25,7 +25,6 @@ import com.projectcastle.game.entities.Enemy;
 import com.projectcastle.game.entities.Hero;
 import com.projectcastle.game.entities.Unit;
 import com.projectcastle.game.gameplay.InputProcessorHelp;
-import com.projectcastle.game.screens.GameOverScreen;
 import com.projectcastle.game.util.Assets;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
@@ -569,7 +568,7 @@ public class Map implements InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if (game.activeTurn == Enums.Turn.PLAYER)
-            return inputProcessorHelp.MapTouchDown(this, screenX, screenY, pointer, button);
+            return inputProcessorHelp.MapTouchDown(this, screenX, screenY);
         else
             return false;
     }

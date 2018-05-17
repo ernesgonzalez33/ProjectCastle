@@ -14,12 +14,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ProjectCastleGame;
 import com.projectcastle.game.util.Constants;
-import com.projectcastle.game.util.Enums;
 
 public class CreditsScreen implements Screen {
-
-    private ProjectCastleGame game;
-    private static final String TAG = VictoryScreen.class.getName();
 
     OrthographicCamera camera;
     Viewport viewport;
@@ -35,7 +31,7 @@ public class CreditsScreen implements Screen {
 
     public CreditsScreen (final ProjectCastleGame game){
 
-        this.game = game;
+        ProjectCastleGame game1 = game;
 
         //Setting the camera
         camera = new OrthographicCamera();
@@ -47,20 +43,20 @@ public class CreditsScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         //Setting the credits
-        credits = new Label("Credits", game.skin);
+        credits = new Label("Credits", game1.skin);
         credits.setFontScale(2);
         //credits.setWidth(credits.getWidth() * 2);
         credits.setPosition((Constants.WIDTH / 2) - (credits.getWidth() / 2), (Constants.HEIGHT / 2) + 250, Align.center);
 
-        developer = new Label("Developed by", game.skin);
+        developer = new Label("Developed by", game1.skin);
         developer.setFontScale(1.5f);
         developer.setWidth(developer.getWidth() * 1.5f);
         developer.setPosition((Constants.WIDTH / 2) - (developer.getWidth() / 2), credits.getY() - 50);
 
-        myName = new Label("Ernesto Gonzalez Chacon", game.skin);
+        myName = new Label("Ernesto Gonzalez Chacon", game1.skin);
         myName.setPosition((Constants.WIDTH / 2) - (myName.getWidth() / 2), credits.getY() - 100);
 
-        sprites = new Label("Sprites by", game.skin);
+        sprites = new Label("Sprites by", game1.skin);
         sprites.setFontScale(1.5f);
         sprites.setWidth(sprites.getWidth() * 1.5f);
         sprites.setPosition((Constants.WIDTH / 2) - (sprites.getWidth() / 2), credits.getY() - 150);
@@ -68,15 +64,15 @@ public class CreditsScreen implements Screen {
         spritesCreators = new Label("Zabin, Daneeklu, Jetrel, Hyptosis, Redshrike, Bertram, Daniel Cook, Saphy and Sharm", game.skin);
         spritesCreators.setPosition((Constants.WIDTH / 2) - (spritesCreators.getWidth() / 2), credits.getY() - 200);
 
-        tutored = new Label("Tutored by", game.skin);
+        tutored = new Label("Tutored by", game1.skin);
         tutored.setFontScale(1.5f);
         tutored.setWidth(tutored.getWidth() * 1.5f);
         tutored.setPosition((Constants.WIDTH / 2) - (tutored.getWidth() / 2), credits.getY() - 250);
 
-        tutor = new Label("Daniel Borrajo Millan", game.skin);
+        tutor = new Label("Daniel Borrajo Millan", game1.skin);
         tutor.setPosition((Constants.WIDTH / 2) - (tutor.getWidth() / 2), credits.getY() - 300);
 
-        returnMain = new TextButton("Back to Main Menu", game.skin);
+        returnMain = new TextButton("Back to Main Menu", game1.skin);
         returnMain.setPosition((Constants.WIDTH / 2) - (returnMain.getWidth() / 2), credits.getY() - 400);
         returnMain.setBounds(returnMain.getX(), returnMain.getY(), returnMain.getWidth(), returnMain.getHeight());
 

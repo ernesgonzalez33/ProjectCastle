@@ -1,7 +1,5 @@
 package com.projectcastle.game.util;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -10,15 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 public class TextureTools {
 
     public TextureTools(){}
-
-    public TextureRegion[][] divide(Texture texture, int i, int j, int tileWidth, int tileHeight){
-
-        TextureRegion[][] regions;
-        regions = TextureRegion.split(texture, tileWidth, tileHeight);
-
-        return regions;
-
-    }
 
     public Vector2 positionConverter (int x, int y){
 
