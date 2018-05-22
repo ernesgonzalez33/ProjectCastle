@@ -89,6 +89,7 @@ public class CreditsScreen implements Screen {
         returnMain.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                game.setMapCont(0);
                 game.setScreen(new MainMenuScreen(game));
             }
         });
