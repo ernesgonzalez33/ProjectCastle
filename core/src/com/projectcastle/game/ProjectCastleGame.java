@@ -54,7 +54,11 @@ public class ProjectCastleGame extends Game {
 	}
 
 	public void dispose(){
+
 		batch.dispose();
+		manager.dispose();
+		skin.dispose();
+
 	}
 
 	public int getMapCont() {
