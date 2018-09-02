@@ -102,7 +102,7 @@ public class Enemy extends Unit {
         //Find the positions I can get
         getMap().highlightTilesToMove(this);
 
-        //Find the best nearest position to the hero I have to pursue
+        //Find the nearest position to the hero I have to pursue
         Vector2 auxiliaryVector = new Vector2();
         float distance = 10000;
         for (Vector2 position : this.getCanMovePositions()){
@@ -205,7 +205,7 @@ public class Enemy extends Unit {
         //Find the positions I can get
         getMap().highlightTilesToMove(this);
 
-        //Find the best nearest position to the hero I have to pursue
+        //Find the nearest position to the hero I have to pursue
         Vector2 auxiliaryVector = new Vector2();
         float distance = 10000;
         for (Vector2 position : this.getCanMovePositions()){

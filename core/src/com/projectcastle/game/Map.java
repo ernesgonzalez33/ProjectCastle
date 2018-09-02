@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 public class Map implements InputProcessor {
 
-    public static final String TAG = Map.class.getName();
+    private static final String TAG = Map.class.getName();
     private TiledMap tiledMap;
     public boolean gameOver;
     public boolean victory;
