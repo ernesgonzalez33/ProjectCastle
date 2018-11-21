@@ -6,12 +6,6 @@ Tactical RPG with only one level too easy to beat. It can get bigger.
 
 Run the executable jar.
 
-To make the executable:
-
-```
-./gradlew desktop:dist
-```
-
 ## How to play
 
 ### Main Menu Screen
