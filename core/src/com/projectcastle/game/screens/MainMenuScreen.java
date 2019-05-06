@@ -59,7 +59,7 @@ public class MainMenuScreen implements Screen {
         //Adding the actors to the stage
         stage.addActor(title);
         stage.addActor(easy);
-        //stage.addActor(debug);
+        stage.addActor(debug);
         stage.addActor(medium);
         stage.addActor(hard);
 
@@ -74,8 +74,8 @@ public class MainMenuScreen implements Screen {
         debug.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //game.setScreen(new GameplayScreen(game, Enums.Level.DEBUG));
-                game.setScreen(new CreditsScreen(game));
+                game.setScreen(new GameplayScreen(game, Enums.Level.DEBUG));
+                //game.setScreen(new CreditsScreen(game));
             }
         });
 

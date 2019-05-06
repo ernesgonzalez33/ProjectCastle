@@ -1,5 +1,6 @@
 package com.projectcastle.game.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -13,6 +14,8 @@ import com.projectcastle.game.util.Enums;
  */
 
 public class Hero extends Unit {
+
+    public boolean isAgent = false;
 
     public Hero(float positionX, float positionY, int attack, int defense, final String name, int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, final Map map) {
         super(positionX, positionY, attack, defense, name, health, region, moveLimit, map);
@@ -39,9 +42,22 @@ public class Hero extends Unit {
         });
     }
 
+    public Hero(float positionX, float positionY, int attack, int defense, final String name, int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, final Map map, boolean isAgent) {
+        super(positionX, positionY, attack, defense, name, health, region, moveLimit, map);
+
+        this.isAgent = isAgent;
+
+    }
+
     Hero (int defense){
 
         super(defense);
+
+    }
+
+    public void runAgent(){
+
+        Gdx.app.log("Hero", "El agente corre");
 
     }
 

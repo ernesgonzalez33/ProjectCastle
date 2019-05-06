@@ -232,12 +232,12 @@ public class Map implements InputProcessor {
         // Creating the characters
         Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
         Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
-        Vector2 positionTheOne = textureTools.positionConverter(10, 5);
-        Vector2 positionTheTwo = textureTools.positionConverter(9, 5);
-        Hero number1 = new Hero(positionNumber1.x, positionNumber1.y, 15, 16, Constants.PRINCESS_NAME, 11, Assets.instance.unitsAssets.eirikaRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
-        Hero number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, Constants.PRINCE_NAME, 11, Assets.instance.unitsAssets.christianRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
+        Vector2 positionTheOne = textureTools.positionConverter(10, 15);
+        Vector2 positionTheTwo = textureTools.positionConverter(9, 15);
+        Hero number1 = new Hero(positionNumber1.x, positionNumber1.y, 15, 16, Constants.PRINCESS_NAME, 11, Assets.instance.unitsAssets.eirikaRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this, true);
+        Hero number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, Constants.PRINCE_NAME, 11, Assets.instance.unitsAssets.christianRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this, true);
         Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
-        Enemy theTwo = new Enemy(positionTheTwo.x, positionTheTwo.y, 10, 9, "TheOne", 20, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
+        Enemy theTwo = new Enemy(positionTheTwo.x, positionTheTwo.y, 10, 9, "TheTwo", 20, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
 
         //Adding the heroes and enemies to the Stage and their lists
         enemies.add(theOne);
@@ -248,6 +248,7 @@ public class Map implements InputProcessor {
         stage.addActor(number2);
         stage.addActor(theOne);
         stage.addActor(theTwo);
+        runAgent();
 
     }
 
@@ -422,6 +423,9 @@ public class Map implements InputProcessor {
         } else {
             game.activeTurn = Enums.Turn.PLAYER;
             game.turnMessage.setTurn(Enums.Turn.PLAYER);
+            if (getHeroes().get(0).isAgent){
+                runAgent();
+            }
         }
 
     }
@@ -452,6 +456,13 @@ public class Map implements InputProcessor {
             }
         }, Constants.DELAY);
 
+    }
+
+    private void runAgent(){
+        //Agente para los héroes
+        for (int ii = 0; ii < getHeroes().size; ii++){
+            getHeroes().get(ii).runAgent();
+        }
     }
 
     public TiledMap getTiledMap() {
