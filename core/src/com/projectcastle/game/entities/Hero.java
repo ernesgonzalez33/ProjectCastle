@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.projectcastle.game.Map;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.util.Enums;
@@ -58,6 +59,8 @@ public class Hero extends Unit {
     public void runAgent(){
 
         Gdx.app.log("Hero", "El agente corre");
+        this.addAction(Actions.moveTo(this.getX()+32, this.getY()+32, 1));
+        this.setState(Enums.UnitState.ATTACKED);
 
     }
 
