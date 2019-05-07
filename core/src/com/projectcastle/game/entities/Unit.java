@@ -36,7 +36,7 @@ public class Unit extends Actor {
     private Map map;
     private ArrayList<Vector2> canMovePositions;
 
-    Unit(float positionX, float positionY, int attack, int defense, String name, final int health, TextureRegion region, int moveLimit, Map map) {
+    public Unit(float positionX, float positionY, int attack, int defense, String name, final int health, TextureRegion region, int moveLimit, Map map) {
 
         this.setPosition(positionX, positionY);
         this.setBounds(this.getX(), this.getY(), region.getRegionWidth(), region.getRegionHeight());

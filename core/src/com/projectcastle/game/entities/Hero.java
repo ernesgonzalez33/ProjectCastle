@@ -16,7 +16,7 @@ import com.projectcastle.game.util.Enums;
 
 public class Hero extends Unit {
 
-    public boolean isAgent = false;
+//    public boolean isAgent = false;
 
     public Hero(float positionX, float positionY, int attack, int defense, final String name, int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, final Map map) {
         super(positionX, positionY, attack, defense, name, health, region, moveLimit, map);
@@ -43,12 +43,12 @@ public class Hero extends Unit {
         });
     }
 
-    public Hero(float positionX, float positionY, int attack, int defense, final String name, int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, final Map map, boolean isAgent) {
-        super(positionX, positionY, attack, defense, name, health, region, moveLimit, map);
-
-        this.isAgent = isAgent;
-
-    }
+//    public Hero(float positionX, float positionY, int attack, int defense, final String name, int health, TextureRegion region, final ActionMenu actionMenu, int moveLimit, final Map map, boolean isAgent) {
+//        super(positionX, positionY, attack, defense, name, health, region, moveLimit, map);
+//
+//        this.isAgent = isAgent;
+//
+//    }
 
     Hero (int defense){
 
@@ -56,12 +56,5 @@ public class Hero extends Unit {
 
     }
 
-    public void runAgent(){
-
-        Gdx.app.log("Hero", "El agente corre");
-        this.addAction(Actions.moveTo(this.getX()+32, this.getY()+32, 1));
-        this.setState(Enums.UnitState.ATTACKED);
-
-    }
 
 }

@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.projectcastle.game.ai.HeroAgent;
 import com.projectcastle.game.entities.Enemy;
 import com.projectcastle.game.entities.Hero;
 import com.projectcastle.game.entities.Unit;
@@ -40,6 +41,7 @@ public class Map implements InputProcessor {
     public boolean victory;
     SnapshotArray<Enemy> enemies;
     SnapshotArray<Hero> heroes;
+    SnapshotArray<HeroAgent> agents;
     TextureTools textureTools;
     public Stage stage;
     public Viewport viewport;
@@ -61,6 +63,7 @@ public class Map implements InputProcessor {
         victory = false;
         enemies = new SnapshotArray<Enemy>();
         heroes = new SnapshotArray<Hero>();
+        agents = new SnapshotArray<HeroAgent>();
         enemiesNewPositions = new SnapshotArray<Vector2>();
         textureTools = new TextureTools();
         stage = new Stage();
@@ -234,15 +237,15 @@ public class Map implements InputProcessor {
         Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
         Vector2 positionTheOne = textureTools.positionConverter(10, 15);
         Vector2 positionTheTwo = textureTools.positionConverter(9, 15);
-        Hero number1 = new Hero(positionNumber1.x, positionNumber1.y, 15, 16, Constants.PRINCESS_NAME, 11, Assets.instance.unitsAssets.eirikaRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this, true);
-        Hero number2 = new Hero(positionNumber2.x, positionNumber2.y, 15, 7, Constants.PRINCE_NAME, 11, Assets.instance.unitsAssets.christianRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this, true);
+        HeroAgent number1 = new HeroAgent(positionNumber1.x, positionNumber1.y, 15, 16, Constants.PRINCESS_NAME, 11, Assets.instance.unitsAssets.eirikaRegion, Constants.MOVE_LIMIT, this);
+        HeroAgent number2 = new HeroAgent(positionNumber2.x, positionNumber2.y, 15, 7, Constants.PRINCE_NAME, 11, Assets.instance.unitsAssets.christianRegion, Constants.MOVE_LIMIT, this);
         Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
         Enemy theTwo = new Enemy(positionTheTwo.x, positionTheTwo.y, 10, 9, "TheTwo", 20, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
 
         //Adding the heroes and enemies to the Stage and their lists
         enemies.add(theOne);
-        heroes.add(number1);
-        heroes.add(number2);
+        agents.add(number1);
+        agents.add(number2);
         enemies.add(theTwo);
         stage.addActor(number1);
         stage.addActor(number2);
@@ -409,6 +412,9 @@ public class Map implements InputProcessor {
         for (Hero hero : getHeroes()) {
             hero.setState(Enums.UnitState.IDLE);
         }
+        for (HeroAgent agent : getAgents()) {
+            agent.setState(Enums.UnitState.IDLE);
+        }
 
         //Changing turn and displaying turn message
         if (game.activeTurn == Enums.Turn.PLAYER) {
@@ -423,7 +429,7 @@ public class Map implements InputProcessor {
         } else {
             game.activeTurn = Enums.Turn.PLAYER;
             game.turnMessage.setTurn(Enums.Turn.PLAYER);
-            if (getHeroes().get(0).isAgent){
+            if (getAgents().size > 0){
                 runAgent();
             }
         }
@@ -431,6 +437,7 @@ public class Map implements InputProcessor {
     }
 
     public void verifyTurnChange(){
+        if (getHeroes().size == 0) return;
         int cont = 0;
         for (Hero hero: this.getHeroes()){
             if (hero.getState() == Enums.UnitState.ATTACKED){
@@ -460,9 +467,10 @@ public class Map implements InputProcessor {
 
     private void runAgent(){
         //Agente para los héroes
-        for (int ii = 0; ii < getHeroes().size; ii++){
-            getHeroes().get(ii).runAgent();
+        for (int ii = 0; ii < getAgents().size; ii++){
+            getAgents().get(ii).runAgent();
         }
+        changeTurn();
     }
 
     public TiledMap getTiledMap() {
@@ -499,6 +507,10 @@ public class Map implements InputProcessor {
 
     public SnapshotArray<Hero> getHeroes() {
         return heroes;
+    }
+
+    public SnapshotArray<HeroAgent> getAgents() {
+        return agents;
     }
 
     public void setHeroes(SnapshotArray<Hero> heroes) {
