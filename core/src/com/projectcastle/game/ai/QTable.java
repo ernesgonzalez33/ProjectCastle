@@ -21,8 +21,8 @@ public class QTable {
         this.actions = actions;
         rewards = new int[Constants.MAX_EPISODES];
 
-        for (int ii = 0; ii < states - 1; ii++){
-            for (int jj = 0; jj < actions - 1; jj++){
+        for (int ii = 0; ii < states; ii++){
+            for (int jj = 0; jj < actions; jj++){
                 qTable[ii][jj] = 0.0f;
             }
         }
@@ -35,8 +35,8 @@ public class QTable {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("/Users/ernestogonzalezchacon/Documents/TFG/ProjectCastle/Docs/qTable.txt"));
 
-            for (int i = 0; i < this.states - 1; i++) {
-                for (int j = 0; j < this.actions - 1; j++) {
+            for (int i = 0; i < this.states; i++) {
+                for (int j = 0; j < this.actions; j++) {
                     bw.write(this.qTable[i][j] + " ");
                 }
                 bw.newLine();
