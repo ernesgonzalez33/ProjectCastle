@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.projectcastle.game.ai.HeroAgent;
+import com.projectcastle.game.ai.QTable;
 import com.projectcastle.game.entities.Enemy;
 import com.projectcastle.game.entities.Hero;
 import com.projectcastle.game.entities.Unit;
@@ -55,6 +56,7 @@ public class Map implements InputProcessor {
     InputProcessorHelp inputProcessorHelp;
     public SnapshotArray<Vector2> enemiesNewPositions;
     public Enums.Level selectedLevel;
+    QTable qTable;
 
 
     public Map(int mapID, final ProjectCastleGame game){
@@ -252,6 +254,8 @@ public class Map implements InputProcessor {
         stage.addActor(theOne);
         stage.addActor(theTwo);
         runAgent();
+
+        qTable = new QTable(Constants.STATES, Constants.ACTIONS);
 
     }
 

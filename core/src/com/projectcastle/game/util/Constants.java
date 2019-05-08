@@ -92,4 +92,8 @@ public class Constants {
     public static final List<Integer> FORBIDDEN_ID_CELLS =
             Collections.unmodifiableList(Arrays.asList(0,1,2,21,23,42,43,44,70,126,127,128,147,149,168,169,170,171,172));
 
+    //QTable
+    public static final int STATES = 4;
+    public static final int ACTIONS = 26;
+
 }

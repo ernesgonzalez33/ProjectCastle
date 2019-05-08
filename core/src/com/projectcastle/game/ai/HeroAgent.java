@@ -16,7 +16,7 @@ public class HeroAgent extends Unit {
     public void runAgent(){
 
         Gdx.app.log("Hero", "El agente corre");
-        this.addAction(Actions.moveTo(this.getX()+32, this.getY()+32, 1));
+        this.addAction(Actions.moveTo(this.getX() + 32, this.getY() + 32, 1));
         this.setState(Enums.UnitState.ATTACKED);
 
     }
