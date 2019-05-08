@@ -50,10 +50,17 @@ public class HeroAgent extends Unit {
 
     }
 
-    public void setStateQLearning(boolean enemyInZone, boolean canAttack){
+    public void setStateQLearning(){
 
-        this.stateQLearning.enemyInZone = enemyInZone;
+        boolean canAttack = false;
+        for (Enemy enemy : getMap().getEnemies()){
+            if (this.isAdjacent(enemy)){
+               canAttack = true;
+            }
+        }
         this.stateQLearning.canAttack = canAttack;
+        this.stateQLearning.enemyInZone = enemyInZone();
+
 
     }
 }

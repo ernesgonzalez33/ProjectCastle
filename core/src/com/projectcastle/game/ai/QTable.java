@@ -12,7 +12,7 @@ public class QTable {
     float [][] qTable;
     int states;
     int actions;
-    int rewards[];
+    public int rewards[];
 
     public QTable (int states, int actions){
 

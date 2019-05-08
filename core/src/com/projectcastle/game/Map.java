@@ -59,6 +59,7 @@ public class Map implements InputProcessor {
     //Agents
     public QTable qTable;
     SnapshotArray<HeroAgent> agents;
+    public int rewardsCurrentEpisode;
 
 
     public Map(int mapID, final ProjectCastleGame game){
@@ -270,17 +271,13 @@ public class Map implements InputProcessor {
         stage.addActor(theTwo);
 
         //Setting initial state
-
-        boolean canAttack = false;
         for (HeroAgent agent : getAgents()){
-            for (Enemy enemy : getEnemies()){
-                if (agent.isAdjacent(enemy)){
-                    canAttack = true;
-                }
-            }
-            agent.setStateQLearning(agent.enemyInZone(), canAttack);
+            agent.setStateQLearning();
         }
 
+        //Setting rewards
+        rewardsCurrentEpisode = 0;
+        //Running agent
         runAgent();
 
 
