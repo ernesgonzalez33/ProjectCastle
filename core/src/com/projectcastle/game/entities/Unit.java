@@ -70,7 +70,7 @@ public class Unit extends Actor {
                 getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
     }
 
-    void setStatsAfterAttack (final Unit attackingUnit, final Unit defendingUnit){
+    public void setStatsAfterAttack (final Unit attackingUnit, final Unit defendingUnit){
 
         //Setting health
         int damage = attackingUnit.getAttack() - defendingUnit.getDefense();

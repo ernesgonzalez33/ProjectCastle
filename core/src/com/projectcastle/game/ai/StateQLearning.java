@@ -12,4 +12,20 @@ public class StateQLearning {
 
     }
 
+    public int getStateID(){
+
+        if (canAttack) {
+            if (enemyInZone)
+                return 0;
+            else
+                return 1;
+        } else {
+            if (enemyInZone)
+                return 2;
+            else
+                return 3;
+        }
+
+    }
+
 }

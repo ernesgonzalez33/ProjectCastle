@@ -94,15 +94,14 @@ public class Constants {
 
     //Learning
     public static final int STATES = 4;
-    public static final int ACTIONS = 26;
+    public static final int ACTIONS = 27;
     public static final int MAX_EPISODES = 100;
     public static final int MAX_STEPS = 50;
-    public static final float LEARNING_RATE = 0.6f;
-    public static final float DISCOUNT_RATE = 0.99f;
-    public static final int EXPLORATION_RATE = 1;
+    public static final double LEARNING_RATE = 0.6;
+    public static final double DISCOUNT_RATE = 0.99;
     public static final int MAX_EXPLORATION_RATE = 1;
-    public static final float MIN_EXPLORATION_RATE = 0.01f;
-    public static final float EXPLORATION_DECAY_RATE = 0.01f;
+    public static final double MIN_EXPLORATION_RATE = 0.01;
+    public static final double EXPLORATION_DECAY_RATE = 0.01;
 
 
 }
