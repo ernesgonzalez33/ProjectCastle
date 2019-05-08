@@ -255,6 +255,7 @@ public class Map implements InputProcessor {
         stage.addActor(theTwo);
         runAgent();
 
+        //Starting Q-Table
         qTable = new QTable(Constants.STATES, Constants.ACTIONS);
 
     }
