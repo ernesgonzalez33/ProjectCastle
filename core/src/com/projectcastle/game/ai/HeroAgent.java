@@ -28,14 +28,11 @@ public class HeroAgent extends Unit {
 
     public void runAgent(){
 
-        explorationRateThreshold = Math.random();
-        if (explorationRateThreshold > explorationRate){
+//        explorationRateThreshold = Math.random();
+//        if (explorationRateThreshold > explorationRate){
+//
+//        }
 
-        }
-
-//        Gdx.app.log("Hero", "El agente corre");
-//        this.addAction(Actions.moveTo(this.getX(), this.getY() + 32, 1));
-//        this.setState(Enums.UnitState.ATTACKED);
 
     }
 
@@ -88,155 +85,206 @@ public class HeroAgent extends Unit {
                 positionAux.set(this.getX(), this.getY() + 3 * Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 1:
                 positionAux.set(this.getX() - Constants.TILE_SIZE, this.getY() + 2 * Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 2:
                 positionAux.set(this.getX(), this.getY() + 2 * Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 3:
                 positionAux.set(this.getX() + Constants.TILE_SIZE, this.getY() + 2 * Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 4:
                 positionAux.set(this.getX() - 2*Constants.TILE_SIZE, this.getY() + Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 5:
                 positionAux.set(this.getX() - Constants.TILE_SIZE, this.getY() + Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 6:
                 positionAux.set(this.getX(), this.getY() + Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 7:
                 positionAux.set(this.getX() + Constants.TILE_SIZE, this.getY() + Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 8:
                 positionAux.set(this.getX() + 2*Constants.TILE_SIZE, this.getY() + Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 9:
                 positionAux.set(this.getX() - 3*Constants.TILE_SIZE, this.getY());
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 10:
                 positionAux.set(this.getX() - 2*Constants.TILE_SIZE, this.getY());
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 11:
                 positionAux.set(this.getX() - Constants.TILE_SIZE, this.getY());
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 12:
                 positionAux.set(this.getX(), this.getY());
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 13:
                 positionAux.set(this.getX() + Constants.TILE_SIZE, this.getY());
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 14:
                 positionAux.set(this.getX() + 2*Constants.TILE_SIZE, this.getY());
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 15:
                 positionAux.set(this.getX() + 3*Constants.TILE_SIZE, this.getY());
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 16:
                 positionAux.set(this.getX() - 2*Constants.TILE_SIZE, this.getY() - Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 17:
                 positionAux.set(this.getX() - Constants.TILE_SIZE, this.getY() - Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 18:
                 positionAux.set(this.getX(), this.getY() - Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 19:
                 positionAux.set(this.getX() + Constants.TILE_SIZE, this.getY() - Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 20:
                 positionAux.set(this.getX() + 2*Constants.TILE_SIZE, this.getY() - Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 21:
                 positionAux.set(this.getX() - Constants.TILE_SIZE, this.getY() - 2*Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 22:
                 positionAux.set(this.getX(), this.getY() - 2*Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 23:
                 positionAux.set(this.getX() + Constants.TILE_SIZE, this.getY() - 2*Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 24:
                 positionAux.set(this.getX(), this.getY() - 3*Constants.TILE_SIZE);
                 if (getCanMovePositions().contains(positionAux)){
                     this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 25: //Ataca
                 if (this.getState() == Enums.UnitState.MOVED){
                     attack();
+                    this.setState(Enums.UnitState.ATTACKED);
                 }
                 break;
             case 26: //No ataca
