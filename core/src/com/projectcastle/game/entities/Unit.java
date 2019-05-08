@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.Timer;
 import com.projectcastle.game.Map;
+import com.projectcastle.game.ai.HeroAgent;
 import com.projectcastle.game.screens.DamageOverlay;
 import com.projectcastle.game.screens.GameOverScreen;
 import com.projectcastle.game.screens.GameplayScreen;
@@ -110,10 +111,22 @@ public class Unit extends Actor {
                     map.game.setMapCont(1);
                     map.game.setScreen(new GameplayScreen(map.game, map.selectedLevel));
                 }
-            } else {
+            } else if (defendingUnit.getClass().getName().equals(Constants.HERO_CLASS_NAME)) {
                 getMap().getHeroes().removeValue((Hero) defendingUnit, true);
                 if (map.getHeroes().size == 0){
                     map.game.setScreen(new GameOverScreen(map.game));
+                }
+            } else {
+                getMap().getAgents().removeValue((HeroAgent) defendingUnit, true);
+                //Refuerzo negativo por morir
+
+                if (map.getAgents().size == 0){
+                    if (map.game.episodesCont == Constants.MAX_EPISODES) {
+                        map.qTable.printQTable();
+                        map.game.setScreen(new GameOverScreen(map.game));
+                    }
+                    map.game.episodesCont++;
+                    map.initializeDebugMap();
                 }
             }
 
@@ -258,13 +271,18 @@ public class Unit extends Actor {
         return false;
     }
 
-    SnapshotArray<Hero> canAttack(Vector2 position){
+    SnapshotArray<Unit> canAttack(Vector2 position){
 
-        SnapshotArray<Hero> heroesICanAttack = new SnapshotArray<Hero>();
+        SnapshotArray<Unit> heroesICanAttack = new SnapshotArray<Unit>();
 
         for (Hero hero:map.getHeroes()){
             if (isAdjacent(position, hero)){
                 heroesICanAttack.add(hero);
+            }
+        }
+        for (HeroAgent agent:map.getAgents()){
+            if (isAdjacent(position, agent)){
+                heroesICanAttack.add(agent);
             }
         }
 

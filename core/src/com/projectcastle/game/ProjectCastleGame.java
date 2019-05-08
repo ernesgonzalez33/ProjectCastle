@@ -26,6 +26,7 @@ public class ProjectCastleGame extends Game {
 	public Enums.Turn activeTurn;
 	public Timer timer;
 	private int mapCont;
+	public int episodesCont;
 
 	@Override
 	public void create() {
@@ -34,6 +35,7 @@ public class ProjectCastleGame extends Game {
 		batch = new SpriteBatch();
 		timer = new Timer();
 		mapCont = 0;
+		episodesCont = 0;
 
 		//Creating Action Menu and Turn Message
 		skin = new Skin(Gdx.files.internal(Constants.FLAT_SKIN));

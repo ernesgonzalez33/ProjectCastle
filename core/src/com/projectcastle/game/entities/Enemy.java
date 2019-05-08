@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.Timer;
 import com.projectcastle.game.Map;
+import com.projectcastle.game.ai.HeroAgent;
 import com.projectcastle.game.screens.ActionMenu;
 import com.projectcastle.game.util.Constants;
 import com.projectcastle.game.util.Enums;
@@ -67,10 +68,10 @@ public class Enemy extends Unit {
     public void runAI(){
 
         //If the enemy can attack, it attacks depending on the selectAttack method result
-        SnapshotArray<Hero> heroesICanAttack =  canAttackInZone();
+        SnapshotArray<Unit> heroesICanAttack =  canAttackInZone();
 
         if (heroesICanAttack.size > 0){
-            Hero heroToAttack = selectAttack(heroesICanAttack);
+            Unit heroToAttack = selectAttack(heroesICanAttack);
             //Move to an adjacent space where the hero is
             Vector2 positionToMove = moveToAdjacent(heroToAttack);
             positionToMove = getMap().getTextureTools().tileFinder((int) positionToMove.x, (int) positionToMove.y);
@@ -97,7 +98,7 @@ public class Enemy extends Unit {
 
     }
 
-    private Vector2 moveToAdjacent(Hero heroToAttack){
+    private Vector2 moveToAdjacent(Unit heroToAttack){
 
         //Find the positions I can get
         getMap().highlightTilesToMove(this);
@@ -121,9 +122,9 @@ public class Enemy extends Unit {
 
     }
 
-    private SnapshotArray<Hero> canAttackInZone(){
+    private SnapshotArray<Unit> canAttackInZone(){
 
-        SnapshotArray<Hero> heroesICanAttack = new SnapshotArray<Hero>();
+        SnapshotArray<Unit> heroesICanAttack = new SnapshotArray<Unit>();
 
         //Find the positions I can get
         getMap().highlightTilesToMove(this);
@@ -132,6 +133,11 @@ public class Enemy extends Unit {
             for (Hero hero:getMap().getHeroes()){
                 if (isAdjacent(positionItCanMove, hero)){
                     heroesICanAttack.add(hero);
+                }
+            }
+            for (HeroAgent agent:getMap().getAgents()){
+                if (isAdjacent(positionItCanMove, agent)){
+                    heroesICanAttack.add(agent);
                 }
             }
         }
@@ -164,18 +170,18 @@ public class Enemy extends Unit {
 
     }
 
-    private Hero selectAttack(SnapshotArray<Hero> heroes){
+    private Unit selectAttack(SnapshotArray<Unit> heroes){
 
         //Hero to compare defense
-        Hero auxiliaryHero = heroes.get(0);
+        Unit auxiliaryHero = heroes.get(0);
 
-        for (Hero hero : heroes){
+        for (Unit hero : heroes){
             //If I can kill it, I attack it
             if ((this.getAttack() - hero.getDefense()) > hero.getHealth()){
                 return hero;
             } else {
                 if (hero.getDefense() < auxiliaryHero.getDefense()){
-                    auxiliaryHero = hero;
+                    auxiliaryHero = (Unit) hero;
                 }
             }
         }
@@ -184,7 +190,7 @@ public class Enemy extends Unit {
 
     }
 
-    private void attackHero (final Hero hero){
+    private void attackHero (final Unit hero){
 
         getMap().game.timer.scheduleTask(new Timer.Task() {
             @Override
@@ -227,7 +233,7 @@ public class Enemy extends Unit {
     private Vector2 findHeroToPursue(){
 
         //Hero to compare defense
-        Hero auxiliaryHero = new Hero(1000);
+        Unit auxiliaryHero = new Unit(1000);
 
         for (Hero hero : this.getMap().getHeroes()){
             //If I can kill it, I attack it
@@ -236,6 +242,16 @@ public class Enemy extends Unit {
             } else {
                 if (hero.getDefense() < auxiliaryHero.getDefense()){
                     auxiliaryHero = hero;
+                }
+            }
+        }
+        for (HeroAgent agent : this.getMap().getAgents()){
+            //If I can kill it, I attack it
+            if ((this.getAttack() - agent.getDefense()) > agent.getHealth()){
+                return new Vector2(agent.getX(), agent.getY());
+            } else {
+                if (agent.getDefense() < auxiliaryHero.getDefense()){
+                    auxiliaryHero = agent;
                 }
             }
         }

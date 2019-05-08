@@ -56,7 +56,7 @@ public class Map implements InputProcessor {
     InputProcessorHelp inputProcessorHelp;
     public SnapshotArray<Vector2> enemiesNewPositions;
     public Enums.Level selectedLevel;
-    QTable qTable;
+    public QTable qTable;
 
 
     public Map(int mapID, final ProjectCastleGame game){
@@ -73,6 +73,8 @@ public class Map implements InputProcessor {
         viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
+        //Starting Q-Table
+        qTable = new QTable(Constants.STATES, Constants.ACTIONS);
 
         //Tiled Map
         switch (mapID){
@@ -232,15 +234,26 @@ public class Map implements InputProcessor {
 
     }
 
-    private void initializeDebugMap(){
+    public void initializeDebugMap(){
+
+        //Erase all that was before
+        for (Enemy enemy : enemies){
+            enemy.remove();
+        }
+        for (Hero hero : heroes){
+            hero.remove();
+        }
+        for (HeroAgent agent : agents){
+            agent.remove();
+        }
 
         // Creating the characters
         Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
         Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
         Vector2 positionTheOne = textureTools.positionConverter(10, 15);
         Vector2 positionTheTwo = textureTools.positionConverter(9, 15);
-        HeroAgent number1 = new HeroAgent(positionNumber1.x, positionNumber1.y, 15, 16, Constants.PRINCESS_NAME, 11, Assets.instance.unitsAssets.eirikaRegion, Constants.MOVE_LIMIT, this);
-        HeroAgent number2 = new HeroAgent(positionNumber2.x, positionNumber2.y, 15, 7, Constants.PRINCE_NAME, 11, Assets.instance.unitsAssets.christianRegion, Constants.MOVE_LIMIT, this);
+        HeroAgent number1 = new HeroAgent(positionNumber1.x, positionNumber1.y, 15, 1, Constants.PRINCESS_NAME, 11, Assets.instance.unitsAssets.eirikaRegion, Constants.MOVE_LIMIT, this);
+        HeroAgent number2 = new HeroAgent(positionNumber2.x, positionNumber2.y, 15, 0, Constants.PRINCE_NAME, 11, Assets.instance.unitsAssets.christianRegion, Constants.MOVE_LIMIT, this);
         Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
         Enemy theTwo = new Enemy(positionTheTwo.x, positionTheTwo.y, 10, 9, "TheTwo", 20, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
 
@@ -255,8 +268,6 @@ public class Map implements InputProcessor {
         stage.addActor(theTwo);
         runAgent();
 
-        //Starting Q-Table
-        qTable = new QTable(Constants.STATES, Constants.ACTIONS);
 
     }
 
