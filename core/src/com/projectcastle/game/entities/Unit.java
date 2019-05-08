@@ -113,20 +113,21 @@ public class Unit extends Actor {
                 }
             } else if (defendingUnit.getClass().getName().equals(Constants.HERO_CLASS_NAME)) {
                 getMap().getHeroes().removeValue((Hero) defendingUnit, true);
-                if (map.getHeroes().size == 0){
+                if (map.getHeroes().size == 0 && map.getAgents().size == 0){
                     map.game.setScreen(new GameOverScreen(map.game));
                 }
             } else {
                 getMap().getAgents().removeValue((HeroAgent) defendingUnit, true);
-                //Refuerzo negativo por morir
+                //TODO: Refuerzo negativo por morir
 
                 if (map.getAgents().size == 0){
                     if (map.game.episodesCont == Constants.MAX_EPISODES) {
                         map.qTable.printQTable();
                         map.game.setScreen(new GameOverScreen(map.game));
+                    } else {
+                        map.game.episodesCont++;
+                        map.initializeDebugMap();
                     }
-                    map.game.episodesCont++;
-                    map.initializeDebugMap();
                 }
             }
 
@@ -210,7 +211,7 @@ public class Unit extends Actor {
         return canMovePositions;
     }
 
-    boolean isAdjacent(Unit attackedUnit){
+    public boolean isAdjacent(Unit attackedUnit){
 
         int attackingX = (int) (this.getX() / Constants.TILE_SIZE);
         int attackingY = (int) (this.getY() / Constants.TILE_SIZE);

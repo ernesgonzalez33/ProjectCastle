@@ -42,7 +42,6 @@ public class Map implements InputProcessor {
     public boolean victory;
     SnapshotArray<Enemy> enemies;
     SnapshotArray<Hero> heroes;
-    SnapshotArray<HeroAgent> agents;
     TextureTools textureTools;
     public Stage stage;
     public Viewport viewport;
@@ -56,7 +55,10 @@ public class Map implements InputProcessor {
     InputProcessorHelp inputProcessorHelp;
     public SnapshotArray<Vector2> enemiesNewPositions;
     public Enums.Level selectedLevel;
+
+    //Agents
     public QTable qTable;
+    SnapshotArray<HeroAgent> agents;
 
 
     public Map(int mapID, final ProjectCastleGame game){
@@ -266,6 +268,19 @@ public class Map implements InputProcessor {
         stage.addActor(number2);
         stage.addActor(theOne);
         stage.addActor(theTwo);
+
+        //Setting initial state
+
+        boolean canAttack = false;
+        for (HeroAgent agent : getAgents()){
+            for (Enemy enemy : getEnemies()){
+                if (agent.isAdjacent(enemy)){
+                    canAttack = true;
+                }
+            }
+            agent.setStateQLearning(agent.enemyInZone(), canAttack);
+        }
+
         runAgent();
 
 

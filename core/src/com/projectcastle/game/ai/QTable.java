@@ -1,6 +1,7 @@
 package com.projectcastle.game.ai;
 
 import com.badlogic.gdx.Gdx;
+import com.projectcastle.game.util.Constants;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -11,12 +12,14 @@ public class QTable {
     float [][] qTable;
     int states;
     int actions;
+    int rewards[];
 
     public QTable (int states, int actions){
 
         qTable = new float[states][actions];
         this.states = states;
         this.actions = actions;
+        rewards = new int[Constants.MAX_EPISODES];
 
         for (int ii = 0; ii < states - 1; ii++){
             for (int jj = 0; jj < actions - 1; jj++){

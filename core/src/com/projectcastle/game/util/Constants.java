@@ -64,7 +64,7 @@ public class Constants {
     public static final double ATTACK_CHANCE = 0.85;
 
     //Timer
-    public static final int DELAY = 3;
+    public static final int DELAY = 0;
 
     //Difficulty buttons
     public static final int DIFFICULTY_WIDTH = 100;
@@ -95,7 +95,14 @@ public class Constants {
     //Learning
     public static final int STATES = 4;
     public static final int ACTIONS = 26;
-    public static final int MAX_EPISODES = 1;
-    public static final int MAX_STEPS = 100;
+    public static final int MAX_EPISODES = 100;
+    public static final int MAX_STEPS = 50;
+    public static final float LEARNING_RATE = 0.6f;
+    public static final float DISCOUNT_RATE = 0.99f;
+    public static final int EXPLORATION_RATE = 1;
+    public static final int MAX_EXPLORATION_RATE = 1;
+    public static final float MIN_EXPLORATION_RATE = 0.01f;
+    public static final float EXPLORATION_DECAY_RATE = 0.01f;
+
 
 }
