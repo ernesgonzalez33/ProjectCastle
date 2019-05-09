@@ -115,22 +115,13 @@ public class Unit extends Actor {
                         map.game.episodesCont++;
                         //Actualizo las recompensas de todos los episodios
                         getMap().qTable.rewards[getMap().game.episodesCont - 1] = getMap().rewardsCurrentEpisode;
+                        getMap().qTable.win[getMap().game.episodesCont - 1] = true;
                         map.initializeDebugMap();
                     }
                 } else if (map.getEnemies().size == 0 && map.game.getMapCont() == 0){
                     map.game.setMapCont(1);
                     map.game.setScreen(new GameplayScreen(map.game, map.selectedLevel));
-                } /*else {
-                    if (map.game.episodesCont == Constants.MAX_EPISODES) {
-                        map.qTable.printQTable();
-                        map.game.setScreen(new GameOverScreen(map.game));
-                    } else {
-                        map.game.episodesCont++;
-                        //Actualizo las recompensas de todos los episodios
-                        getMap().qTable.rewards[getMap().game.episodesCont - 1] = getMap().rewardsCurrentEpisode;
-                        map.initializeDebugMap();
-                    }
-                } */
+                }
             } else if (defendingUnit.getClass().getName().equals(Constants.HERO_CLASS_NAME)) {
                 getMap().getHeroes().removeValue((Hero) defendingUnit, true);
                 if (map.getHeroes().size == 0 && map.getAgents().size == 0){
@@ -146,6 +137,7 @@ public class Unit extends Actor {
                         map.game.episodesCont++;
                         //Actualizo las recompensas de todos los episodios
                         getMap().qTable.rewards[getMap().game.episodesCont - 1] = getMap().rewardsCurrentEpisode;
+                        getMap().qTable.win[getMap().game.episodesCont - 1] = false;
                         map.initializeDebugMap();
                     }
                 }

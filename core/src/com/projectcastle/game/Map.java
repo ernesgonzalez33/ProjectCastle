@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.Timer;
@@ -60,6 +61,7 @@ public class Map implements InputProcessor {
     public QTable qTable;
     SnapshotArray<HeroAgent> agents;
     public int rewardsCurrentEpisode;
+    public int wins;
 
 
     public Map(int mapID, final ProjectCastleGame game){
@@ -78,6 +80,7 @@ public class Map implements InputProcessor {
         camera.setToOrtho(false, Constants.WIDTH, Constants.HEIGHT);
         //Starting Q-Table
         qTable = new QTable(Constants.STATES, Constants.ACTIONS);
+        wins = 0;
 
         //Tiled Map
         switch (mapID){
@@ -240,35 +243,40 @@ public class Map implements InputProcessor {
     public void initializeDebugMap(){
 
         //Erase all that was before
-        for (Enemy enemy : enemies){
-            enemies.removeValue(enemy, true);
+        for (int ii = 0; ii < getStage().getActors().size; ii++){
+            if (getStage().getActors().get(ii).getClass().getName() == Constants.ENEMY_CLASS_NAME || getStage().getActors().get(ii).getClass().getName() == Constants.HERO_AGENT_CLASS_NAME || getStage().getActors().get(ii).getClass().getName() == Constants.HERO_CLASS_NAME){
+                getStage().getActors().removeIndex(ii);
+                ii = 0;
+            }
         }
-        for (Hero hero : heroes){
-            heroes.removeValue(hero, true);
-        }
-        for (HeroAgent agent : agents){
-            agents.removeValue(agent, true);
-        }
+        heroes = new SnapshotArray<Hero>();
+        enemies = new SnapshotArray<Enemy>();
+        agents = new SnapshotArray<HeroAgent>();
+
 
         // Creating the characters
         Vector2 positionNumber1 = textureTools.positionConverter(9, 10);
         Vector2 positionNumber2 = textureTools.positionConverter(11, 10);
-        Vector2 positionTheOne = textureTools.positionConverter(8, 5);
-        Vector2 positionTheTwo = textureTools.positionConverter(12, 5);
+        Vector2 positionTheOne = textureTools.positionConverter(8, 4);
+        Vector2 positionTheTwo = textureTools.positionConverter(12, 4);
+        Vector2 positionTheThree = textureTools.positionConverter(9, 8);
         HeroAgent number1 = new HeroAgent(positionNumber1.x, positionNumber1.y, 9, 7, Constants.PRINCESS_NAME, 12, Assets.instance.unitsAssets.eirikaRegion, Constants.MOVE_LIMIT, this);
         HeroAgent number2 = new HeroAgent(positionNumber2.x, positionNumber2.y, 10, 5, Constants.PRINCE_NAME, 9, Assets.instance.unitsAssets.christianRegion, Constants.MOVE_LIMIT, this);
         Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 3, "TheOne", 7, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
         Enemy theTwo = new Enemy(positionTheTwo.x, positionTheTwo.y, 10, 3, "TheTwo", 7, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
+        Enemy theThree = new Enemy(positionTheThree.x, positionTheThree.y, 5, 5, "TheThree", 6, Assets.instance.unitsAssets.limeRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
 
         //Adding the heroes and enemies to the Stage and their lists
         enemies.add(theOne);
         agents.add(number1);
         agents.add(number2);
         enemies.add(theTwo);
+        enemies.add(theThree);
         stage.addActor(number1);
         stage.addActor(number2);
         stage.addActor(theOne);
         stage.addActor(theTwo);
+        stage.addActor(theThree);
 
         //Setting initial state
         for (HeroAgent agent : getAgents()){

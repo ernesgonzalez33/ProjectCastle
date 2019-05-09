@@ -13,6 +13,7 @@ public class QTable {
     int states;
     int actions;
     public int rewards[];
+    public boolean win[];
 
     public QTable (int states, int actions){
 
@@ -20,6 +21,7 @@ public class QTable {
         this.states = states;
         this.actions = actions;
         rewards = new int[Constants.MAX_EPISODES];
+        win = new boolean[Constants.MAX_EPISODES];
 
         for (int ii = 0; ii < states; ii++){
             for (int jj = 0; jj < actions; jj++){
@@ -45,7 +47,10 @@ public class QTable {
             for (int ii = 0; ii < rewards.length; ii++){
                 bw.write(rewards[ii] + " ");
             }
-
+            bw.newLine();
+            for (int ii = 0; ii < win.length; ii++){
+                bw.write(win[ii] + " ");
+            }
             bw.flush();
         } catch (IOException e) {}
 
