@@ -241,24 +241,24 @@ public class Map implements InputProcessor {
 
         //Erase all that was before
         for (Enemy enemy : enemies){
-            enemy.remove();
+            enemies.removeValue(enemy, true);
         }
         for (Hero hero : heroes){
-            hero.remove();
+            heroes.removeValue(hero, true);
         }
         for (HeroAgent agent : agents){
-            agent.remove();
+            agents.removeValue(agent, true);
         }
 
         // Creating the characters
-        Vector2 positionNumber1 = textureTools.positionConverter(9, 3);
-        Vector2 positionNumber2 = textureTools.positionConverter(11, 3);
-        Vector2 positionTheOne = textureTools.positionConverter(10, 15);
-        Vector2 positionTheTwo = textureTools.positionConverter(9, 15);
-        HeroAgent number1 = new HeroAgent(positionNumber1.x, positionNumber1.y, 15, 1, Constants.PRINCESS_NAME, 11, Assets.instance.unitsAssets.eirikaRegion, Constants.MOVE_LIMIT, this);
-        HeroAgent number2 = new HeroAgent(positionNumber2.x, positionNumber2.y, 15, 0, Constants.PRINCE_NAME, 11, Assets.instance.unitsAssets.christianRegion, Constants.MOVE_LIMIT, this);
-        Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 9, "TheOne", 20, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
-        Enemy theTwo = new Enemy(positionTheTwo.x, positionTheTwo.y, 10, 9, "TheTwo", 20, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
+        Vector2 positionNumber1 = textureTools.positionConverter(9, 10);
+        Vector2 positionNumber2 = textureTools.positionConverter(11, 10);
+        Vector2 positionTheOne = textureTools.positionConverter(8, 5);
+        Vector2 positionTheTwo = textureTools.positionConverter(12, 5);
+        HeroAgent number1 = new HeroAgent(positionNumber1.x, positionNumber1.y, 9, 7, Constants.PRINCESS_NAME, 12, Assets.instance.unitsAssets.eirikaRegion, Constants.MOVE_LIMIT, this);
+        HeroAgent number2 = new HeroAgent(positionNumber2.x, positionNumber2.y, 10, 5, Constants.PRINCE_NAME, 9, Assets.instance.unitsAssets.christianRegion, Constants.MOVE_LIMIT, this);
+        Enemy theOne = new Enemy(positionTheOne.x, positionTheOne.y, 10, 3, "TheOne", 7, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
+        Enemy theTwo = new Enemy(positionTheTwo.x, positionTheTwo.y, 10, 3, "TheTwo", 7, Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
 
         //Adding the heroes and enemies to the Stage and their lists
         enemies.add(theOne);

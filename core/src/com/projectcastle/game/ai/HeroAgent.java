@@ -60,9 +60,9 @@ public class HeroAgent extends Unit {
         //Find the positions I can get
         getMap().highlightTilesToMove(this);
 
-        for (Vector2 positionItCanMove:this.getCanMovePositions()){
-            for (Enemy enemy:getMap().getEnemies()){
-                if (isAdjacent(positionItCanMove, enemy)){
+        for (Vector2 positionItCanMove:this.getCanMovePositions()) {
+            for (Enemy enemy : getMap().getEnemies()) {
+                if (isAdjacent(positionItCanMove, enemy)) {
                     enemiesICanAttack.add(enemy);
                 }
             }

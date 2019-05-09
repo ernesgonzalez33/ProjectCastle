@@ -107,6 +107,16 @@ public class Unit extends Actor {
                 map.getEnemies().removeValue((Enemy) defendingUnit, true);
                 if (map.getEnemies().size == 0 && map.game.getMapCont() == 1){
                     map.game.setScreen(new VictoryScreen(map.game));
+                } else if (map.selectedLevel == Enums.Level.DEBUG && map.getEnemies().size == 0){
+                    if (map.game.episodesCont == Constants.MAX_EPISODES) {
+                        map.qTable.printQTable();
+                        map.game.setScreen(new GameOverScreen(map.game));
+                    } else {
+                        map.game.episodesCont++;
+                        //Actualizo las recompensas de todos los episodios
+                        getMap().qTable.rewards[getMap().game.episodesCont - 1] = getMap().rewardsCurrentEpisode;
+                        map.initializeDebugMap();
+                    }
                 } else if (map.getEnemies().size == 0 && map.game.getMapCont() == 0){
                     map.game.setMapCont(1);
                     map.game.setScreen(new GameplayScreen(map.game, map.selectedLevel));
@@ -243,8 +253,8 @@ public class Unit extends Actor {
 
     public boolean isAdjacent(Vector2 callingUnit, Unit attackedUnit){
 
-        int attackingX = (int) (callingUnit.x / Constants.TILE_SIZE);
-        int attackingY = (int) (callingUnit.y / Constants.TILE_SIZE);
+        int attackingX = (int) callingUnit.x;
+        int attackingY = (int) callingUnit.y;
         int attackedX = (int) (attackedUnit.getX() / Constants.TILE_SIZE);
         int attackedY = (int) (attackedUnit.getY() / Constants.TILE_SIZE);
 
