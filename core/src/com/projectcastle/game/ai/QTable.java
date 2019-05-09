@@ -9,14 +9,14 @@ import java.io.IOException;
 
 public class QTable {
 
-    float [][] qTable;
+    double [][] qTable;
     int states;
     int actions;
     public int rewards[];
 
     public QTable (int states, int actions){
 
-        qTable = new float[states][actions];
+        qTable = new double[states][actions];
         this.states = states;
         this.actions = actions;
         rewards = new int[Constants.MAX_EPISODES];
@@ -41,6 +41,11 @@ public class QTable {
                 }
                 bw.newLine();
             }
+            bw.newLine();
+            for (int ii = 0; ii < rewards.length; ii++){
+                bw.write(rewards[ii] + " ");
+            }
+
             bw.flush();
         } catch (IOException e) {}
 
