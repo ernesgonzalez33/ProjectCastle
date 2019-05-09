@@ -110,7 +110,17 @@ public class Unit extends Actor {
                 } else if (map.getEnemies().size == 0 && map.game.getMapCont() == 0){
                     map.game.setMapCont(1);
                     map.game.setScreen(new GameplayScreen(map.game, map.selectedLevel));
-                }
+                } /*else {
+                    if (map.game.episodesCont == Constants.MAX_EPISODES) {
+                        map.qTable.printQTable();
+                        map.game.setScreen(new GameOverScreen(map.game));
+                    } else {
+                        map.game.episodesCont++;
+                        //Actualizo las recompensas de todos los episodios
+                        getMap().qTable.rewards[getMap().game.episodesCont - 1] = getMap().rewardsCurrentEpisode;
+                        map.initializeDebugMap();
+                    }
+                } */
             } else if (defendingUnit.getClass().getName().equals(Constants.HERO_CLASS_NAME)) {
                 getMap().getHeroes().removeValue((Hero) defendingUnit, true);
                 if (map.getHeroes().size == 0 && map.getAgents().size == 0){
@@ -118,14 +128,14 @@ public class Unit extends Actor {
                 }
             } else {
                 getMap().getAgents().removeValue((HeroAgent) defendingUnit, true);
-                //TODO: Refuerzo negativo por morir
-
                 if (map.getAgents().size == 0){
                     if (map.game.episodesCont == Constants.MAX_EPISODES) {
                         map.qTable.printQTable();
                         map.game.setScreen(new GameOverScreen(map.game));
                     } else {
                         map.game.episodesCont++;
+                        //Actualizo las recompensas de todos los episodios
+                        getMap().qTable.rewards[getMap().game.episodesCont - 1] = getMap().rewardsCurrentEpisode;
                         map.initializeDebugMap();
                     }
                 }
@@ -254,7 +264,7 @@ public class Unit extends Actor {
     public boolean canAttack(Vector2 newPosition, Stage stage){
 
         for (Actor actor: stage.getActors()){
-            if (this.getClass().getName().equals(Constants.HERO_CLASS_NAME)){
+            if (this.getClass().getName().equals(Constants.HERO_CLASS_NAME) || this.getClass().getName().equals(Constants.HERO_AGENT_CLASS_NAME)){
                 if (actor.getClass().getName().equals(Constants.ENEMY_CLASS_NAME)){
                     if (isAdjacent(newPosition, (Unit) actor)){
                         return true;
@@ -262,7 +272,7 @@ public class Unit extends Actor {
                 }
             }
             else {
-                if (actor.getClass().getName().equals(Constants.HERO_CLASS_NAME)){
+                if (actor.getClass().getName().equals(Constants.HERO_CLASS_NAME) || this.getClass().getName().equals(Constants.HERO_AGENT_CLASS_NAME)){
                     if (isAdjacent((Unit) actor)){
                         return true;
                     }
