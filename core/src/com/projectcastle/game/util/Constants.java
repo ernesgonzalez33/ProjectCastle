@@ -96,7 +96,7 @@ public class Constants {
     //Learning
     public static final int STATES = 4;
     public static final int ACTIONS = 27;
-    public static final int MAX_EPISODES = 100;
+    public static final int MAX_EPISODES = 250;
     public static final double LEARNING_RATE = 0.4;
     public static final double DISCOUNT_RATE = 0.99;
     public static final int MAX_EXPLORATION_RATE = 1;
