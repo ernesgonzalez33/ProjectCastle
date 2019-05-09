@@ -24,5 +24,10 @@ public class TextureTools {
 
     }
 
+    public Vector2 positionConverter (Vector2 position){
+
+        return new Vector2(position.x / Constants.TILE_SIZE, position.y / Constants.TILE_SIZE);
+
+    }
 
 }
