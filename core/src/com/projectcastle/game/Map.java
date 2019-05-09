@@ -277,6 +277,7 @@ public class Map implements InputProcessor {
 
         //Setting rewards
         rewardsCurrentEpisode = 0;
+
         //Running agent
         runAgent();
 
