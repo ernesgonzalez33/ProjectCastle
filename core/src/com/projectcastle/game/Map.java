@@ -205,16 +205,16 @@ public class Map implements InputProcessor {
         //Loop to create the characters
         for (int ii = 0; ii < characters.getCount(); ii++){
             if (characters.get(ii).getName().equals(Constants.COMMANDER_NAME)){
-                Hero airmanagild = new Hero((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.airmanagildRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
-                heroes.add(airmanagild);
+                HeroAgent airmanagild = new HeroAgent((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.airmanagildRegion, Constants.MOVE_LIMIT, this);
+                agents.add(airmanagild);
                 stage.addActor(airmanagild);
             } else if (characters.get(ii).getName().equals(Constants.PRINCESS_NAME)){
                 HeroAgent eirika = new HeroAgent((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.eirikaRegion, Constants.MOVE_LIMIT, this);
                 agents.add(eirika);
                 stage.addActor(eirika);
             } else if (characters.get(ii).getName().equals(Constants.PRINCE_NAME)){
-                Hero christian = new Hero((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.christianRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
-                heroes.add(christian);
+                HeroAgent christian = new HeroAgent((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.christianRegion, Constants.MOVE_LIMIT, this);
+                agents.add(christian);
                 stage.addActor(christian);
             } else if (characters.get(ii).getProperties().get("type").equals("skeleton")){
                 Enemy auxSkeleton = new Enemy((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.skeletonRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
