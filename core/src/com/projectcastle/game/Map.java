@@ -137,6 +137,11 @@ public class Map implements InputProcessor {
         //Initializing the Map Objects
         initializeMapObjects();
 
+        if (selectedLevel != Enums.Level.DEBUG){
+            qTable.createFromFile();
+            runTrainedAgent();
+        }
+
     }
 
     public void update (float delta) {
@@ -204,8 +209,8 @@ public class Map implements InputProcessor {
                 heroes.add(airmanagild);
                 stage.addActor(airmanagild);
             } else if (characters.get(ii).getName().equals(Constants.PRINCESS_NAME)){
-                Hero eirika = new Hero((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.eirikaRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
-                heroes.add(eirika);
+                HeroAgent eirika = new HeroAgent((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.eirikaRegion, Constants.MOVE_LIMIT, this);
+                agents.add(eirika);
                 stage.addActor(eirika);
             } else if (characters.get(ii).getName().equals(Constants.PRINCE_NAME)){
                 Hero christian = new Hero((Float) characters.get(ii).getProperties().get("x"), (Float) characters.get(ii).getProperties().get("y"), (Integer) characters.get(ii).getProperties().get("attack"), (Integer) characters.get(ii).getProperties().get("defense"), characters.get(ii).getName(), (Integer) characters.get(ii).getProperties().get("health"), Assets.instance.unitsAssets.christianRegion, this.game.actionMenu, Constants.MOVE_LIMIT, this);
@@ -255,10 +260,10 @@ public class Map implements InputProcessor {
 
 
         // Creating the characters
-        Vector2 positionNumber1 = textureTools.positionConverter(9, 10);
-        Vector2 positionNumber2 = textureTools.positionConverter(11, 10);
-        Vector2 positionTheOne = textureTools.positionConverter(8, 4);
-        Vector2 positionTheTwo = textureTools.positionConverter(12, 4);
+        Vector2 positionNumber1 = textureTools.positionConverter(9, 4);
+        Vector2 positionNumber2 = textureTools.positionConverter(11, 4);
+        Vector2 positionTheOne = textureTools.positionConverter(8, 10);
+        Vector2 positionTheTwo = textureTools.positionConverter(12, 10);
         Vector2 positionTheThree = textureTools.positionConverter(9, 8);
         HeroAgent number1 = new HeroAgent(positionNumber1.x, positionNumber1.y, 9, 7, Constants.PRINCESS_NAME, 12, Assets.instance.unitsAssets.eirikaRegion, Constants.MOVE_LIMIT, this);
         HeroAgent number2 = new HeroAgent(positionNumber2.x, positionNumber2.y, 10, 5, Constants.PRINCE_NAME, 9, Assets.instance.unitsAssets.christianRegion, Constants.MOVE_LIMIT, this);
@@ -466,8 +471,10 @@ public class Map implements InputProcessor {
         } else {
             game.activeTurn = Enums.Turn.PLAYER;
             game.turnMessage.setTurn(Enums.Turn.PLAYER);
-            if (getAgents().size > 0){
+            if (getAgents().size > 0 && selectedLevel == Enums.Level.DEBUG){
                 runAgent();
+            } else if (getAgents().size > 0 && selectedLevel != Enums.Level.DEBUG) {
+                runTrainedAgent();
             }
         }
 
@@ -481,7 +488,13 @@ public class Map implements InputProcessor {
                 cont++;
             }
         }
-        if (cont == this.getHeroes().size){
+        int contAgent = 0;
+        for (HeroAgent agent : this.getAgents()){
+            if (agent.getState() == Enums.UnitState.ATTACKED){
+                contAgent++;
+            }
+        }
+        if (cont == this.getHeroes().size && contAgent == this.getAgents().size){
             this.changeTurn();
         }
     }
@@ -508,6 +521,13 @@ public class Map implements InputProcessor {
             getAgents().get(ii).runAgent();
         }
         changeTurn();
+    }
+
+    private void runTrainedAgent(){
+        //Agente para los héroes
+        for (int ii = 0; ii < getAgents().size; ii++){
+            getAgents().get(ii).runTrainedAgent();
+        }
     }
 
     public TiledMap getTiledMap() {

@@ -96,12 +96,13 @@ public class Constants {
     //Learning
     public static final int STATES = 4;
     public static final int ACTIONS = 27;
-    public static final int MAX_EPISODES = 250;
-    public static final double LEARNING_RATE = 0.4;
+    public static final int MAX_EPISODES = 50;
+    public static final double LEARNING_RATE = 0.6;
     public static final double DISCOUNT_RATE = 0.99;
     public static final int MAX_EXPLORATION_RATE = 1;
     public static final double MIN_EXPLORATION_RATE = 0.01;
     public static final double EXPLORATION_DECAY_RATE = 0.001;
+    public static final String Q_TABLE_FILE = "/Users/ernestogonzalezchacon/Documents/TFG/ProjectCastle/Docs/qTable.txt";
 
 
 }

@@ -1,7 +1,6 @@
 package com.projectcastle.game.ai;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.SnapshotArray;
@@ -28,6 +27,24 @@ public class HeroAgent extends Unit {
         explorationRateThreshold = 0.0;
         explorationRate = 1.0;
         random = new Random();
+
+    }
+
+    public void runTrainedAgent(){
+
+        if (getMap().game.activeTurn == Enums.Turn.PLAYER){
+            setStateQLearning();
+            //Selecciono la acción con mejor valor
+            double action = 0.0;
+            int selected = 0;
+            for (int jj = 0; jj < Constants.ACTIONS; jj++){
+                if (getMap().qTable.qTable[stateQLearning.getStateID()][jj] > action){
+                    action = getMap().qTable.qTable[stateQLearning.getStateID()][jj];
+                    selected = jj;
+                }
+            }
+            while (this.getState() != Enums.UnitState.ATTACKED){ selectActionTrained(selected); }
+        }
 
     }
 
@@ -60,9 +77,12 @@ public class HeroAgent extends Unit {
         //Find the positions I can get
         getMap().highlightTilesToMove(this);
 
+
+
         for (Vector2 positionItCanMove:this.getCanMovePositions()) {
             for (Enemy enemy : getMap().getEnemies()) {
-                if (isAdjacent(positionItCanMove, enemy)) {
+                Vector2 positionAux = new Vector2(positionItCanMove.x * Constants.TILE_SIZE, positionItCanMove.y * Constants.TILE_SIZE);
+                if (isAdjacent(positionAux, enemy)) {
                     enemiesICanAttack.add(enemy);
                 }
             }
@@ -342,7 +362,7 @@ public class HeroAgent extends Unit {
         setStateQLearning();
         int newStateQLearning = this.stateQLearning.getStateID();
 
-        //Consigo la mejor accción del siguiente estado
+        //Consigo la mejor acción del siguiente estado
         double action = 0.0;
         int selected = 0;
         for (int jj = 0; jj < Constants.ACTIONS; jj++){
@@ -360,6 +380,230 @@ public class HeroAgent extends Unit {
 
         //Actualizo el exploration rate
         explorationRate = Constants.MIN_EXPLORATION_RATE + (Constants.MAX_EXPLORATION_RATE - Constants.MIN_EXPLORATION_RATE) * Math.exp(-Constants.EXPLORATION_DECAY_RATE*getMap().game.episodesCont);
+
+
+    }
+
+    public void selectActionTrained (int actionID) {
+
+
+        //Checking false positions to move
+        getMap().highlightTilesToMove(this);
+        Vector2 positionAux = new Vector2(0, 0);
+
+        switch (actionID){
+            case 0:
+                positionAux.set(this.getX(), this.getY() + 3 * Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 1:
+                positionAux.set(this.getX() - Constants.TILE_SIZE, this.getY() + 2 * Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 2:
+                positionAux.set(this.getX(), this.getY() + 2 * Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 3:
+                positionAux.set(this.getX() + Constants.TILE_SIZE, this.getY() + 2 * Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 4:
+                positionAux.set(this.getX() - 2*Constants.TILE_SIZE, this.getY() + Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 5:
+                positionAux.set(this.getX() - Constants.TILE_SIZE, this.getY() + Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 6:
+                positionAux.set(this.getX(), this.getY() + Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 7:
+                positionAux.set(this.getX() + Constants.TILE_SIZE, this.getY() + Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 8:
+                positionAux.set(this.getX() + 2*Constants.TILE_SIZE, this.getY() + Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 9:
+                positionAux.set(this.getX() - 3*Constants.TILE_SIZE, this.getY());
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 10:
+                positionAux.set(this.getX() - 2*Constants.TILE_SIZE, this.getY());
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 11:
+                positionAux.set(this.getX() - Constants.TILE_SIZE, this.getY());
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 12:
+                positionAux.set(this.getX(), this.getY());
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 13:
+                positionAux.set(this.getX() + Constants.TILE_SIZE, this.getY());
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 14:
+                positionAux.set(this.getX() + 2*Constants.TILE_SIZE, this.getY());
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 15:
+                positionAux.set(this.getX() + 3*Constants.TILE_SIZE, this.getY());
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 16:
+                positionAux.set(this.getX() - 2*Constants.TILE_SIZE, this.getY() - Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 17:
+                positionAux.set(this.getX() - Constants.TILE_SIZE, this.getY() - Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 18:
+                positionAux.set(this.getX(), this.getY() - Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 19:
+                positionAux.set(this.getX() + Constants.TILE_SIZE, this.getY() - Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                }
+                break;
+            case 20:
+                positionAux.set(this.getX() + 2*Constants.TILE_SIZE, this.getY() - Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 21:
+                positionAux.set(this.getX() - Constants.TILE_SIZE, this.getY() - 2*Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 22:
+                positionAux.set(this.getX(), this.getY() - 2*Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 23:
+                positionAux.set(this.getX() + Constants.TILE_SIZE, this.getY() - 2*Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 24:
+                positionAux.set(this.getX(), this.getY() - 3*Constants.TILE_SIZE);
+                if (getState() == Enums.UnitState.IDLE && getCanMovePositions().contains(getMap().getTextureTools().positionConverter(positionAux))){
+                    this.addAction(Actions.moveTo(positionAux.x, positionAux.y, 1));
+                    if (this.canAttack(positionAux, getStage())) setState(Enums.UnitState.MOVED);
+                    else setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 25: //Ataca
+                if (this.stateQLearning.canAttack){
+                    attack();
+                    this.setState(Enums.UnitState.ATTACKED);
+                } else setState(Enums.UnitState.ATTACKED);
+                break;
+            case 26: //No ataca
+                setState(Enums.UnitState.ATTACKED);
+                break;
+        }
+
+        getMap().clearHighlightedTiles(this);
 
 
     }

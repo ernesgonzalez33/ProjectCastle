@@ -129,18 +129,25 @@ public class Unit extends Actor {
                 }
             } else {
                 getMap().getAgents().removeValue((HeroAgent) defendingUnit, true);
-                if (map.getAgents().size == 0){
-                    if (map.game.episodesCont == Constants.MAX_EPISODES) {
-                        map.qTable.printQTable();
+                if (getMap().selectedLevel == Enums.Level.DEBUG){
+                    if (map.getAgents().size == 0){
+                        if (map.game.episodesCont == Constants.MAX_EPISODES) {
+                            map.qTable.printQTable();
+                            map.game.setScreen(new GameOverScreen(map.game));
+                        } else {
+                            map.game.episodesCont++;
+                            //Actualizo las recompensas de todos los episodios
+                            getMap().qTable.rewards[getMap().game.episodesCont - 1] = getMap().rewardsCurrentEpisode;
+                            getMap().qTable.win[getMap().game.episodesCont - 1] = false;
+                            map.initializeDebugMap();
+                        }
+                    }
+                } else {
+                    if (getMap().getAgents().size == 0 && getMap().getHeroes().size == 0){
                         map.game.setScreen(new GameOverScreen(map.game));
-                    } else {
-                        map.game.episodesCont++;
-                        //Actualizo las recompensas de todos los episodios
-                        getMap().qTable.rewards[getMap().game.episodesCont - 1] = getMap().rewardsCurrentEpisode;
-                        getMap().qTable.win[getMap().game.episodesCont - 1] = false;
-                        map.initializeDebugMap();
                     }
                 }
+
             }
 
         }
@@ -245,8 +252,8 @@ public class Unit extends Actor {
 
     public boolean isAdjacent(Vector2 callingUnit, Unit attackedUnit){
 
-        int attackingX = (int) callingUnit.x;
-        int attackingY = (int) callingUnit.y;
+        int attackingX = (int) callingUnit.x / Constants.TILE_SIZE;
+        int attackingY = (int) callingUnit.y / Constants.TILE_SIZE;
         int attackedX = (int) (attackedUnit.getX() / Constants.TILE_SIZE);
         int attackedY = (int) (attackedUnit.getY() / Constants.TILE_SIZE);
 

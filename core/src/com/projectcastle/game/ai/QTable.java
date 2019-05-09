@@ -3,9 +3,7 @@ package com.projectcastle.game.ai;
 import com.badlogic.gdx.Gdx;
 import com.projectcastle.game.util.Constants;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class QTable {
 
@@ -35,7 +33,7 @@ public class QTable {
     public void printQTable (){
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("/Users/ernestogonzalezchacon/Documents/TFG/ProjectCastle/Docs/qTable.txt"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(Constants.Q_TABLE_FILE));
 
             for (int i = 0; i < this.states; i++) {
                 for (int j = 0; j < this.actions; j++) {
@@ -52,6 +50,25 @@ public class QTable {
                 bw.write(win[ii] + " ");
             }
             bw.flush();
+        } catch (IOException e) {}
+
+    }
+
+    public void createFromFile (){
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(Constants.Q_TABLE_FILE));
+
+            for (int i = 0; i < this.states; i++){
+                    String aux = br.readLine();
+                    String auxArray [] = new String[this.actions];
+                    auxArray = aux.split(" ");
+                    for (int j = 0; j < this.actions; j++){
+                        double auxDouble = Double.parseDouble(auxArray[j]);
+                        this.qTable[i][j] = auxDouble;
+                    }
+            }
+
         } catch (IOException e) {}
 
     }
