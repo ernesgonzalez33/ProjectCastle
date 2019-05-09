@@ -35,7 +35,7 @@ public class ProjectCastleGame extends Game {
 		batch = new SpriteBatch();
 		timer = new Timer();
 		mapCont = 0;
-		episodesCont = 0;
+		episodesCont = 1;
 
 		//Creating Action Menu and Turn Message
 		skin = new Skin(Gdx.files.internal(Constants.FLAT_SKIN));
