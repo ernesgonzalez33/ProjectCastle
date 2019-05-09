@@ -61,6 +61,7 @@ public class Constants {
     //Other
     public static final String HERO_CLASS_NAME = "com.projectcastle.game.entities.Hero";
     public static final String ENEMY_CLASS_NAME = "com.projectcastle.game.entities.Enemy";
+    public static final String HERO_AGENT_CLASS_NAME = "com.projectcastle.game.ai.HeroAgent";
     public static final double ATTACK_CHANCE = 0.85;
 
     //Timer
@@ -95,8 +96,7 @@ public class Constants {
     //Learning
     public static final int STATES = 4;
     public static final int ACTIONS = 27;
-    public static final int MAX_EPISODES = 100;
-    public static final int MAX_STEPS = 50;
+    public static final int MAX_EPISODES = 10;
     public static final double LEARNING_RATE = 0.6;
     public static final double DISCOUNT_RATE = 0.99;
     public static final int MAX_EXPLORATION_RATE = 1;
